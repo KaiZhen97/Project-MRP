@@ -1,0 +1,10 @@
+﻿._button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#btnCloseAddNewModule {
+    margin-right: 15px;
+}

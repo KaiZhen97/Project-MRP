@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Msg>
+  <CustomMsg>
+    <ADD_SUCCESS>Added successfully.</ADD_SUCCESS>
+    <ADD_FAILED>Failed to add data.</ADD_FAILED>
+    <DELETE_SUCCESS>Deleted successfully.</DELETE_SUCCESS>
+    <DELETE_FAILED>Failed to delete data.</DELETE_FAILED>
+    <UPDATE_SUCCESS>Update successfully.</UPDATE_SUCCESS>
+    <UPDATE_FAILED>Failed to update data.</UPDATE_FAILED>
+    <NO_DATA>No data found.</NO_DATA>
+    <DATA_EXIST>@0 already exists.</DATA_EXIST>
+    <DATE_NOT_VALID>Date range not valid.</DATE_NOT_VALID>
+    <DATE_EXIST>The time has been @0 by another user.</DATE_EXIST>
+    <MAX_LOAN_DATE>The maximum loaning date is 14 days.</MAX_LOAN_DATE>
+    <MAX_BOOKING_DATE>The maximum booking date is 30 days.</MAX_BOOKING_DATE>
+    <SEND_EMAIL_FAILED>Failed to send email.</SEND_EMAIL_FAILED>
+    <DATA_DUPLICATE>@0 and @1 already exists.</DATA_DUPLICATE>
+    <FIRST_STATION_EXIST>Starting station for route @0 already exist.</FIRST_STATION_EXIST>
+    <FILE_IS_REQUIRED>No file uploaded</FILE_IS_REQUIRED>
+    <SAME_STATION>Station name and last station name cannot be the same.</SAME_STATION>
+    <NO_IDENTITY_DATA>No IC or Passport data was found.</NO_IDENTITY_DATA>
+    <IDENTITY_FAILED>Required to choose one form only for the IC or Passport form.</IDENTITY_FAILED>
+    <IDENTITY_REGISTERED>User already registered.</IDENTITY_REGISTERED>
+    <USER_NOT_IN_EMPLOYEELIST>No record found in i-Stone's employee list. </USER_NOT_IN_EMPLOYEELIST>
+    <VERIFY_REGISTER_SUCCESS>Success.</VERIFY_REGISTER_SUCCESS>
+    <IC_REGISTERED>IC/ Passport Number don't match.</IC_REGISTERED>
+    <ID_STAFFNO_REQUIRED>Staff No and Identity Number are required</ID_STAFFNO_REQUIRED>
+    <VERIFY_WHITE_SPACE>Staff Number cannot have space</VERIFY_WHITE_SPACE>
+    <VALID_MEMO_DATE>The Memo date must be in the future.</VALID_MEMO_DATE>
+    <EMAIL_SEND_SUCCESS>Email successfully send for approval</EMAIL_SEND_SUCCESS>
+    <EMAIL_SEND_FAILED>Email failed sedn for approval</EMAIL_SEND_FAILED>
+    <DATE_FREEZED>Cannot select date that have been freezed. Please contact HR for assist.</DATE_FREEZED>
+
+
+    <!-- user logout -->
+    <USER_LOGOUT>User logout successfully.</USER_LOGOUT>
+    <USER_LOGOUT_FAILED>Failed to logout.</USER_LOGOUT_FAILED>
+
+    <!--upload-->
+    <INVALID_FILE_TYPE>Invalid file type.</INVALID_FILE_TYPE>
+    <NO_ATTACHMENT_UPLOADED>No Attachment Uploaded!</NO_ATTACHMENT_UPLOADED>
+
+    <!--change-->
+    <OLDPWD_INCORRECT>The old password you entered was incorrect.</OLDPWD_INCORRECT>
+    <PASSWORD_UPDATED>Your password has been changed successfully. New password will take effect on next login.</PASSWORD_UPDATED>
+    <INVALID_USER>Invalid Username/Password</INVALID_USER>
+
+    <!--Added data success but email fail-->
+    <ADD_SUCCESS_EMAIL_FAILED>Added successfully but email failed</ADD_SUCCESS_EMAIL_FAILED>
+
+
+    <!--OT TICKET-->
+    <INCORRECT_TIME>Incorrect Time inserted! The start time cannot be later than end time!</INCORRECT_TIME>
+    <INVALID_ROLE>This role are not allowed to make an OT Request!</INVALID_ROLE>
+    <EMPLOYEE_NOT_FOUND>Can't find Employee profile for requestor! Invalid request!</EMPLOYEE_NOT_FOUND>
+  </CustomMsg>
+</Msg>

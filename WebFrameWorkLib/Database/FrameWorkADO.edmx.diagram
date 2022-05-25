@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d66053e333e94ec385d4658551147c8d" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="FrameWorkModel.AuditActivityLog" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.AuditLogTable" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.AuditSecurityLog" Width="1.5" PointX="8.75" PointY="5.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.Bank" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.Category" Width="1.5" PointX="8.75" PointY="1.375" />
+        <EntityTypeShape EntityType="FrameWorkModel.CertAttachment" Width="1.5" PointX="5.25" PointY="17.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.Company" Width="1.5" PointX="0.75" PointY="20.625" />
+        <EntityTypeShape EntityType="FrameWorkModel.Department" Width="1.5" PointX="0.75" PointY="17.5" />
+        <EntityTypeShape EntityType="FrameWorkModel.Dependant" Width="1.5" PointX="5.25" PointY="20.875" />
+        <EntityTypeShape EntityType="FrameWorkModel.Email" Width="1.5" PointX="8.75" PointY="8.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.EmailTemplate" Width="1.5" PointX="10.75" PointY="5.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.EmployeeAttachemnt" Width="1.5" PointX="8.25" PointY="14.125" />
+        <EntityTypeShape EntityType="FrameWorkModel.EmployeeChecklist" Width="1.5" PointX="10.75" PointY="9.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.EmployeeProfile" Width="1.5" PointX="3" PointY="9.25" />
+        <EntityTypeShape EntityType="FrameWorkModel.ErrorLog" Width="1.5" PointX="12.75" PointY="5.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.FileTypeAttachment" Width="1.5" PointX="6" PointY="5.375" />
+        <EntityTypeShape EntityType="FrameWorkModel.PolicyAndMemo" Width="1.5" PointX="11" PointY="1" />
+        <EntityTypeShape EntityType="FrameWorkModel.PromotionHistory" Width="1.5" PointX="5.25" PointY="8.125" />
+        <EntityTypeShape EntityType="FrameWorkModel.sysdiagram" Width="1.5" PointX="12.75" PointY="9.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.Team" Width="1.5" PointX="10.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMAction" Width="1.5" PointX="12.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMAppEmailTemplate" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMMailServer" Width="1.5" PointX="14.75" PointY="4.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMModule" Width="1.5" PointX="3.75" PointY="3.125" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMModuleAction" Width="1.5" PointX="14.75" PointY="8.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMPlatform" Width="1.5" PointX="3.75" PointY="24.375" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMPlatformLoginRole" Width="1.5" PointX="6" PointY="14.25" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMRoleModule" Width="1.5" PointX="6" PointY="11" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMSendEmail" Width="1.5" PointX="14.75" PointY="11.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMSendEmailStatu" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMSMMEmailList" Width="1.5" PointX="5.25" PointY="30.875" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMSystem" Width="1.5" PointX="1.5" PointY="4" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMUser" Width="1.5" PointX="3" PointY="31.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMUserGroup" Width="1.5" PointX="0.75" PointY="9.875" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMUserProfile" Width="1.5" PointX="7.5" PointY="31" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMUserRole" Width="1.5" PointX="0.75" PointY="13.875" />
+        <EntityTypeShape EntityType="FrameWorkModel.UAMUserToken" Width="1.5" PointX="5.25" PointY="34.5" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_CategoryList" Width="1.5" PointX="10.75" PointY="15.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_ChildModuleList" Width="1.5" PointX="16.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_DepartmentList" Width="1.5" PointX="16.75" PointY="8.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_EmployeeAttachmentList" Width="1.5" PointX="16.75" PointY="11.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_EmployeeProfileList" Width="1.5" PointX="12.75" PointY="16.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_EmployeeReportingManagerList" Width="1.5" PointX="14.75" PointY="16.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_ModuleAction" Width="1.5" PointX="16.75" PointY="15.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_PolicyAndMemoList" Width="1.5" PointX="7.75" PointY="17.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_ProbationList" Width="1.5" PointX="18.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_RegisteredEmployee" Width="1.5" PointX="18.75" PointY="13.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_ReportingManager" Width="1.5" PointX="16.75" PointY="18.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_RoleMenuList" Width="1.5" PointX="18.75" PointY="18.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_RoleModuleList" Width="1.5" PointX="9.75" PointY="19.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_TeamList" Width="1.5" PointX="20.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_TrainingList" Width="1.5" PointX="20.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_UAMUserGroup" Width="1.5" PointX="20.75" PointY="7.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_UserDetail" Width="1.5" PointX="20.75" PointY="10.75" />
+        <EntityTypeShape EntityType="FrameWorkModel.V_UserList" Width="1.5" PointX="20.75" PointY="15.75" />
+        <AssociationConnector Association="FrameWorkModel.FK_PolicyAndMemo_Category" />
+        <AssociationConnector Association="FrameWorkModel.FK_CertAttachment_EmployeeProfile" />
+        <AssociationConnector Association="FrameWorkModel.FK_Department_Company" />
+        <AssociationConnector Association="FrameWorkModel.FK_EmployeeProfile_Company" />
+        <AssociationConnector Association="FrameWorkModel.FK_EmployeeProfile_Department" />
+        <AssociationConnector Association="FrameWorkModel.FK_UAMUserGroup_Department" />
+        <AssociationConnector Association="FrameWorkModel.FK_UAMUserProfile_Department" />
+        <AssociationConnector Association="FrameWorkModel.FK_Dependant_EmployeeProfile" />
+        <AssociationConnector Association="FrameWorkModel.FK_EmployeeAttachemnt_EmployeeProfile" />
+        <AssociationConnector Association="FrameWorkModel.FK_EmployeeAttachemnt_FileTypeAttachment" />
+        <AssociationConnector Association="FrameWorkModel.FK_EmployeeProfile_UAMUserGroup" />
+        <AssociationConnector Association="FrameWorkModel.FK_EmployeeProfile_UAMUserRole" />
+        <AssociationConnector Association="FrameWorkModel.FK_PromotionHistory_EmployeeProfile" />
+        <AssociationConnector Association="FrameWorkModel.FK_TblUAMRoleModule_TblUAMRoleModule" />
+        <AssociationConnector Association="FrameWorkModel.FK_UAMModule_UAMSystem" />
+        <AssociationConnector Association="FrameWorkModel.FK_TblUAMPlatformLoginRole_TblUAMPlatform" />
+        <AssociationConnector Association="FrameWorkModel.FK_TblUAMPlatformLoginRole_TblUAMUserRole" />
+        <AssociationConnector Association="FrameWorkModel.FK_TblUAMRoleModule_TblUAMUserRole" />
+        <AssociationConnector Association="FrameWorkModel.FK_TblUAMUserProfile_TblSMMEmailList" />
+        <AssociationConnector Association="FrameWorkModel.SMMEMAILLIST_FK_ACCESSID" />
+        <AssociationConnector Association="FrameWorkModel.FK_UAMSystem_UAMSystem" />
+        <AssociationConnector Association="FrameWorkModel.FK_UAMUserProfile_UAMUser" />
+        <AssociationConnector Association="FrameWorkModel.FK_USERTOKEN_UAMUSER" />
+        <AssociationConnector Association="FrameWorkModel.UAMUSER_FK_ROLEID" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

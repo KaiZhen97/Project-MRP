@@ -1,0 +1,51 @@
+﻿.context-menu-list {
+    max-width: none;    
+    border-radius: 5px;
+    border: none;
+    border: .5px solid rgba(0,0,0,.1);
+    font-size: .85rem;
+    box-shadow: 0px 4px 9px rgba(0,0,0,.25);
+}
+
+.context-menu-item {
+    padding: .2rem .9rem;
+    position: relative;
+    display: flex;
+    color: #141414;
+    transition: background-color .1s, color .2s;
+}
+
+.context-menu-hover {
+    background-color: #EDEDED !important;
+    color: #004858 !important;
+}
+
+.context-menu-item::before {
+    position: relative !important;
+    margin-right: 10px;
+    color: inherit !important;
+    font-size: inherit;
+}
+
+.context-menu-list.css-title-toolbox {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.context-menu-list.css-title-toolbox::before {
+    position: relative;
+    content: 'Tool Box';
+    padding: 0px .9rem;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: .7rem;
+    color: #BEBEBE;
+}
+
+.context-menu-item:first-child {
+    margin-top: .25rem;
+}
+
+.context-menu-item:last-child {
+    margin-bottom: .2rem;
+}

@@ -1,0 +1,210 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="MRP.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - MRP System</title>
+
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <asp:PlaceHolder runat="server">
+        <%: Styles.Render("~/styleBundle/Master") %>
+        <%: Styles.Render("~/styleBundle/iziToast") %>
+        <%: Styles.Render("~/styleBundle/Component") %>
+    </asp:PlaceHolder>
+
+    <asp:ContentPlaceHolder ID="CssContent" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <script>
+        function SessionExpireAlert(timeout) {
+            var seconds = timeout / 1000;
+            setInterval(function () {
+                seconds--;
+            }, 1000);
+            setTimeout(function () {
+                //Show Popup before 20 seconds of timeout.
+                //$find("mpeTimeout").show();
+            }, timeout - 20 * 1000);
+            setTimeout(function () {
+                alert("Session Timeout. Please login again.");
+                window.location = "<%= ResolveUrl("~/Expired")%>";
+            }, timeout);
+        };
+
+        function ResetSession() {
+            //Redirect to refresh Session.
+            window.location = window.location.href;
+        }
+    </script>
+</head>
+<body>
+    <%------------------------------------------------------------------------------------------%>
+    <%----------------------------------     Pace Overlay     ----------------------------------%>
+    <%------------------------------------------------------------------------------------------%>
+    <div class="pace-overlay">
+        <%--<img class="overlay-style" src="<%= ResolveUrl("~/Content/images/Pace_BackgroundStyle.png") %>" />--%>
+        <img class="overlay-logo" src="<%= ResolveUrl("~/Content/images/Aimflex_Logo_White.png") %>" />
+        <div class="overlay-footer">POWERED BY AIMFLEX</div>
+
+        <div class="pace-progress-cont">
+            <div class="progress-label">Loading...</div>
+            <div class="progress-item"></div>
+            <div class="progress-footer">Redirect to <%: Page.Title %></div>
+        </div>
+    </div>
+
+    <%------------------------------------------------------------------------------------------%>
+    <%------------------------------------     Top Panel     -----------------------------------%>
+    <%------------------------------------------------------------------------------------------%>
+    <div class="top-panel">
+        <div class="_left">
+            <i class="fa-solid fa-bars" id="Button_ExpandSidePanel"></i>
+            <h4 class="_title">Aimflex MRP System</h4>
+            <img src="<%= ResolveUrl("~/icon_white.svg") %>" class="_logo" />
+        </div>
+
+        <div class="_right">
+            <i class="fa-solid fa-user"></i>
+            <div class="_loginUser" id="TopPanel_Username">Admin</div>
+            <button id="App_SignOut" onclick="SignOut()">Sign Out</button>
+        </div>
+    </div>
+
+    <%------------------------------------------------------------------------------------------%>
+    <%-----------------------------------     Side Panel     -----------------------------------%>
+    <%------------------------------------------------------------------------------------------%>
+    <div class="side-panel-overlay disabled" id="SidePanel_Overlay"></div>
+
+    <%-- Side Panel --%>
+    <div class="side-panel collapsed" id="SidePanel_Main">
+        <div class="_top">
+            <div class="_overlay"></div>
+            <i class="fa-solid fa-thumbtack" id="Button_PinSidePanel"></i>
+            <div class="_title">WELCOME</div>
+            <i class="fa-solid fa-circle-chevron-left" id="Button_CollapseSidePanel"></i>
+        </div>
+
+        <div class="_middle">
+            <div class="_button">
+                <button class="_round flat-button"><i class="fa-solid fa-pen-to-square"></i></button>
+                <div class="_profilePic _round">
+                    <i class="fa-solid fa-user" id="SidePanel_ProfileIcon"></i>
+                    <img src="" id="SidePanel_ProfilePic"/>
+                </div>
+                <button class="_round flat-button" onclick="SignOut()"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </div>
+
+            <div class="_userName" id="SidePanel_Username">
+                Administrator
+            </div>
+        </div>
+
+        <div class="_bottom">
+            <nav class="_navigation" id="SidePanel_Nav">
+                <%--<a class="nav-item" href="#">
+                    <i class="fa-solid fa-house-chimney"></i>
+                    <span>Home</span>
+                </a>--%>
+
+                <%-- PR Management --%>
+                <%--<a class="nav-item lv1 collapsed" data-toggle="collapse" href="#collapsePRManagement" aria-controls="collapsePRManagement">
+                    <i class="fa-solid fa-cart-plus"></i>
+                    <span>PR Management</span>
+                    <i class="fa-solid fa-chevron-up _arrow"></i>
+                </a>--%>
+                <%--<div class="collapse" id="collapsePRManagement">
+                    <a class="nav-item lv2" href="#">
+                        <i class="fa-solid fa-list"></i>
+                        <span>PR List</span>
+                    </a>
+
+                    <a class="nav-item lv2" href="#">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        <span>PR On Hand</span>
+                    </a>
+
+                    <a class="nav-item lv2" href="#">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Assign Purchaser</span>
+                    </a>
+
+                    <a class="nav-item lv2" href="#">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Pending Update</span>
+                    </a>
+                </div>--%>
+            </nav>
+
+            <div class="_footer">POWERED BY AIMFLEX</div>
+        </div>
+    </div>
+
+    <%------------------------------------------------------------------------------------------%>
+    <%----------------------------------     Main Content     ----------------------------------%>
+    <%------------------------------------------------------------------------------------------%>
+    <div class="body-content-wrapper" id="MainPanel">
+        <div class="container-fluid body-content">
+            <div id="Navigation_Path">Home</div>
+
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <hr class="mt-4"/>
+            <h6 class="_footer">POWERED BY AIMFLEX</h6>
+        </div>
+    </div>
+
+    <%------------------------------------------------------------------------------------------%>
+    <%-----------------------------------     Javascript     -----------------------------------%>
+    <%------------------------------------------------------------------------------------------%>
+    <script>
+        var authToken = "<%= Session["accessToken"].ToString() %>";
+        var redirectLoginURL = "<%= ResolveUrl("~/Login")%>";
+
+        var reqURL = "<%= ResolveUrl("~/api/UAM/getRoleMenuList") %>";
+        var reqProfileURL = "<%= ResolveUrl("~/api/User/getProfileDetails") %>";
+        var reqProfileIconURL = "<%= ResolveUrl("~/api/EmployeeProfile/getProfileIcon") %>";
+
+        window.paceOptions = {
+            ajax: {
+                ignoreURLs: ['signalr', 'browserLinkSignalR', '__browserLink'],
+                trackWebSockets: false,
+            },
+            document: true,
+            eventLag: true,
+            target: '.pace-progress-cont .progress-item',
+            easeFactor: 2.5,
+            elements: {
+                checkInterval: 50,
+            }
+        }
+    </script>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/scriptBundle/Master") %>
+        <%: Scripts.Render("~/scriptBundle/iziToast") %>
+        <%: Scripts.Render("~/scriptBundle/Component") %>
+    </asp:PlaceHolder>
+
+    <script>
+        Pace.on('start', function () {
+            $(".pace-overlay").removeClass("overlay-inactive")
+        });
+
+        Pace.on('hide', function () {
+            $(".pace-overlay").addClass("overlay-inactive");
+
+            setTimeout(() => {
+                $(".pace-overlay").css("display", "none");
+            }, 500);
+        });
+    </script>
+
+    <asp:ContentPlaceHolder ID="JsContent" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>

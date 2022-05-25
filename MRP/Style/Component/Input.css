@@ -1,0 +1,37 @@
+﻿:root {
+    --inputBoxInnerShadow_Light: inset -2px -2px 4px rgba(255,255,255, .8);
+    --inputBoxInnerShadow_Dark: inset 2px 2px 4px rgba(0,0,0, .15);
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+    .input-container label {
+        color: #818181;
+        font-size: .85rem;
+        margin-bottom: 2px;
+    }
+
+        .input-container label.required::after {
+            content: '*';
+            color: #ff0000;
+            margin-left: 5px;
+        }
+
+    .input-container input, .input-container select, .input-container ._checkbox-cont, .input-container textarea {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .input-container input, .input-container select, .input-container textarea{
+        background-color: #ECECEC;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+    }
+    .input-container input, .input-container select, .input-container textarea {
+        padding: 14px 16px;
+        box-shadow: var(--inputBoxInnerShadow_Dark), var(--inputBoxInnerShadow_Light);
+    }

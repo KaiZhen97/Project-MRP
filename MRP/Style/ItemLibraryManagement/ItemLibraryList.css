@@ -1,0 +1,26 @@
+﻿body {
+}
+
+.solid-button.draft {
+    background-image: linear-gradient(to bottom, #FCFCFC, #C9C9C9);
+    /*color: black;*/
+}
+
+div.btn {
+    display: flex;
+    width: 50%;
+    justify-content: flex-start;
+    /*color: black;*/
+    /*flex-direction: row;*/
+}
+
+.end {
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.modal-content {
+     border: 2px solid lightgrey; 
+     border-radius: 10px;
+}

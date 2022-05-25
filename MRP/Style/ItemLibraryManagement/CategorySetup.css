@@ -1,0 +1,30 @@
+﻿body {
+}
+
+.req {
+    color: red;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.center {
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.end {
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.modal-content {
+     border: 2px solid lightgrey; 
+     border-radius: 10px;
+}
+
+.des {
+    margin-bottom: 5px;
+}

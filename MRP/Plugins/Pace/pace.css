@@ -1,0 +1,133 @@
+﻿/* Styling for Pace.js */
+.pace-overlay {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    z-index: 2000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(to bottom, #4B4B4B, #252525);
+    transition: opacity 1s;
+}
+
+.overlay-inactive {
+    opacity: 0;
+}
+
+.overlay-style {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+.overlay-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 60px;
+    height: 40px;
+}
+
+.overlay-footer {
+    position: absolute;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%);
+    font-family: Raleway;
+    font-size: .8rem;
+    color: white;
+    opacity: .6;
+    letter-spacing: 4px;
+}
+
+.pace-progress-cont {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pace-progress-cont {
+    display: flex;
+    flex-direction: column;
+}
+
+.progress-label {
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 25px;
+    font-family: Raleway;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: white;
+    letter-spacing: 4px;
+}
+
+.progress-item {
+    position: relative;
+}
+
+.progress-footer {
+    margin-top: 15px;
+    font-size: .8rem;
+    font-family: Poppins;
+    font-weight: 300;
+    text-align: center;
+    color: white;
+    opacity: .7;
+    letter-spacing: 1.5px;
+}
+
+.pace {
+    -webkit-pointer-events: none;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    z-index: 2000;
+    position: relative;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 5px;
+    width: 70%;
+    min-width: 200px;
+    max-width: 450px;
+    background: #fff;
+    overflow: hidden;
+    transition: opacity .5s;
+}
+
+    .pace .pace-progress {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        -o-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        position: fixed;
+        z-index: 2000;
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 100%;
+        height: 100%;
+        width: 100%;
+        background: #E3B534;
+    }
+
+    .pace.pace-inactive {
+        /*display: none;*/
+        /*opacity: 0;*/
+    }

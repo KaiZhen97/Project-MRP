@@ -1,0 +1,51 @@
+﻿.iziToast-theme-customDark {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    border-radius: 0px !important;
+}
+
+    .iziToast-theme-customDark::after {
+        box-shadow: none !important;
+    }
+
+    .iziToast-theme-customDark .iziToast-body {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0px !important;
+        margin-left: 0px;
+    }
+
+    .iziToast-theme-customDark .iziToast-icon {
+        position: relative !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        font-size: 1.2rem !important;
+        min-width: 52px !important;
+        max-width: 52px !important;
+        margin-top: 0px !important;
+    }
+
+    .iziToast-theme-customDark .iziToast-texts {
+        display: flex !important;
+        flex-direction: column;
+        margin: 17px 10px !important;
+        margin-left: 15px;
+    }
+
+    .iziToast-theme-customDark .iziToast-title {
+        display: block !important;
+        font-family: Poppins;
+        font-weight: 700 !important;
+    }
+
+    .iziToast-theme-customDark .iziToast-message {
+        margin-top: 2px !important;
+        margin-bottom: 0px !important;
+        float: none !important;
+        font-family: Poppins;
+        font-size: .85rem !important;
+    }

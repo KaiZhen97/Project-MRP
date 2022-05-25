@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "Js/Administrator/AuditSetup.min.js",
+    "inputFiles": [
+      "Js/Administrator/AuditSetup.js"
+    ]
+  },
+  {
+    "outputFileName": "Js/ItemLibraryManagement/AddNewPage-1.0.0.min.js",
+    "inputFiles": [
+      "Js/ItemLibraryManagement/AddNewPage-1.0.0.js"
+    ]
+  },
+  {
+    "outputFileName": "Js/ItemLibraryManagement/CategorySetup-1.0.0.min.js",
+    "inputFiles": [
+      "Js/ItemLibraryManagement/CategorySetup-1.0.0.js"
+    ]
+  },
+  {
+    "outputFileName": "Js/ItemLibraryManagement/ItemLibraryList-1.0.0.min.js",
+    "inputFiles": [
+      "Js/ItemLibraryManagement/ItemLibraryList-1.0.0.js"
+    ]
+  }
+]

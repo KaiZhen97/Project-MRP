@@ -1,0 +1,109 @@
+﻿.drawer-container {
+    pointer-events: none;
+    position: fixed;
+    display: flex;
+    flex-direction: column-reverse;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+}
+    .drawer-container.show {
+        pointer-events: all;
+    }
+
+
+
+    .drawer-container ._overlay {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0,0,0,.4);
+        backdrop-filter: blur(1px);
+        opacity: 0;
+        transition: opacity .5s;
+        z-index: 0;
+    }
+
+    .drawer-container ._loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 100px;
+        width: 100px;
+        background-color: white;
+        opacity: 0;
+        transition: opacity .5s, transform .5s;
+        border-radius: 15px;
+        transform: translate(-50%, -20%);
+        z-index: 1;
+    }
+        .drawer-container ._loading i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotating 1s linear infinite;
+        }
+
+        @keyframes rotating {
+            from {
+                transform: translate(-50%,-50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%,-50%) rotate(360deg);
+            }
+        }
+
+    .drawer-container.show ._overlay {
+        opacity: 1;
+    }
+
+    .drawer-container.show.loading ._loading {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    .drawer-container ._body {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 70vh;
+        max-height: 90vh;
+        padding: 35px 35px;
+        background-color: white;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        transform: translateY(100%);
+        transition: transform .5s;
+        z-index: 1;
+    }
+    .drawer-container.show:not(.loading) ._body {
+        transform: translateY(0%);
+    }
+
+    .drawer-container ._body ._title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+        .drawer-container ._body ._title span {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .drawer-container ._body ._title button {
+            font-size: 1.5rem;
+        }
+
+        .drawer-container ._body ._content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 15px;
+            /*overflow-y: overlay;*/
+        }
