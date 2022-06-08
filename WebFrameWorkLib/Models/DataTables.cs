@@ -87,4 +87,12 @@ namespace WebFrameWorkLib.Models
         public List<UAMPlatform> data { get; set; }
     }
 
+    public class DataTablesUserDetail
+    {
+        public int draw { get; set; }
+        public int recordsTotal { get; set; }
+        public int recordsFiltered { get; set; }
+        public List<V_UserDetail> data { get; set; }
+    }
+
 }

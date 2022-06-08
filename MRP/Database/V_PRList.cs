@@ -26,8 +26,10 @@ namespace MRP.Database
         public Nullable<System.DateTime> UpdateETA { get; set; }
         public Nullable<int> AcceptUpdateETA { get; set; }
         public string UpdateETA_PurchaserRemark { get; set; }
+        public Nullable<int> IsUrgent { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
         public Nullable<System.Guid> Purchaser1 { get; set; }
+        public Nullable<System.Guid> Purchaser2 { get; set; }
         public System.DateTime LastUpdatedDate { get; set; }
     }
 }

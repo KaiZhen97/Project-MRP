@@ -14,7 +14,7 @@ namespace WebFrameWorkLib.BusinessLogic
             {
                 if (modelState[key].Errors.Count != 0)
                 {
-                    return !string.IsNullOrEmpty(modelState[key].Errors[0].ErrorMessage) ? 
+                    return string.IsNullOrEmpty(modelState[key].Errors[0].ErrorMessage) ? 
                         modelState[key].Errors[0].ErrorMessage.ToString()
                         :
                         modelState[key].Errors[0].Exception.Message;

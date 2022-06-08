@@ -24,3 +24,23 @@ div.btn {
      border: 2px solid lightgrey; 
      border-radius: 10px;
 }
+
+.context-menu-list.css-title-toolbox::before {
+    content: 'General';
+    /*position: relative;
+    padding: 0px .9rem;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: .7rem;
+    color: #BEBEBE;*/
+}
+
+/*.context-menu-list.css-title-General::after {
+    position: relative;
+    content: 'Pur';
+    padding: 0px .9rem;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: .7rem;
+    color: #BEBEBE;
+}*/

@@ -48,6 +48,35 @@ namespace WebFrameWorkLib.BusinessLogic
             }
         }
 
+
+        public HttpResponseMessage getPurchasingList(HttpRequestMessage request)
+        {
+            //return UAMUserRole RoleName == "ISYS Purchasing";
+            //return UAMUserProfile Department = 22;
+
+            try
+            {
+                var PurchasingList = userDal.getPurchasingList(request);
+
+                if (PurchasingList != null)
+                {
+                    HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, PurchasingList);
+                    return response;
+                }
+                else
+                {
+                    HttpResponseMessage response = request.CreateResponse(HttpStatusCode.BadGateway, "not found");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.InternalServerError, "error" + ex.Message.ToString());
+                return response;
+            }
+        }
+
+
         public HttpResponseMessage getProfileDetails(HttpRequestMessage request)
         {
             try

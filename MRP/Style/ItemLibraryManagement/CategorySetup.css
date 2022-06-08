@@ -1,7 +1,4 @@
-﻿body {
-}
-
-.req {
+﻿.req {
     color: red;
 }
 
@@ -21,8 +18,9 @@
 }
 
 .modal-content {
-     border: 2px solid lightgrey; 
+     /*border: 2px solid lightgrey;*/
      border-radius: 10px;
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .des {

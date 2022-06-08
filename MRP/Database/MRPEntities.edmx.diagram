@@ -5,49 +5,49 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7e230b475c554fad9dd82f93aa48e258" Name="Diagram1" ZoomLevel="61">
-        <EntityTypeShape EntityType="MRPModel.AppBatchPO" Width="1.5" PointX="8.75" PointY="11.875" />
-        <EntityTypeShape EntityType="MRPModel.AppBatchPR" Width="1.5" PointX="10.75" PointY="3.875" />
-        <EntityTypeShape EntityType="MRPModel.AppItemLibrary" Width="1.5" PointX="10.75" PointY="6.875" />
-        <EntityTypeShape EntityType="MRPModel.AppPR" Width="1.5" PointX="10.75" PointY="9.875" />
-        <EntityTypeShape EntityType="MRPModel.AppRFQ" Width="1.5" PointX="10.75" PointY="12.875" />
-        <EntityTypeShape EntityType="MRPModel.AppWatcher" Width="1.5" PointX="12.75" PointY="3.875" />
-        <EntityTypeShape EntityType="MRPModel.Attachment" Width="1.5" PointX="3" PointY="11.625" />
-        <EntityTypeShape EntityType="MRPModel.Category" Width="1.5" PointX="1.5" PointY="45.375" />
-        <EntityTypeShape EntityType="MRPModel.ItemLibrary" Width="1.5" PointX="3.75" PointY="42.875" />
-        <EntityTypeShape EntityType="MRPModel.ItemLibraryPWPMapping" Width="1.5" PointX="12.75" PointY="6.875" />
-        <EntityTypeShape EntityType="MRPModel.JobNoHODMapping" Width="1.5" PointX="12.75" PointY="9.875" />
-        <EntityTypeShape EntityType="MRPModel.MultiTierApproval" Width="1.5" PointX="8.75" PointY="15.875" />
-        <EntityTypeShape EntityType="MRPModel.Notification" Width="1.5" PointX="8" PointY="8" />
-        <EntityTypeShape EntityType="MRPModel.NotificationReceiver" Width="1.5" PointX="12.75" PointY="12.875" />
-        <EntityTypeShape EntityType="MRPModel.NotificationType" Width="1.5" PointX="5.75" PointY="8.375" />
-        <EntityTypeShape EntityType="MRPModel.PO" Width="1.5" PointX="0.75" PointY="7.625" />
-        <EntityTypeShape EntityType="MRPModel.POItem" Width="1.5" PointX="3" PointY="19.375" />
-        <EntityTypeShape EntityType="MRPModel.POStatu" Width="1.5" PointX="10.75" PointY="15.875" />
-        <EntityTypeShape EntityType="MRPModel.PR" Width="1.5" PointX="0.75" PointY="31" />
-        <EntityTypeShape EntityType="MRPModel.PRItem" Width="1.5" PointX="6" PointY="44.5" />
-        <EntityTypeShape EntityType="MRPModel.PRStatu" Width="1.5" PointX="1.5" PointY="39.75" />
-        <EntityTypeShape EntityType="MRPModel.RFQ" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="MRPModel.RFQStatu" Width="1.5" PointX="1.5" PointY="28.25" />
-        <EntityTypeShape EntityType="MRPModel.RunningNo" Width="1.5" PointX="8" PointY="4.125" />
-        <EntityTypeShape EntityType="MRPModel.RunningNoType" Width="1.5" PointX="5.75" PointY="4.625" />
-        <EntityTypeShape EntityType="MRPModel.UpdateTrace" Width="1.5" PointX="6" PointY="11.5" />
-        <EntityTypeShape EntityType="MRPModel.UpdateTraceAction" Width="1.5" PointX="3.75" PointY="4.5" />
-        <EntityTypeShape EntityType="MRPModel.UpdateTraceType" Width="1.5" PointX="3.75" PointY="7.25" />
-        <EntityTypeShape EntityType="MRPModel.Watcher" Width="1.5" PointX="3" PointY="16.375" />
-        <EntityTypeShape EntityType="MRPModel.V_CategoryList" Width="1.5" PointX="12.75" PointY="15.875" />
-        <EntityTypeShape EntityType="MRPModel.V_ItemLibraryAttachments" Width="1.5" PointX="5.75" PointY="16.875" />
-        <EntityTypeShape EntityType="MRPModel.V_ItemLibraryList" Width="1.5" PointX="14.75" PointY="3.875" />
-        <EntityTypeShape EntityType="MRPModel.V_PH_PO" Width="1.5" PointX="14.75" PointY="12.875" />
-        <EntityTypeShape EntityType="MRPModel.V_PH_PODTL" Width="1.5" PointX="7.75" PointY="18.875" />
-        <EntityTypeShape EntityType="MRPModel.V_POAttachmentsList" Width="1.5" PointX="9.75" PointY="18.875" />
-        <EntityTypeShape EntityType="MRPModel.V_PRAttachmentsList" Width="1.5" PointX="16.75" PointY="3.875" />
-        <EntityTypeShape EntityType="MRPModel.V_PRList" Width="1.5" PointX="16.75" PointY="8.875" />
-        <EntityTypeShape EntityType="MRPModel.V_PRList_Watcher" Width="1.5" PointX="16.75" PointY="13.875" />
-        <EntityTypeShape EntityType="MRPModel.V_RFQAttachmentsList" Width="1.5" PointX="11.75" PointY="19.875" />
-        <EntityTypeShape EntityType="MRPModel.V_RFQList" Width="1.5" PointX="16.75" PointY="18.875" />
-        <EntityTypeShape EntityType="MRPModel.V_UpdateHistoryTrace" Width="1.5" PointX="18.75" PointY="3.875" />
+        <EntityTypeShape EntityType="MRPModel.AppBatchPO" Width="1.5" PointX="2.75" PointY="7" />
+        <EntityTypeShape EntityType="MRPModel.AppBatchPR" Width="1.5" PointX="5.75" PointY="4" />
+        <EntityTypeShape EntityType="MRPModel.AppItemLibrary" Width="1.5" PointX="8.75" PointY="12" />
+        <EntityTypeShape EntityType="MRPModel.AppPR" Width="1.5" PointX="10.75" PointY="12" />
+        <EntityTypeShape EntityType="MRPModel.AppRFQ" Width="1.5" PointX="8.75" PointY="15" />
+        <EntityTypeShape EntityType="MRPModel.AppWatcher" Width="1.5" PointX="10.75" PointY="15" />
+        <EntityTypeShape EntityType="MRPModel.Attachment" Width="1.5" PointX="6" PointY="12" />
+        <EntityTypeShape EntityType="MRPModel.Category" Width="1.5" PointX="1.5" PointY="37.625" />
+        <EntityTypeShape EntityType="MRPModel.ItemLibrary" Width="1.5" PointX="1.5" PointY="28.625" />
+        <EntityTypeShape EntityType="MRPModel.ItemLibraryPWPMapping" Width="1.5" PointX="12.75" PointY="12" />
+        <EntityTypeShape EntityType="MRPModel.JobNoHODMapping" Width="1.5" PointX="12.75" PointY="15" />
+        <EntityTypeShape EntityType="MRPModel.MultiTierApproval" Width="1.5" PointX="13.75" PointY="4" />
+        <EntityTypeShape EntityType="MRPModel.Notification" Width="1.5" PointX="11" PointY="8.25" />
+        <EntityTypeShape EntityType="MRPModel.NotificationReceiver" Width="1.5" PointX="2.75" PointY="17" />
+        <EntityTypeShape EntityType="MRPModel.NotificationType" Width="1.5" PointX="8.75" PointY="8.625" />
+        <EntityTypeShape EntityType="MRPModel.PO" Width="1.5" PointX="0.75" PointY="7.875" />
+        <EntityTypeShape EntityType="MRPModel.POItem" Width="1.5" PointX="3" PointY="19.75" />
+        <EntityTypeShape EntityType="MRPModel.POStatu" Width="1.5" PointX="13.75" PointY="7" />
+        <EntityTypeShape EntityType="MRPModel.PR" Width="1.5" PointX="0.75" PointY="42.25" />
+        <EntityTypeShape EntityType="MRPModel.PRItem" Width="1.5" PointX="3.75" PointY="32.25" />
+        <EntityTypeShape EntityType="MRPModel.PRStatu" Width="1.5" PointX="1.5" PointY="50.875" />
+        <EntityTypeShape EntityType="MRPModel.RFQ" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MRPModel.RFQStatu" Width="1.5" PointX="1.5" PointY="4.25" />
+        <EntityTypeShape EntityType="MRPModel.RunningNo" Width="1.5" PointX="11" PointY="4.25" />
+        <EntityTypeShape EntityType="MRPModel.RunningNoType" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="MRPModel.UpdateTrace" Width="1.5" PointX="3" PointY="11.625" />
+        <EntityTypeShape EntityType="MRPModel.UpdateTraceAction" Width="1.5" PointX="0.75" PointY="20.875" />
+        <EntityTypeShape EntityType="MRPModel.UpdateTraceType" Width="1.5" PointX="0.75" PointY="23.375" />
+        <EntityTypeShape EntityType="MRPModel.Watcher" Width="1.5" PointX="6" PointY="6.375" />
+        <EntityTypeShape EntityType="MRPModel.V_CategoryList" Width="1.5" PointX="5.75" PointY="17" />
+        <EntityTypeShape EntityType="MRPModel.V_ItemLibraryAttachments" Width="1.5" PointX="14.75" PointY="10" />
+        <EntityTypeShape EntityType="MRPModel.V_ItemLibraryList" Width="1.5" PointX="7.75" PointY="18" />
+        <EntityTypeShape EntityType="MRPModel.V_PH_PO" Width="1.5" PointX="9.75" PointY="18" />
+        <EntityTypeShape EntityType="MRPModel.V_PH_PODTL" Width="1.5" PointX="14.75" PointY="15" />
+        <EntityTypeShape EntityType="MRPModel.V_POAttachmentsList" Width="1.5" PointX="11.75" PointY="18" />
+        <EntityTypeShape EntityType="MRPModel.V_PRAttachmentsList" Width="1.5" PointX="15.75" PointY="4" />
+        <EntityTypeShape EntityType="MRPModel.V_PRList" Width="1.5" PointX="16.75" PointY="9" />
+        <EntityTypeShape EntityType="MRPModel.V_PRList_Watcher" Width="1.5" PointX="16.75" PointY="15" />
+        <EntityTypeShape EntityType="MRPModel.V_RFQAttachmentsList" Width="1.5" PointX="16.75" PointY="20" />
+        <EntityTypeShape EntityType="MRPModel.V_RFQList" Width="1.5" PointX="13.75" PointY="21" />
+        <EntityTypeShape EntityType="MRPModel.V_UpdateHistoryTrace" Width="1.5" PointX="17.75" PointY="4" />
         <AssociationConnector Association="MRPModel.FK_Attachments_PO" />
-        <AssociationConnector Association="MRPModel.FK_Attachments_PR" />
+        <AssociationConnector Association="MRPModel.FK_Attachments_PRItem" />
         <AssociationConnector Association="MRPModel.FK_Attachments_RFQ" />
         <AssociationConnector Association="MRPModel.FK_ItemLibrary_Category" />
         <AssociationConnector Association="MRPModel.FK_PR_Item_Category" />

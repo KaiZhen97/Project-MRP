@@ -16,7 +16,7 @@ namespace MRP.Database
     {
         public int ID { get; set; }
         public Nullable<int> ItemLibraryID { get; set; }
-        public Nullable<int> PRID { get; set; }
+        public Nullable<int> PRItemID { get; set; }
         public Nullable<int> POID { get; set; }
         public Nullable<int> RFQID { get; set; }
         public string AttachmentName { get; set; }
@@ -28,7 +28,7 @@ namespace MRP.Database
         public Nullable<System.Guid> DeletedBy { get; set; }
     
         public virtual PO PO { get; set; }
-        public virtual PR PR { get; set; }
+        public virtual PRItem PRItem { get; set; }
         public virtual RFQ RFQ { get; set; }
     }
 }

@@ -111,7 +111,7 @@ namespace MRP.BusinessLogic
             }
         }
 
-        public HttpResponseMessage postDeleteItemLibrary(RequestParameter.inputID input, ModelStateDictionary modelState, HttpRequestMessage request)
+        public HttpResponseMessage postDeleteItemLibrary(RequestParameter.inputDeleteItemLibrary input, ModelStateDictionary modelState, HttpRequestMessage request)
         {
             try
             {
@@ -130,8 +130,35 @@ namespace MRP.BusinessLogic
                     HttpResponseMessage response = request.CreateResponse(HttpStatusCode.BadRequest, systemMessage);
                     return response;
                 }
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message != null)
+                    return webReqApi.returnUnexpected(request, ex.Message.ToString());
+                else
+                    return webReqApi.returnUnexpected(request, "Unexpected Error");
+            }
+        }
 
+        public HttpResponseMessage postDeleteDraftItem(RequestParameter.inputDeleteDraftItem input, ModelStateDictionary modelState, HttpRequestMessage request)
+        {
+            try
+            {
+                if (modelState.IsValid)
+                {
+                    var deleteData = itemLibraryDal.postDeleteDraftItem(input, request);
 
+                    if (!deleteData)
+                        return webReqApi.returnBad(Resources.UPDATE_FAILED, request);
+
+                    return webReqApi.returnOk(Resources.UPDATE_SUCCESS, request);
+                }
+                else
+                {
+                    systemMessage.Message = extractModelStateMsg.GetErrorMessageForKey(modelState);
+                    HttpResponseMessage response = request.CreateResponse(HttpStatusCode.BadRequest, systemMessage);
+                    return response;
+                }
             }
             catch (Exception ex)
             {

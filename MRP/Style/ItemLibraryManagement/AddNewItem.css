@@ -3,24 +3,40 @@
 }
 
 .solid-button.draft {
-    background-image: linear-gradient(to bottom, #FCFCFC, #C9C9C9);
+    /*background-image: linear-gradient(to bottom, #FCFCFC, #C9C9C9);*/
     /*color: black;*/
 }
 
-/*div.box {
-    display: flex;
-    width: 50%;
-    justify-content: flex-start;
-    flex-direction: row;
-    /*color: black;*/
-}*/
+div.box {
+    /*display: flex;*/
+    width: 100%;
+    /*justify-content: flex-start;*/
+    /*flex-direction: row;*/
+    background-color: #ECECEC;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--inputBoxInnerShadow_Dark), var(--inputBoxInnerShadow_Light);
+}
 
 .red {
     color: red;
 }
 
-.bold {
+/*.bold {
     font-weight: bold;
+}*/
+
+.end {
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.modal-content {
+     /*border: 2px solid lightgrey;*/ 
+     border-radius: 10px;
+     /*box-shadow: var(--inputBoxInnerShadow_Dark), var(--inputBoxInnerShadow_Light);*/
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 /*.row {
@@ -38,9 +54,9 @@
     flex: 0 0 auto;
 }*/
 
-.label1 {
+/*.label1 {
     margin-left: 5px;
-}
+}*/
 
 label {
     margin-left: -10px;
@@ -66,6 +82,20 @@ h4 {
 
 .center {
     text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.end {
+    /*text-align: end;*/
+    text-align: right;
+}
+
+.start {
+    /*text-align: left;*/
+    /*text-align: start;*/
+    /*align-items: flex-start;*/
+    /*align-content: flex-start;*/
 }
 
 /*button {
@@ -73,23 +103,41 @@ h4 {
 
 }*/
 
-.btnReset {
+/*.btnOrange {
     color: white; 
     background-image: linear-gradient(#feca4a, #ee8e17);
 }
 
-.btnClose {
+.btnRed {
     color: white; 
     background-image: linear-gradient(#fd7878, #e01b1b);
-    /*background-image: linear-gradient(to bottom, #fd7878, #e01b1b);*/
 }
 
-.btnSaveDraft {
+.btnBlue {
     color: white; 
     background-image: linear-gradient(#7ed6fc, #42bef3);
 }
 
-.btnConfirm {
+.btnGreen {
     color: black; 
     background-image: linear-gradient(#93fd65, #34df3e);
+}*/
+
+
+.spec_left {
+    border-radius: 8px 0px 0px 8px;
+    width: 49%;
+    /*padding: 5px;*/
+    border: 1px solid black;
+}
+
+.spec_right {
+    border-radius: 0px 8px 8px 0px;
+    /*padding: 5px;*/
+    border: 1px solid black;
+    /*top: 50%;*/
+}
+
+.spec {
+    /*padding: 20px;*/
 }

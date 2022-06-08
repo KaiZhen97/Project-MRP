@@ -23,6 +23,7 @@ namespace MRP.Database
         public Nullable<int> PRID { get; set; }
         public Nullable<int> POID { get; set; }
         public Nullable<int> ApprvOrReject { get; set; }
+        public string Status { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
     

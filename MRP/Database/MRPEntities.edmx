@@ -60,7 +60,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ItemLibraryID" Type="int" />
-          <Property Name="PRID" Type="int" />
+          <Property Name="PRItemID" Type="int" />
           <Property Name="POID" Type="int" />
           <Property Name="RFQID" Type="int" />
           <Property Name="AttachmentName" Type="varchar" MaxLength="100" Nullable="false" />
@@ -84,6 +84,7 @@
           <Property Name="LastUpdatedBy" Type="uniqueidentifier" />
           <Property Name="DeletedDate" Type="datetime" />
           <Property Name="DeletedBy" Type="uniqueidentifier" />
+          <Property Name="DeletedRemark" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="ItemLibrary">
           <Key>
@@ -123,6 +124,7 @@
           <Property Name="DeletedDate" Type="datetime" />
           <Property Name="DeletedBy" Type="uniqueidentifier" />
           <Property Name="AppKey" Type="uniqueidentifier" />
+          <Property Name="DeletedRemark" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ItemLibraryPWPMapping">
           <Key>
@@ -419,6 +421,7 @@
           <Property Name="PRID" Type="int" />
           <Property Name="POID" Type="int" />
           <Property Name="ApprvOrReject" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="100" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
         </EntityType>
@@ -464,6 +467,8 @@ warning 6002: The table/view 'MRP.dbo.V_CategoryList' does not have a primary ke
           <Property Name="LastUpdatedBy" Type="uniqueidentifier" />
           <Property Name="CreatedByStaffName" Type="varchar" MaxLength="200" />
           <Property Name="LastUpdatedByStaffName" Type="varchar" MaxLength="200" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="uniqueidentifier" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MRP.dbo.V_ItemLibraryAttachments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -699,8 +704,10 @@ warning 6002: The table/view 'MRP.dbo.V_PRList' does not have a primary key defi
           <Property Name="UpdateETA" Type="date" />
           <Property Name="AcceptUpdateETA" Type="int" />
           <Property Name="UpdateETA_PurchaserRemark" Type="varchar" MaxLength="200" />
+          <Property Name="IsUrgent" Type="int" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
           <Property Name="Purchaser1" Type="uniqueidentifier" />
+          <Property Name="Purchaser2" Type="uniqueidentifier" />
           <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -819,15 +826,15 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Attachments_PR">
-          <End Role="PR" Type="Self.PR" Multiplicity="0..1" />
+        <Association Name="FK_Attachments_PRItem">
+          <End Role="PRItem" Type="Self.PRItem" Multiplicity="0..1" />
           <End Role="Attachments" Type="Self.Attachments" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PR">
+            <Principal Role="PRItem">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Attachments">
-              <PropertyRef Name="PRID" />
+              <PropertyRef Name="PRItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1069,7 +1076,9 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
     [V_CategoryList].[LastUpdatedDate] AS [LastUpdatedDate], 
     [V_CategoryList].[LastUpdatedBy] AS [LastUpdatedBy], 
     [V_CategoryList].[CreatedByStaffName] AS [CreatedByStaffName], 
-    [V_CategoryList].[LastUpdatedByStaffName] AS [LastUpdatedByStaffName]
+    [V_CategoryList].[LastUpdatedByStaffName] AS [LastUpdatedByStaffName], 
+    [V_CategoryList].[DeletedDate] AS [DeletedDate], 
+    [V_CategoryList].[DeletedBy] AS [DeletedBy]
     FROM [dbo].[V_CategoryList] AS [V_CategoryList]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_ItemLibraryAttachments" EntityType="Self.V_ItemLibraryAttachments" store:Type="Views" store:Schema="dbo">
@@ -1249,8 +1258,10 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
     [V_PRList].[UpdateETA] AS [UpdateETA], 
     [V_PRList].[AcceptUpdateETA] AS [AcceptUpdateETA], 
     [V_PRList].[UpdateETA_PurchaserRemark] AS [UpdateETA_PurchaserRemark], 
+    [V_PRList].[IsUrgent] AS [IsUrgent], 
     [V_PRList].[CreatedBy] AS [CreatedBy], 
     [V_PRList].[Purchaser1] AS [Purchaser1], 
+    [V_PRList].[Purchaser2] AS [Purchaser2], 
     [V_PRList].[LastUpdatedDate] AS [LastUpdatedDate]
     FROM [dbo].[V_PRList] AS [V_PRList]</DefiningQuery>
           </EntitySet>
@@ -1339,8 +1350,8 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             <End Role="PO" EntitySet="PO" />
             <End Role="Attachments" EntitySet="Attachments" />
           </AssociationSet>
-          <AssociationSet Name="FK_Attachments_PR" Association="Self.FK_Attachments_PR">
-            <End Role="PR" EntitySet="PR" />
+          <AssociationSet Name="FK_Attachments_PRItem" Association="Self.FK_Attachments_PRItem">
+            <End Role="PRItem" EntitySet="PRItem" />
             <End Role="Attachments" EntitySet="Attachments" />
           </AssociationSet>
           <AssociationSet Name="FK_Attachments_RFQ" Association="Self.FK_Attachments_RFQ">
@@ -1464,8 +1475,8 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             <End Role="PO" EntitySet="POes" />
             <End Role="Attachment" EntitySet="Attachments" />
           </AssociationSet>
-          <AssociationSet Name="FK_Attachments_PR" Association="MRPModel.FK_Attachments_PR">
-            <End Role="PR" EntitySet="PRs" />
+          <AssociationSet Name="FK_Attachments_PRItem" Association="MRPModel.FK_Attachments_PRItem">
+            <End Role="PRItem" EntitySet="PRItems" />
             <End Role="Attachment" EntitySet="Attachments" />
           </AssociationSet>
           <AssociationSet Name="FK_Attachments_RFQ" Association="MRPModel.FK_Attachments_RFQ">
@@ -1588,7 +1599,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ItemLibraryID" Type="Int32" />
-          <Property Name="PRID" Type="Int32" />
+          <Property Name="PRItemID" Type="Int32" />
           <Property Name="POID" Type="Int32" />
           <Property Name="RFQID" Type="Int32" />
           <Property Name="AttachmentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -1599,7 +1610,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="DeletedBy" Type="Guid" />
           <NavigationProperty Name="PO" Relationship="MRPModel.FK_Attachments_PO" FromRole="Attachment" ToRole="PO" />
-          <NavigationProperty Name="PR" Relationship="MRPModel.FK_Attachments_PR" FromRole="Attachment" ToRole="PR" />
+          <NavigationProperty Name="PRItem" Relationship="MRPModel.FK_Attachments_PRItem" FromRole="Attachment" ToRole="PRItem" />
           <NavigationProperty Name="RFQ" Relationship="MRPModel.FK_Attachments_RFQ" FromRole="Attachment" ToRole="RFQ" />
         </EntityType>
         <EntityType Name="Category">
@@ -1615,6 +1626,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="LastUpdatedBy" Type="Guid" />
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="DeletedBy" Type="Guid" />
+          <Property Name="DeletedRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ItemLibraries" Relationship="MRPModel.FK_ItemLibrary_Category" FromRole="Category" ToRole="ItemLibrary" />
           <NavigationProperty Name="PRItems" Relationship="MRPModel.FK_PR_Item_Category" FromRole="Category" ToRole="PRItem" />
         </EntityType>
@@ -1656,6 +1668,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="DeletedBy" Type="Guid" />
           <Property Name="AppKey" Type="Guid" />
+          <Property Name="DeletedRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Category" Relationship="MRPModel.FK_ItemLibrary_Category" FromRole="ItemLibrary" ToRole="Category" />
           <NavigationProperty Name="PRItems" Relationship="MRPModel.FK_PR_Item_ItemLibrary" FromRole="ItemLibrary" ToRole="PRItem" />
           <NavigationProperty Name="UpdateTraces" Relationship="MRPModel.FK_UpdateTrace_ItemLibrary" FromRole="ItemLibrary" ToRole="UpdateTrace" />
@@ -1862,7 +1875,6 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="AppKey" Type="Guid" />
           <Property Name="AppBatchKey" Type="Guid" />
           <Property Name="CancelRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Attachments" Relationship="MRPModel.FK_Attachments_PR" FromRole="PR" ToRole="Attachment" />
           <NavigationProperty Name="PRStatu" Relationship="MRPModel.FK_PR_PRStatus" FromRole="PR" ToRole="PRStatu" />
           <NavigationProperty Name="UpdateTraces" Relationship="MRPModel.FK_UpdateTrace_PR" FromRole="PR" ToRole="UpdateTrace" />
         </EntityType>
@@ -1888,6 +1900,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="UdpateETA_RequesterRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IsUrgent" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Attachments" Relationship="MRPModel.FK_Attachments_PRItem" FromRole="PRItem" ToRole="Attachment" />
           <NavigationProperty Name="Category" Relationship="MRPModel.FK_PR_Item_Category" FromRole="PRItem" ToRole="Category" />
           <NavigationProperty Name="ItemLibrary" Relationship="MRPModel.FK_PR_Item_ItemLibrary" FromRole="PRItem" ToRole="ItemLibrary" />
         </EntityType>
@@ -1974,6 +1987,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="PRID" Type="Int32" />
           <Property Name="POID" Type="Int32" />
           <Property Name="ApprvOrReject" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" />
           <NavigationProperty Name="ItemLibrary" Relationship="MRPModel.FK_UpdateTrace_ItemLibrary" FromRole="UpdateTrace" ToRole="ItemLibrary" />
@@ -2026,6 +2040,8 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="LastUpdatedBy" Type="Guid" />
           <Property Name="CreatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="LastUpdatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Guid" />
         </EntityType>
         <EntityType Name="V_ItemLibraryAttachments">
           <Key>
@@ -2247,8 +2263,10 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="UpdateETA" Type="DateTime" Precision="0" />
           <Property Name="AcceptUpdateETA" Type="Int32" />
           <Property Name="UpdateETA_PurchaserRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsUrgent" Type="Int32" />
           <Property Name="CreatedBy" Type="Guid" />
           <Property Name="Purchaser1" Type="Guid" />
+          <Property Name="Purchaser2" Type="Guid" />
           <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="V_PRList_Watcher">
@@ -2359,15 +2377,15 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Attachments_PR">
-          <End Type="MRPModel.PR" Role="PR" Multiplicity="0..1" />
+        <Association Name="FK_Attachments_PRItem">
+          <End Type="MRPModel.PRItem" Role="PRItem" Multiplicity="0..1" />
           <End Type="MRPModel.Attachment" Role="Attachment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PR">
+            <Principal Role="PRItem">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Attachment">
-              <PropertyRef Name="PRID" />
+              <PropertyRef Name="PRItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2642,7 +2660,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
                 <ScalarProperty Name="AttachmentName" ColumnName="AttachmentName" />
                 <ScalarProperty Name="RFQID" ColumnName="RFQID" />
                 <ScalarProperty Name="POID" ColumnName="POID" />
-                <ScalarProperty Name="PRID" ColumnName="PRID" />
+                <ScalarProperty Name="PRItemID" ColumnName="PRItemID" />
                 <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -2651,6 +2669,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="MRPModel.Category">
               <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="DeletedRemark" ColumnName="DeletedRemark" />
                 <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
                 <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
@@ -2666,6 +2685,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySetMapping Name="ItemLibraries">
             <EntityTypeMapping TypeName="MRPModel.ItemLibrary">
               <MappingFragment StoreEntitySet="ItemLibrary">
+                <ScalarProperty Name="DeletedRemark" ColumnName="DeletedRemark" />
                 <ScalarProperty Name="AppKey" ColumnName="AppKey" />
                 <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
                 <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
@@ -3006,6 +3026,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
               <MappingFragment StoreEntitySet="UpdateTrace">
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ApprvOrReject" ColumnName="ApprvOrReject" />
                 <ScalarProperty Name="POID" ColumnName="POID" />
                 <ScalarProperty Name="PRID" ColumnName="PRID" />
@@ -3048,6 +3069,8 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySetMapping Name="V_CategoryList">
             <EntityTypeMapping TypeName="MRPModel.V_CategoryList">
               <MappingFragment StoreEntitySet="V_CategoryList">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
                 <ScalarProperty Name="LastUpdatedByStaffName" ColumnName="LastUpdatedByStaffName" />
                 <ScalarProperty Name="CreatedByStaffName" ColumnName="CreatedByStaffName" />
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
@@ -3239,8 +3262,10 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             <EntityTypeMapping TypeName="MRPModel.V_PRList">
               <MappingFragment StoreEntitySet="V_PRList">
                 <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="Purchaser2" ColumnName="Purchaser2" />
                 <ScalarProperty Name="Purchaser1" ColumnName="Purchaser1" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsUrgent" ColumnName="IsUrgent" />
                 <ScalarProperty Name="UpdateETA_PurchaserRemark" ColumnName="UpdateETA_PurchaserRemark" />
                 <ScalarProperty Name="AcceptUpdateETA" ColumnName="AcceptUpdateETA" />
                 <ScalarProperty Name="UpdateETA" ColumnName="UpdateETA" />

@@ -181,11 +181,11 @@ namespace MRP
 
             bundles.Add(new ScriptBundle("~/scriptBundle/ILM/EditItem")
                 .Include(contextMenuScript)
-                .Include("~/Js/ItemLibraryManagement/EditItem-1.0.0.js"));
+                .Include("~/Js/ItemLibraryManagement/EditItem.js"));
 
             bundles.Add(new ScriptBundle("~/scriptBundle/ILM/ItemDetails")
                 .Include(contextMenuScript)
-                .Include("~/Js/ItemLibraryManagement/ItemDetails-1.0.0.js"));
+                .Include("~/Js/ItemLibraryManagement/ItemDetails.js"));
 
             bundles.Add(new ScriptBundle("~/scriptBundle/ILM/CategorySetup")
                 .Include(dataTablesScript)

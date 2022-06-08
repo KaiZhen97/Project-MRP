@@ -45,6 +45,29 @@ namespace MRP.Controllers
             return response;
         }
 
+        public HttpResponseMessage getDraftItemLIbraryList()
+        {
+            DataTableItemLibrary data = new DataTableItemLibrary();
+
+            List<V_ItemLibraryList> dataList = itemLibraryDal.getDraftItemLibraryList();
+
+            data.data = dataList;
+            data.draw = 1;
+            if (dataList == null)
+            {
+                data.recordsFiltered = 0;
+                data.recordsTotal = 0;
+            }
+            else
+            {
+                data.recordsFiltered = dataList.Count;
+                data.recordsTotal = dataList.Count;
+            }
+            HttpResponseMessage response = new HttpResponseMessage();
+            response = Request.CreateResponse(HttpStatusCode.OK, data);
+            return response;
+        }
+
         [HttpPost]
         public HttpResponseMessage postItemLibraryByID([FromBody]RequestParameter.inputID input)
         {
@@ -70,12 +93,21 @@ namespace MRP.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage postDeleteItemLibrary([FromBody]RequestParameter.inputID input)
+        public HttpResponseMessage postDeleteItemLibrary([FromBody]RequestParameter.inputDeleteItemLibrary input)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             response = itemLibraryBL.postDeleteItemLibrary(input, ModelState, Request);
             return response;
         }
+
+        [HttpPost]
+        public HttpResponseMessage postDeleteDraftItem([FromBody]RequestParameter.inputDeleteDraftItem input)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            response = itemLibraryBL.postDeleteDraftItem(input, ModelState, Request);
+            return response;
+        }
+
         #endregion
 
         #region Category

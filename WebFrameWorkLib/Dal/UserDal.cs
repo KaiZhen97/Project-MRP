@@ -59,6 +59,129 @@ namespace WebFrameWorkLib.Dal
             }
         }
 
+
+        //public List<V_UserDetail> getPurchasingList()
+        //{
+        //    try
+        //    {
+        //        //Guid userGuid = common.extractUserID(Request);
+
+        //        //var User = dbContext.UAMUsers;
+        //        //List<V_UserDetail> PurchasingList = new List<V_UserDetail>();
+        //        var PurchasingList = dbContext.V_UserDetail.Where(c => c.DepartmentID == 22).ToList();
+
+        //        return PurchasingList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+        //            System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+        //        return null;
+        //    }
+        //}
+
+
+
+        public List<V_UserDetail> getPurchasingList(HttpRequestMessage Request)
+        {
+            try
+            {
+                //Guid userGuid = common.extractUserID(Request);
+
+                //var User = dbContext.UAMUsers;
+                //List<V_UserDetail> PurchasingList = new List<V_UserDetail>();
+                var PurchasingList = dbContext.V_UserDetail.Where(c => c.DepartmentID == 22).ToList();
+
+                return PurchasingList;
+            }
+            catch (Exception ex)
+            {
+                logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+                    System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+                return null;
+            }
+        }
+
+
+        //public List<V_UserDetail> getPurchasingList(HttpRequestMessage Request)
+        //{
+        //    try
+        //    {
+        //        //Guid userGuid = common.extractUserID(Request);
+
+        //        //var User = dbContext.UAMUsers;
+        //        List<V_UserDetail> PurchasingList = new List<V_UserDetail>();
+        //        var UserDetail = dbContext.V_UserDetail.Where(c => c.DepartmentID == 22).ToList();
+
+        //            return PurchasingList;
+
+        //        //if (UserDetail != null)
+        //        //{
+        //        //    return PurchasingList;
+        //        //}
+
+        //            //UserProfiles = dbContext.UAMUserProfiles.AccessID().FirstOrDefault();
+        //            //var 
+
+        //            //UAMUserProfile UserProfile = new UAMUserProfile();
+
+        //        //var AccessID = dbContext.UAMUsers.Join(dbContext.UAMUserProfiles,
+        //        //    //s => s.DepartmentID,
+        //        //    d => d.AccessID,
+        //        //    (dbContext.UAMUsers, dbContext.UAMUserProfiles) => new
+        //        //    {
+        //        //        //DepartmentID = dbContext.UAMUserProfiles.DepartmentID,
+        //        //        AccessID1 = dbContext.UAMUserProfiles.AccessID,
+        //        //        AccessID2 = dbContext.UAMUsers.AccessID
+        //        //    });
+
+        //        //var AccessID = from u in dbContext.UAMUsers
+        //        //               join p in dbContext.UAMUserProfiles
+        //        //               on u.dbContext.UAMUsers.AccessID euqals p.dbContext.UAMUserProfiles.AccessID
+        //        //    select new
+        //        //    {
+        //        //        dbContext.UAMUsers.AcecessID = u.AccessID,
+        //        //        dbContext.UAMUserProfiles.AccessID = p.AccessID
+        //        //    };
+
+
+        //        //if (UserProfiles != null && User != null)
+        //        //{
+        //        //    return userGuid;
+        //        //    return null;
+        //        //}
+
+
+        //        //var EmployeeProfileList = dbContext.V_EmployeeProfileList.Where(c => c.DepartmentID == 22 || c.DepartmentName == "ISYS Purchasing").FirstOrDefault();
+
+        //        //if (EmployeeProfileList != null)
+        //        //{
+
+        //        //    return EmployeeProfileList;
+        //        //}
+
+        //        //var Department = dbContext.UAMUserProfiles.()
+
+        //        //else
+        //        //{
+
+        //        //    return null;
+        //        //}
+
+        //        //return PurchasingList.AccessID;
+
+        //        //return null;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+        //            System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+        //        return null;
+        //    }
+        //}
+
+
+
         public UAMUser getUserByIDAndPwd(string loginID, string password, string loginType)
         {
 

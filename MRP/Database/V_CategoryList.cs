@@ -23,5 +23,7 @@ namespace MRP.Database
         public Nullable<System.Guid> LastUpdatedBy { get; set; }
         public string CreatedByStaffName { get; set; }
         public string LastUpdatedByStaffName { get; set; }
+        public Nullable<System.DateTime> DeletedDate { get; set; }
+        public Nullable<System.Guid> DeletedBy { get; set; }
     }
 }

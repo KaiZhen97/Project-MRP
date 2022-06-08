@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\1. Waygon\i-Stone\Project\Active Project\MRP\Source Code\SVN Issue Fixing\trunk\MRP\MRP\Database\MRPEntities.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\Project\latest MRP\MRP\MRP\Database\MRPEntities.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

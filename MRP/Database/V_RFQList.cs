@@ -11,7 +11,7 @@ namespace MRP.Database
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class V_RFQList
     {
         public string CreatedByStaffName { get; set; }

@@ -14,6 +14,12 @@ namespace MRP.Database
     
     public partial class PRItem
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PRItem()
+        {
+            this.Attachments = new HashSet<Attachment>();
+        }
+    
         public int ID { get; set; }
         public int PRID { get; set; }
         public Nullable<int> ItemLibraryID { get; set; }
@@ -33,6 +39,8 @@ namespace MRP.Database
         public int IsUrgent { get; set; }
         public string Remark { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Attachment> Attachments { get; set; }
         public virtual Category Category { get; set; }
         public virtual ItemLibrary ItemLibrary { get; set; }
     }

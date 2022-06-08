@@ -17,7 +17,6 @@ namespace MRP.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PR()
         {
-            this.Attachments = new HashSet<Attachment>();
             this.UpdateTraces = new HashSet<UpdateTrace>();
         }
     
@@ -53,8 +52,6 @@ namespace MRP.Database
         public Nullable<System.Guid> AppBatchKey { get; set; }
         public string CancelRemark { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Attachment> Attachments { get; set; }
         public virtual PRStatu PRStatu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UpdateTrace> UpdateTraces { get; set; }

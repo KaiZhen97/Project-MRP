@@ -1,2 +1,134 @@
 ﻿body {
+    /*max-width: 1640px;*/
+}
+
+.solid-button.draft {
+    /*background-image: linear-gradient(to bottom, #FCFCFC, #C9C9C9);*/
+    /*color: black;*/
+}
+
+div.box {
+    /*display: flex;*/
+    width: 100%;
+    /*justify-content: flex-start;*/
+    /*flex-direction: row;*/
+    background-color: #ECECEC;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--inputBoxInnerShadow_Dark), var(--inputBoxInnerShadow_Light);
+}
+
+.red {
+    color: red;
+}
+
+/*.bold {
+    font-weight: bold;
+}*/
+
+.end {
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.modal-content {
+     /*border: 2px solid lightgrey;*/ 
+     border-radius: 10px;
+     /*box-shadow: var(--inputBoxInnerShadow_Dark), var(--inputBoxInnerShadow_Light);*/
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/*.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}*/
+
+/*.column {
+    display: flex;
+    flex-direction: column;
+}*/
+
+/*.column {
+    flex: 0 0 auto;
+}*/
+
+/*.label1 {
+    margin-left: 5px;
+}*/
+
+label {
+    margin-left: -10px;
+}
+
+h4 {
+    margin-bottom: 20px;
+}
+
+/*.length {
+    max-width: 1640px;
+}*/
+
+.AddRemoveBtn {
+    background: white; 
+    border-radius: 10px; 
+    border: 1px solid gray; 
+    color: darkgray; 
+    padding: 10px 20px; 
+    font-size: 15px;
+    margin: 10px;
+}
+
+.center {
+    text-align: center;
+}
+
+.end {
+    /*text-align: end;*/
+    text-align: right;
+}
+
+
+/*button {
+    background-image: linear-gradient(to bottom, white, #0dcaf0);
+
+}*/
+
+.btnOrange {
+    color: white; 
+    background-image: linear-gradient(#feca4a, #ee8e17);
+}
+
+.btnRed {
+    color: white; 
+    background-image: linear-gradient(#fd7878, #e01b1b);
+}
+
+.btnBlue {
+    color: white; 
+    background-image: linear-gradient(#7ed6fc, #42bef3);
+}
+
+.btnGreen {
+    color: black; 
+    background-image: linear-gradient(#93fd65, #34df3e);
+}
+
+.spec_left {
+    border-radius: 8px 0px 0px 8px;
+    width: 49%;
+    /*padding: 5px;*/
+    border: 1px solid black;
+}
+
+.spec_right {
+    border-radius: 0px 8px 8px 0px;
+    /*padding: 5px;*/
+    border: 1px solid black;
+    /*top: 50%;*/
+}
+
+.spec {
+    /*padding: 20px;*/
 }

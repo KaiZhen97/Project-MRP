@@ -30,6 +30,7 @@ namespace MRP.Database
         public Nullable<System.Guid> LastUpdatedBy { get; set; }
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public Nullable<System.Guid> DeletedBy { get; set; }
+        public string DeletedRemark { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemLibrary> ItemLibraries { get; set; }

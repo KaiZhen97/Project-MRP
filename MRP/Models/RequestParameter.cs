@@ -316,50 +316,94 @@ namespace MRP.Models
         #region Item Library
         public class inputAddItemLibrary
         {
-            [Required]
+            //[Required]
             public int CategoryID { get; set; }
-            [MaxLength(100)]
+            public string IPN { get; set; }
             public string Manufacturer { get; set; }
-            [MaxLength(100)]
             public string MPN { get; set; }
-            [MaxLength(200)]
-            public string ItemDescription { get; set; }
-            [MaxLength(100)]
-            public string SupplierName { get; set; }
-            [MaxLength(100)]
-            public string SupplierCode { get; set; }
-            [MaxLength(10)]
-            public string Currency { get; set; }
-            [MaxLength(50)]
-            public string UOM { get; set; }
-            public decimal UnitPrice { get; set; }
-            public decimal UnitPriceDiscount { get; set; }
-            public int MinAmountPerOrder { get; set; }
-            public int RequiredSN { get; set; }
-            [MaxLength(50)]
-            public string Tariff { get; set; }
             [Required]
+            public string ItemDescription { get; set; }
+            [Required]
+            public string SupplierName { get; set; }
+            public string SupplierCode { get; set; }
+            public string Currency { get; set; }
+            [Required]
+            public string UOM { get; set; }
+            [Required]
+            public Nullable<decimal> UnitPrice { get; set; }
+            public Nullable<decimal> UnitPriceDiscount { get; set; }
+            [Required]
+            public Nullable<int> MinAmountPerOrder { get; set; }
+            public int RequiredSN { get; set; }
+            public string Tariff { get; set; }
             public int RequiredCalibration { get; set; }
-            [MaxLength(200)]
             public string MoreDetails { get; set; }
-            [MaxLength(100)]
             public string DeliveryTerm { get; set; }
-            public DateTime QuotationDate { get; set; }
-            [MaxLength(100)]
+            public Nullable<DateTime> QuotationDate { get; set; }
             public string QuotationValidity { get; set; }
-            public int Std_LeadTime_Days { get; set; }
+
+            public Nullable<int> Std_LeadTime_Days { get; set; }
+
             public string Purchaser1 { get; set; }
             public string Purchaser2 { get; set; }
             public string KeyTechSpec { get; set; }
-            [Required]
             public int IsDefault { get; set; }
-            [Required]
             public int IsDraft { get; set; }
-            [MaxLength(200)]
             public string Remark { get; set; }
 
-            public List<inputAddItemLibraryPWP> PWPItemList { get; set; }
+            //public DateTime CreatedDate { get; set; }
+            //public string CreatedBy { get; set; }
+            //public DateTime LastUpdatedDate { get; set; }
+            //public string LastUpdatedBy { get; set; }
+            //public DateTime DeletedDate { get; set; }
+            //public string DeletedBy { get; set; }
+            //public string AppKey { get; set; }
+
+            //public List<inputAddItemLibraryPWP> PWPItemList { get; set; }
         }
+
+        //public class inputDraftItemLibrary
+        //{
+        //    public int ID { get; set; }
+        //    public int CategoryID { get; set; }
+        //    public string IPN { get; set; }
+        //    public string Manufacturer { get; set; }
+        //    public string MPN { get; set; }
+        //    public string ItemDescription { get; set; }
+        //    public string SupplierName { get; set; }
+        //    public string SupplierCode { get; set; }
+        //    public string Currency { get; set; }
+        //    public string UOM { get; set; }
+        //    public decimal UnitPrice { get; set; }
+        //    public decimal UnitPriceDiscount { get; set; }
+        //    public int MinAmountPerOrder { get; set; }
+        //    public int RequiredSN { get; set; }
+        //    public string Tariff { get; set; }
+        //    public int RequiredCalibration { get; set; }
+        //    public string MoreDetails { get; set; }
+        //    public string DeliveryTerm { get; set; }
+        //    public DateTime QuotationDate { get; set; }
+        //    public string QuotationValidity { get; set; }
+
+        //    public int Std_LeadTime_Days { get; set; }
+
+        //    public string Purchaser1 { get; set; }
+        //    public string Purchaser2 { get; set; }
+        //    public string KeyTechSpec { get; set; }
+        //    public int IsDefault { get; set; }
+        //    public int IsDraft { get; set; }
+        //    public string Remark { get; set; }
+
+        //    //public DateTime CreatedDate { get; set; }
+        //    //public string CreatedBy { get; set; }
+        //    //public DateTime LastUpdatedDate { get; set; }
+        //    //public string LastUpdatedBy { get; set; }
+        //    //public DateTime DeletedDate { get; set; }
+        //    //public string DeletedBy { get; set; }
+        //    //public string AppKey { get; set; }
+
+        //    //public List<inputAddItemLibraryPWP> PWPItemList { get; set; }
+        //}
 
         public class inputAddItemLibraryPWP
         {
@@ -370,53 +414,59 @@ namespace MRP.Models
 
         public class inputEditItemLibrary
         {
-            [Required]
             public int ID { get; set; }
-            [Required]
             public int CategoryID { get; set; }
-            [MaxLength(100)]
+            public string IPN { get; set; }
             public string Manufacturer { get; set; }
-            [MaxLength(100)]
             public string MPN { get; set; }
-            [MaxLength(200)]
             public string ItemDescription { get; set; }
-            [MaxLength(100)]
             public string SupplierName { get; set; }
-            [MaxLength(100)]
             public string SupplierCode { get; set; }
-            [MaxLength(10)]
             public string Currency { get; set; }
-            [MaxLength(50)]
             public string UOM { get; set; }
             public decimal UnitPrice { get; set; }
             public decimal UnitPriceDiscount { get; set; }
             public int MinAmountPerOrder { get; set; }
             public int RequiredSN { get; set; }
-            [MaxLength(50)]
             public string Tariff { get; set; }
-            [Required]
             public int RequiredCalibration { get; set; }
-            [MaxLength(200)]
             public string MoreDetails { get; set; }
-            [MaxLength(100)]
             public string DeliveryTerm { get; set; }
             public DateTime QuotationDate { get; set; }
-            [MaxLength(100)]
             public string QuotationValidity { get; set; }
+
             public int Std_LeadTime_Days { get; set; }
+
             public string Purchaser1 { get; set; }
             public string Purchaser2 { get; set; }
             public string KeyTechSpec { get; set; }
-            [Required]
             public int IsDefault { get; set; }
-            [Required]
             public int IsDraft { get; set; }
-            [MaxLength(200)]
             public string Remark { get; set; }
-            public string LastUpdatedBy { get; set; }
+
+            //public DateTime CreatedDate { get; set; }
+            //public string CreatedBy { get; set; }
+            //public DateTime LastUpdatedDate { get; set; }
+            //public string LastUpdatedBy { get; set; }
+            //public DateTime DeletedDate { get; set; }
+            //public string DeletedBy { get; set; }
+            //public string AppKey { get; set; }
 
             public List<inputAddItemLibraryPWP> PWPItemList { get; set; }
         }
+
+        public class inputDeleteItemLibrary
+        {
+            public int ID { get; set; }
+            public string DeletedRemark { get; set; }
+        }
+
+        public class inputDeleteDraftItem
+        {
+            public int ID { get; set; }
+            public string DeletedRemark { get; set; }
+        }
+
 
         public class inputAddCategory
         {
@@ -438,7 +488,7 @@ namespace MRP.Models
         {
             [Required]
             public int ID { get; set; }
-            public string Description { get; set; }
+            public string DeletedRemark { get; set; }
         }
         #endregion
 
