@@ -19,30 +19,30 @@ namespace MRP.Controllers
         private RFQDal RFQDal = new RFQDal();
 
         #region RFQList
-        [HttpGet]
-        public HttpResponseMessage getActiveRFQList()
-        {
-            DataTableRFQ data = new DataTableRFQ();
+        //[HttpGet]
+        //public HttpResponseMessage getActiveRFQList()
+        //{
+        //    DataTableRFQ data = new DataTableRFQ();
 
-            List<V_RFQList> dataList = RFQDal.getActiveRFQList(Request);
+        //    List<V_RFQList> dataList = RFQDal.getActiveRFQList(Request);
 
-            data.data = dataList;
-            data.draw = 1;
-            if (dataList == null)
-            {
-                data.recordsFiltered = 0;
-                data.recordsTotal = 0;
-            }
-            else
-            {
-                data.recordsFiltered = dataList.Count;
-                data.recordsTotal = dataList.Count;
-            }
+        //    data.data = dataList;
+        //    data.draw = 1;
+        //    if (dataList == null)
+        //    {
+        //        data.recordsFiltered = 0;
+        //        data.recordsTotal = 0;
+        //    }
+        //    else
+        //    {
+        //        data.recordsFiltered = dataList.Count;
+        //        data.recordsTotal = dataList.Count;
+        //    }
 
-            HttpResponseMessage response = new HttpResponseMessage();
-            response = Request.CreateResponse(HttpStatusCode.OK, data);
-            return response;
-        }
+        //    HttpResponseMessage response = new HttpResponseMessage();
+        //    response = Request.CreateResponse(HttpStatusCode.OK, data);
+        //    return response;
+        //}
 
         [HttpGet]
         public HttpResponseMessage getDraftRFQList()
@@ -322,7 +322,7 @@ namespace MRP.Controllers
         public HttpResponseMessage postAttachmentByID([FromBody]RequestParameter.inputID input)
         {
             HttpResponseMessage response = new HttpResponseMessage();
-            response = RFQBL.postAttachmentByID(input, ModelState, Request);
+            //response = RFQBL.postAttachmentByID(input, ModelState, Request);
             return response;
 
         }

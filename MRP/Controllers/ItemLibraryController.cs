@@ -45,6 +45,75 @@ namespace MRP.Controllers
             return response;
         }
 
+        //[HttpGet]
+        //public HttpResponseMessage getSupplierList()
+        //{
+        //    DataTableItemLibrary data = new DataTableItemLibrary();
+
+        //    List<V_ItemLibraryList> dataList = itemLibraryDal.getSupplierList();
+
+        //    data.data = dataList;
+        //    data.draw = 1;
+        //    data.recordsFiltered = dataList.Count;
+        //    data.recordsTotal = dataList.Count;
+
+        //    HttpResponseMessage response = new HttpResponseMessage();
+        //    response = Request.CreateResponse(HttpStatusCode.OK, data);
+        //    return response;
+        //}
+
+        [HttpGet]
+        public HttpResponseMessage getSupplierNameList()
+        {
+            DataTableItemLibrary data = new DataTableItemLibrary();
+
+            List<V_ItemLibraryList> dataList = itemLibraryDal.getSupplierNameList();
+
+            data.data = dataList;
+            data.draw = 1;
+            data.recordsFiltered = dataList.Count;
+            data.recordsTotal = dataList.Count;
+
+            HttpResponseMessage response = new HttpResponseMessage();
+            response = Request.CreateResponse(HttpStatusCode.OK, data);
+            return response;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage getPurchaserNameList()
+        {
+            DataTableItemLibrary data = new DataTableItemLibrary();
+
+            List<V_ItemLibraryList> dataList = itemLibraryDal.getPurchaserNameList();
+
+            data.data = dataList;
+            data.draw = 1;
+            data.recordsFiltered = dataList.Count;
+            data.recordsTotal = dataList.Count;
+
+            HttpResponseMessage response = new HttpResponseMessage();
+            response = Request.CreateResponse(HttpStatusCode.OK, data);
+            return response;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage getSupplierList()
+        {
+            DataTableItemLibrarySupplier data = new DataTableItemLibrarySupplier();
+
+            List<ItemLibrarySupplier> dataList = itemLibraryDal.getSupplierList();
+
+            data.data = dataList;
+            data.draw = 1;
+            data.recordsFiltered = dataList.Count;
+            data.recordsTotal = dataList.Count;
+
+            HttpResponseMessage response = new HttpResponseMessage();
+            response = Request.CreateResponse(HttpStatusCode.OK, data);
+            return response;
+        }
+
+        [HttpGet]
         public HttpResponseMessage getDraftItemLIbraryList()
         {
             DataTableItemLibrary data = new DataTableItemLibrary();
@@ -97,6 +166,22 @@ namespace MRP.Controllers
         {
             HttpResponseMessage response = new HttpResponseMessage();
             response = itemLibraryBL.postDeleteItemLibrary(input, ModelState, Request);
+            return response;
+        }
+
+        [HttpPost]
+        public HttpResponseMessage postAddDraftItem([FromBody]RequestParameter.inputAddDraftItem input)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            response = itemLibraryBL.postAddDraftItem(input, ModelState, Request);
+            return response;
+        }
+
+        [HttpPost]
+        public HttpResponseMessage postSaveDraftItem([FromBody]RequestParameter.inputSaveDraftItem input)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            response = itemLibraryBL.postSaveDraftItem(input, ModelState, Request);
             return response;
         }
 

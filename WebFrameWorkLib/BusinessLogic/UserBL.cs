@@ -49,18 +49,15 @@ namespace WebFrameWorkLib.BusinessLogic
         }
 
 
-        public HttpResponseMessage getPurchasingList(HttpRequestMessage request)
+        public HttpResponseMessage getPurchaserList(HttpRequestMessage request)
         {
-            //return UAMUserRole RoleName == "ISYS Purchasing";
-            //return UAMUserProfile Department = 22;
-
             try
             {
-                var PurchasingList = userDal.getPurchasingList(request);
+                var PurchaserList = userDal.getPurchaserList(request);
 
-                if (PurchasingList != null)
+                if (PurchaserList != null)
                 {
-                    HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, PurchasingList);
+                    HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, PurchaserList);
                     return response;
                 }
                 else
@@ -90,14 +87,12 @@ namespace WebFrameWorkLib.BusinessLogic
                 }
                 else
                 {
-                    //return a message for reason of fail
                     HttpResponseMessage response = request.CreateResponse(HttpStatusCode.BadRequest, "not found");
                     return response;
                 }
             }
             catch (Exception ex)
             {
-                //return a message for reason of fail
                 HttpResponseMessage response = request.CreateResponse(HttpStatusCode.InternalServerError, "error" + ex.Message.ToString());
                 return response;
             }

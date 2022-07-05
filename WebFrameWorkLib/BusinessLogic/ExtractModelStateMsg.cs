@@ -14,10 +14,10 @@ namespace WebFrameWorkLib.BusinessLogic
             {
                 if (modelState[key].Errors.Count != 0)
                 {
-                    return string.IsNullOrEmpty(modelState[key].Errors[0].ErrorMessage) ? 
-                        modelState[key].Errors[0].ErrorMessage.ToString()
+                    return string.IsNullOrEmpty(modelState[key].Errors[0].ErrorMessage) ?
+                        modelState[key].Errors[0].Exception.Message
                         :
-                        modelState[key].Errors[0].Exception.Message;
+                        modelState[key].Errors[0].ErrorMessage.ToString();
                 }
             }
 

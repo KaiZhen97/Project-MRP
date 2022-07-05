@@ -101,6 +101,11 @@ namespace MRP.Models
         public List<V_ItemLibraryList> data { get; set; }
     }
 
+    public class DataTableItemLibrarySupplier : DataTableModel
+    {
+        public List<ItemLibrarySupplier> data { get; set; }
+    }
+
     public class DataTableILMCategory : DataTableModel
     {
         public List<MRP.Database.V_CategoryList> data { get; set; }

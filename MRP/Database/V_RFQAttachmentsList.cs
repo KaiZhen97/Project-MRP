@@ -15,18 +15,15 @@ namespace MRP.Database
     public partial class V_RFQAttachmentsList
     {
         public int ID { get; set; }
-        public Nullable<int> ItemLibraryID { get; set; }
-        public Nullable<int> PRID { get; set; }
-        public Nullable<int> POID { get; set; }
-        public Nullable<int> RFQID { get; set; }
+        public System.Guid AttachmentKey { get; set; }
         public string AttachmentName { get; set; }
+        public string FileName { get; set; }
         public string FilePath { get; set; }
-        public int IsConfidential { get; set; }
-        public System.DateTime CreatedDate { get; set; }
+        public int IsSubmitted { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public string CreatedByStaffName { get; set; }
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public Nullable<System.Guid> DeletedBy { get; set; }
-        public string CreatedByStaffName { get; set; }
-        public string DeletedByStaffName { get; set; }
     }
 }

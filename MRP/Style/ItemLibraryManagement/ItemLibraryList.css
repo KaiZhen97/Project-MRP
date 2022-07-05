@@ -25,6 +25,21 @@ div.btn {
      border-radius: 10px;
 }
 
+p {
+    font-size: .75rem; 
+    margin-top: 5px; 
+    margin-bottom: 10px; 
+    color: #767676;
+}
+
+#keywordSearch {
+    border: none; 
+    border-bottom: 2px solid #E9E9E9; 
+    color: #989898; 
+    font-size: 16px; 
+    margin-bottom: 10px;
+}
+
 .context-menu-list.css-title-toolbox::before {
     content: 'General';
     /*position: relative;
@@ -44,3 +59,49 @@ div.btn {
     font-size: .7rem;
     color: #BEBEBE;
 }*/
+
+
+.clickableLink {
+    color: #545454;
+}
+
+div .d-flex {
+    /*color: #696969;*/
+    /*color: #9A9A9A;*/
+    /*color: darkred;*/
+}
+
+p.d-flex{
+    color: #505050;
+}
+
+#draftItemList li{
+    list-style-type: none;
+    height: inherit;
+    background-color: #D8D8D8;
+    border-radius: 5px;
+    margin-top: 15px;
+    width: 100%;
+    margin-left: -15px;
+}
+
+#draftItemList li:hover, li:hover a, li:hover #draftDetail, li:hover #draftDescription, li:hover #draftCreatedDate {
+    background-color: #7DD0FF;
+    color: white;
+}
+
+#draftDetail, #draftDescription {
+    color: #505050;
+}
+
+#draftCreatedDate {
+    color: #A7A7A7;
+}
+
+a {
+    color: #6D6D6D;
+}
+
+#draftItemList a:hover{
+    color: #0F7E97;
+}

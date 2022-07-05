@@ -11,20 +11,18 @@
             <a href="/Views/ItemLibraryManagement/ItemLibraryList" style="color: black;">
                 <i class="fa-solid fa-arrow-left me-3"></i>
             </a>
-            <span><%= Page.Title %></span>
+            <span id="txtTitle">Add New Item</span>
         </h4>
     </div>
 
-    <%--<form runat="server">
-        <asp:TextBox runat="server" ID="hiddenCategoryID" ClientInstanceName="hiddenCategoryID"></asp:TextBox>
-    </form>--%>
-
-    <p> * Field with " <span style="color: red;">*</span> " is compulsory  * New Item with existed IPN will replace "Key Tech Spe" value</p>
+    <p> * Field with " <span style="color: red;">*</span> " is compulsory  * New Item with existed IPN will replace "Key Tech Spec" value</p>
     <hr />
 
-    <%--<form action="ItemLibraryList" method="post" id="list">--%>
+    <input type="hidden" id="hdnID" value="<%= Page.RouteData.Values["ID"] %>" />
+    <input type="hidden" id="hdnMode" value="<%= Page.RouteData.Values["Mode"] %>" />
 
     <h5>1 | Basic Information</h5>
+    <br />
     <div class="input-container">
         <div class="row ms-0 mb-2">
             <label>Item Description <span style="color: red;">*</span></label>
@@ -34,15 +32,14 @@
             <div class="col">
                 <div class="row">
                     <label class="label">Category <span style="color: red;">*</span></label>
-                    <select id="inputCategoryID" style="width: 95%;" required>
-                        <option selected hidden disabled>select</option>
-                        <option>cable</option>
+                    <select id="inputCategory" style="width: 95%;" required>
+                        <%--<option selected hidden>select</option>--%>
                     </select>
                 </div>
             </div>
             <div class="col">
                 <div class="row">
-                    <label class="label">Internal Part Number &nbsp; <i class="fa-solid fa-lock"></i> </label>
+                    <label class="label" id="labelIPN">Internal Part Number &nbsp; <i class="fa-solid fa-lock" id="lock"></i> </label>
                     <input id="inputIPN" style="width: 95%; background:#D2D2D2" disabled/>
                 </div>
             </div>
@@ -71,6 +68,7 @@
                 <div class="row">
                     <label class="label">Required Serial Number</label>
                     <select id="inputRequiredSN" style="width: 95%;">
+                        <%--<option selected hidden disabled>select</option>--%>
                         <option value="1">Yes</option>
                         <option value="0" selected>No</option>
                     </select>
@@ -80,6 +78,7 @@
                 <div class="row">
                     <label class="label">Required Calibration</label>
                     <select id="inputRequiredCalibration" style="width: 95%;">
+                        <%--<option selected hidden disabled>select</option>--%>
                         <option value="1">Yes</option>
                         <option value="0" selected>No</option>
                     </select>
@@ -89,6 +88,7 @@
                 <div class="row">
                     <label class="label">Is Default</label>
                     <select id="inputIsDefault" style="width: 95%;" required>
+                        <%--<option selected hidden disabled>select</option>--%>
                         <option value="1">Yes</option>
                         <option value="0" selected>No</option>
                     </select>
@@ -99,7 +99,7 @@
             <div class="col">
                 <div class="row">
                     <label class="label">More Details</label>
-                    <input id="inputMoreDetails" style="width: 49%; height: 120px" />
+                    <textarea id="inputMoreDetails" style="width: 49%; height: 120px"></textarea>
                 </div>
             </div>
         </div>
@@ -108,14 +108,15 @@
     <hr />
 
     <h5>2 | Pricing & Shipping</h5>
+    <br />
     <div class="input-container">
         <div class="row ms-0 mb-2">
             <div class="col">
                 <div class="row">
                     <label>Supplier <span style="color: red;">*</span></label>
                     <select id="inputSupplierName" style="width: 95%;" required>
-                        <option selected hidden disabled>select</option>
-                        <option>Supplier</option>
+                        <%--<option selected hidden>select</option>--%>
+                        <%--<option>Supplier</option>--%>
                     </select>
                 </div>
             </div>
@@ -185,6 +186,7 @@
     <hr />
 
     <h5>3 | Other Attachments</h5>
+    <br />
     <div class="input-container">
         <div class="row">
             <div class="col">
@@ -192,16 +194,16 @@
                     <div class="col">
                         <div class="row" style="width: 100%;">
                             <label class="input-container label">Default Purchaser / Agent 1 </label>
-                            <select id="inputPurchaser1">
-                                <option selected hidden disabled>select</option>
+                            <select id="inputPurchaser1" required>
+                                <%--<option selected hidden>select</option>--%>
                             </select>
                         </div>
                     </div>
                     <div class="col">
                         <div class="row" style="width: 100%;">
                             <label class="label">Default Purchaser / Agent 2 </label>
-                            <select id="inputPurchaser2">
-                                <option selected hidden disabled>select</option>
+                            <select id="inputPurchaser2" required>
+                                <%--<option selected hidden>select</option>--%>
                             </select>
                         </div>
                     </div>
@@ -209,7 +211,7 @@
 
                 <div class="row ms-0">
                     <label>Remark</label>
-                    <input id="inputRemark" style="width: 98%; height: 120px" />
+                    <textarea id="inputRemark" style="width: 98%; height: 120px"></textarea> 
                 </div>
             </div>
 
@@ -230,30 +232,27 @@
     <hr />
 
     <h5>4 | Key Tech Specification</h5>
+    <br />
     <div class="box">
-        <%--<div class="row ms-0 mb-3">--%>
-            <%--<div class="spec_left m-0 1 0 1" style="background-color: #0C56AD; width: 19%">1</div>--%>
-            <%--<div class="spec_right m-0 1 1 1" style="background: white; width: 30%">--%>
-                <%--2--%>
-                <%--<div class="end">
-                    <i class="fa-solid fa-circle-minus" style="color:red"></i>
-                </div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="row ms-0">--%>
-            <button id="btnAdd" style="background: #BCBCBC; width: 50%;"><i class="fa-solid fa-plus"></i></button>
-        <%--</div>--%>
+        <div class="container-fluid ms-2">
+            <div class="row" id="KeyTechSpec">
+
+            </div>
+        </div>
+        <div class="row ms-2 mt-1">
+            <button id="btnAdd" style="background: #BCBCBC; border: 1px solid #B2B2B2; width: 48%;"><i class="fa-solid fa-plus"></i></button>
+        </div>
     </div>
 
     <hr />
 
     <h5>5 | PWP Bundle</h5>
-    <%--<br />--%>
-    <%--<div class="input-container label">--%>
-        <button class="AddRemoveBtn" id="btnAddPWPItem"><i class="fa-solid fa-plus me-2"></i> Add New</button>
-        <button class="AddRemoveBtn" id="btnEditPWPItem"><i class="fa-solid fa-minus me-2"></i> Remove </button>
-    <%--</div>--%>
+    
+    <button class="AddRemoveBtn" id="btnAddPWPItem"><i class="fa-solid fa-plus me-2"></i> Add New</button>
+    <button class="AddRemoveBtn" id="btnEditPWPItem"><i class="fa-solid fa-minus me-2"></i> Remove</button>
 
+    <br />
+    
     <table id="PWP_Bundle">
         <thead>
             <tr>
@@ -266,30 +265,29 @@
         </thead>
     </table>
 
-    <br />
-
-    <br />
+    <br /><br />
     <div class="flex flex-row mt-3 center">
-        <button class="solid-button reset me-3" id="btnResetAdd">
+        <button class="solid-button reset me-3" id="btnReset">
             <i class="fa-solid fa-rotate-right"></i>
             Reset
         </button>
-        <button class="solid-button close me-3" id="btnCloseAdd" data-bs-toggle="modal" data-bs-target="#closeAdd">
+        <button class="solid-button close me-3" id="btnClose" data-bs-toggle="modal" data-bs-target="#Close">
             <i class="fa-solid fa-xmark"></i>
             Close
         </button>
-        <button class="solid-button normal me-3" style="color: white" id="btnSaveDraftAdd">
+        <button class="solid-button normal me-3" style="color: white" id="btnSaveDraft">
             <i class="fa-solid fa-inbox"></i>
             Save Draft
         </button>
-        <button class="solid-button submit me-3" id="btnConfirmAdd" data-bs-toggle="modal" data-bs-target="#confirmAdd">
+        <%--<button class="solid-button submit me-3" id="btnConfirm" data-bs-toggle="modal" data-bs-target="#confirm">--%>
+        <button class="solid-button submit me-3" id="btnConfirm">
             <i class="fa-solid fa-check"></i>
             Confirm
         </button>
     </div>
 
 
-    <div class="modal fade" id="confirmAdd" tabindex="-1" data-bs-backdrop="true" >
+    <div class="modal fade" id="ExistAdd" tabindex="-1" data-bs-backdrop="true" >
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -298,15 +296,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-container">
-                        <p>Found IPN already exists in system, continue adding will some value of existing item</p>
+                        <p>Found IPN already exists in system, continue adding will replace some value of existing item</p>
                         <p>Are you sure want to proceed?</p>
                     </div>
                 </div>
                 <div class="flex flex-row end">
-                    <button class="solid-button submit m-2" id="btnYesConfirmAdd" style="color: white;" type="submit">
+                    <button class="solid-button submit m-2" id="btnYesExistAdd" style="color: white;" type="submit">
                         Yes
                     </button>
-                    <button class="solid-button close m-2" id="btnNoConfirmAdd">
+                    <button class="solid-button close m-2" id="btnNoExistAdd">
                         No
                     </button>
                 </div>
@@ -314,7 +312,60 @@
         </div>
     </div>
 
-    <div class="modal fade" id="closeAdd" tabindex="-1" data-bs-backdrop="true" >
+    <div class="modal fade" id="ExistEdit" tabindex="-1" data-bs-backdrop="true" >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Item - Found Existed IPN</h5>
+                    <button class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-container">
+                        <p>Found IPN already exists in system, continue adding will replace some value of existing item</p>
+                        <p>Are you sure want to proceed?</p>
+                        <label class="ms-1">Remark</label>
+                        <input id="ExistEditRemark" />
+                    </div>
+                </div>
+                <div class="flex flex-row end">
+                    <button class="solid-button submit m-2" id="btnYesExistEdit" style="color: white;" type="submit">
+                        Yes
+                    </button>
+                    <button class="solid-button close m-2" id="btnNoExistEdit">
+                        No
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ConfirmEdit" tabindex="-1" data-bs-backdrop="true" >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Item</h5>
+                    <button class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-container">
+                        <p>Are you sure confirm to edit the item?</p>
+                        <label class="ms-1">Remark</label>
+                        <input id="ConfirmEditRemark" />
+                    </div>
+                </div>
+                <div class="flex flex-row end">
+                    <button class="solid-button submit m-2" id="btnYesConfirmEdit" style="color: white;" type="submit">
+                        Yes
+                    </button>
+                    <button class="solid-button close m-2" id="btnNoConfirmEdit">
+                        No
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="Close" tabindex="-1" data-bs-backdrop="true" >
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -328,13 +379,13 @@
                     </div>
                 </div>
                 <div class="flex flex-row end">
-                    <button class="solid-button normal m-2" style="color: white" id="btnSaveDraftCloseAdd" onclick="">
+                    <button class="solid-button normal m-2" style="color: white" id="btnSaveDraftClose" onclick="">
                         Save Draft
                     </button>
-                    <button class="solid-button reset m-2" id="btnDiscardCloseAdd" onclick="">
+                    <button class="solid-button reset m-2" id="btnDiscardClose" onclick="">
                         Discard
                     </button>
-                    <button class="solid-button close m-2" id="btnCancelCloseAdd" onclick="">
+                    <button class="solid-button close m-2" id="btnCancelClose" onclick="">
                         Cancel
                     </button>
                 </div>
@@ -343,7 +394,6 @@
     </div>
 
     <div class="drawer-container" title="Add PWP Item From Library" id="AddPWPItem">
-        <%--<form class="container-fluid">--%>
             <div class="center">
                 1 Filter Items  >  2 Select Items
             </div>
@@ -377,20 +427,26 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="JsContent" runat="server">
     <%: Scripts.Render("~/scriptBundle/ILM/AddNewItem") %>
-
+    
     <script>
 
         var authToken = "<%= Session["accessToken"].ToString() %>";
+        var reqItemLibraryIdUrl = "<%= ResolveUrl("~/api/ItemLibrary/postItemLibraryByID")%>";
 
-        var reqCategoryListUrl = "<%= ResolveUrl("~/api/ItemLibrary/getActiveItemLibraryList")%>";
         var reqAddItemLibraryUrl = "<%= ResolveUrl("~/api/ItemLibrary/postAddItemLibrary")%>";
         var reqEditItemLibraryUrl = "<%= ResolveUrl("~/api/ItemLibrary/postEditItemLibrary")%>";
         var reqDeleteItemLibraryUrl = "<%= ResolveUrl("~/api/ItemLibrary/postDeleteItemLibrary")%>";
-        var reqItemLibraryIdUrl = "<%= ResolveUrl("~/api/ItemLibrary/postItemLibraryByID")%>";
-        var reqDraftLibraryUrl = "<%= ResolveUrl("~/api/ItemLibrary/postDraftItemLibrary") %>";
+        var reqAddDraftItemUrl = "<%= ResolveUrl("~/api/ItemLibrary/postAddDraftItem")%>";
+        var reqSaveDraftItemUrl = "<%= ResolveUrl("~/api/ItemLibrary/postSaveDraftItem")%>";
+        var reqDeleteDraftItemUrl = "<%= ResolveUrl("~/api/ItemLibrary/postDeleteDraftItem")%>";
 
-        var reqPurchasingListUrl = "<%= ResolveUrl("~/api/User/getPurchasingList") %>";
+        var reqPurchaserListUrl = "<%= ResolveUrl("~/api/User/getPurchaserList") %>";
+        var reqCategoryListUrl = "<%= ResolveUrl("~/api/ItemLibrary/getActiveCategoryList")%>";
 
+        var reqSupplierListUrl = "<%= ResolveUrl("~/api/ItemLibrary/getSupplierNameList")%>";
+
+        <%--var reqSupplierListUrl = "<%= ResolveUrl("~/api/ItemLibrary/getSupplierList")%>";--%>
+        <%--var reqPurchaserListUrl = "<%= ResolveUrl("~/api/ItemLibrary/getPurchaserNameList")%>";--%>
     </script>
 </asp:Content>
 

@@ -72,43 +72,43 @@ namespace MRP.Dal
             }
         }
 
-        public List<V_RFQAttachmentsList> postAttachmentByID(RequestParameter.inputID input)
-        {
-            try
-            {
-                List<V_RFQAttachmentsList> data = new List<V_RFQAttachmentsList>();
-                data = dbContext.V_RFQAttachmentsList.Where(c => c.RFQID == input.ID).ToList();
-                return data;
-            }
-            catch (Exception ex)
-            {
-                logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
-                    System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
-                return null;
-            }
-        }
+        //public List<V_RFQAttachmentsList> postAttachmentByID(RequestParameter.inputID input)
+        //{
+        //    try
+        //    {
+        //        List<V_RFQAttachmentsList> data = new List<V_RFQAttachmentsList>();
+        //        data = dbContext.V_RFQAttachmentsList.Where(c => c.RFQID == input.ID).ToList();
+        //        return data;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+        //            System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+        //        return null;
+        //    }
+        //}
 
 
         #region RFQList
-        public List<V_RFQList> getActiveRFQList(HttpRequestMessage request)
-        {
-            try
-            {
-                Guid user = common.extractUserID(request);
-                var data = dbContext.V_RFQList.Where(c => c.CancelDate == null && c.IsDraft == 0 && (c.CreatedBy == user || c.Watchers_AccessID == user))
-                    .AsEnumerable()
-                    .Distinct(new V_RFQListComparer())
-                    .ToList();
+        //public List<V_RFQList> getActiveRFQList(HttpRequestMessage request)
+        //{
+        //    try
+        //    {
+        //        Guid user = common.extractUserID(request);
+        //        var data = dbContext.V_RFQList.Where(c => c.CancelDate == null && c.IsDraft == 0 && (c.CreatedBy == user || c.Watchers_AccessID == user))
+        //            .AsEnumerable()
+        //            .Distinct(new V_RFQListComparer())
+        //            .ToList();
 
-                return data;
-            }
-            catch (Exception ex)
-            {
-                logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
-                    System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
-                return null;
-            }
-        }
+        //        return data;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+        //            System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+        //        return null;
+        //    }
+        //}
 
         public List<V_RFQList> getDraftRFQList(HttpRequestMessage request)
         {
@@ -266,7 +266,7 @@ namespace MRP.Dal
                 newRFQ.CreatedDate = DateTime.Now;
                 newRFQ.LastUpdatedBy = userGuid;
                 newRFQ.LastUpdatedDate = DateTime.Now;
-                newRFQ.tempWatcher = input.tempWatcher;
+                //newRFQ.tempWatcher = input.tempWatcher;
 
                 dbContext.RFQs.Add(newRFQ);
 
@@ -410,7 +410,7 @@ namespace MRP.Dal
                 newRFQ.IsDraft = 1;
                 newRFQ.LastUpdatedBy = userGuid;
                 newRFQ.LastUpdatedDate = DateTime.Now;
-                newRFQ.tempWatcher = input.tempWatcher;
+                //newRFQ.tempWatcher = input.tempWatcher;
 
                 var RFQUploadList = new List<Attachment>();
 

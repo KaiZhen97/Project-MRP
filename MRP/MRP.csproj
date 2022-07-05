@@ -282,7 +282,6 @@
     <Content Include="Js\ItemLibraryManagement\CategorySetup-1.0.0.min.js">
       <DependentUpon>CategorySetup-1.0.0.js</DependentUpon>
     </Content>
-    <Content Include="Js\ItemLibraryManagement\EditItem.js" />
     <Content Include="Js\ItemLibraryManagement\ItemDetails.js" />
     <Content Include="Js\ItemLibraryManagement\ItemLibraryList-1.0.0.js" />
     <Content Include="Js\ItemLibraryManagement\ItemLibraryList-1.0.0.min.js">
@@ -747,7 +746,6 @@
     <Content Include="Style\Component\Table.css" />
     <Content Include="Style\ItemLibraryManagement\AddNewItem.css" />
     <Content Include="Style\ItemLibraryManagement\CategorySetup.css" />
-    <Content Include="Style\ItemLibraryManagement\EditItem.css" />
     <Content Include="Style\ItemLibraryManagement\ItemDetails.css" />
     <Content Include="Style\ItemLibraryManagement\ItemLibraryList.css" />
     <Content Include="Style\Plugins\ContextMenu.css" />
@@ -988,8 +986,7 @@
     <Content Include="Views\Administrator\TeamSetup.aspx" />
     <Content Include="Views\Administrator\UserSetup.aspx" />
     <Content Include="Views\ItemLibraryManagement\AddNewItem.aspx" />
-    <Content Include="Views\ItemLibraryManagement\CategorySetup.aspx" />
-    <Content Include="Views\ItemLibraryManagement\EditItem.aspx" />
+    <Content Include="Views\ItemLibraryManagement\CategoryList.aspx" />
     <Content Include="Views\ItemLibraryManagement\ItemDetails.aspx" />
     <Content Include="Views\ItemLibraryManagement\ItemLibraryList.aspx" />
     <Content Include="Views\PurchasingRFQManagement\AssignPurchaser.aspx" />
@@ -1060,6 +1057,9 @@
     <Compile Include="Database\AppRFQ.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\AppRFQWatcher.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\AppWatcher.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
@@ -1072,7 +1072,37 @@
     <Compile Include="Database\ItemLibrary.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\ItemLibraryAttachment.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ItemLibraryPendingUpdate.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ItemLibraryPendingUpdateAction.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\ItemLibraryPWPMapping.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ItemLibrarySupplier.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ItemLibraryTemp.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ItemLibraryTempAttachment.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ItemLibraryTempPWPMapping.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ItemLibraryTempSupplier.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ItemLibraryUpdateTrace.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ItemLibraryUpdateTraceAction.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\JobNoHODMapping.cs">
@@ -1117,22 +1147,55 @@
     <Compile Include="Database\PR.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\PRAttachment.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\PRItem.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\PRStatu.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\PRTemp.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\PRTempAttachment.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\PRTempItem.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\PRUpdateTrace.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\PRUpdateTraceAction.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\PRWatcher.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\RFQ.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\RFQAttachment.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\RFQStatu.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\RFQUpdateTrace.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\RFQWatcher.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\RunningNo.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\RunningNoType.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\SupplierRelation.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\UpdateTrace.cs">
@@ -1151,6 +1214,15 @@
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\V_ItemLibraryList.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\V_ItemLibraryPendingUpdate.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\V_ItemLibraryTempList.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\V_ItemLibraryUpdateTrace.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\V_PH_PO.cs">
@@ -1175,6 +1247,12 @@
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\V_RFQList.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\V_RFQUpdateTrace.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\V_SupplierRelation.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\V_UpdateHistoryTrace.cs">
@@ -1317,19 +1395,12 @@
     <Compile Include="Views\ItemLibraryManagement\AddNewItem.aspx.designer.cs">
       <DependentUpon>AddNewItem.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\ItemLibraryManagement\CategorySetup.aspx.cs">
-      <DependentUpon>CategorySetup.aspx</DependentUpon>
+    <Compile Include="Views\ItemLibraryManagement\CategoryList.aspx.cs">
+      <DependentUpon>CategoryList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\ItemLibraryManagement\CategorySetup.aspx.designer.cs">
-      <DependentUpon>CategorySetup.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ItemLibraryManagement\EditItem.aspx.cs">
-      <DependentUpon>EditItem.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\ItemLibraryManagement\EditItem.aspx.designer.cs">
-      <DependentUpon>EditItem.aspx</DependentUpon>
+    <Compile Include="Views\ItemLibraryManagement\CategoryList.aspx.designer.cs">
+      <DependentUpon>CategoryList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\ItemLibraryManagement\ItemDetails.aspx.cs">
       <DependentUpon>ItemDetails.aspx</DependentUpon>

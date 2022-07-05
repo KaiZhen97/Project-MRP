@@ -18,6 +18,7 @@ namespace MRP.Database
         public Category()
         {
             this.ItemLibraries = new HashSet<ItemLibrary>();
+            this.ItemLibraryTemps = new HashSet<ItemLibraryTemp>();
             this.PRItems = new HashSet<PRItem>();
         }
     
@@ -34,6 +35,8 @@ namespace MRP.Database
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemLibrary> ItemLibraries { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemLibraryTemp> ItemLibraryTemps { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRItem> PRItems { get; set; }
     }

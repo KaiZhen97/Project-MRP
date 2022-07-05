@@ -1,2 +1,50 @@
-﻿body {
+﻿
+.input-container input, .input-container select, .input-container textarea {
+    background-color: #ececec;
+    -webkit-box-shadow: none;
+	box-shadow: none;
+    resize: none;
 }
+
+.box {
+    width: 100%;
+    background-color: #ECECEC;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+#info {
+    transform: rotate(180deg);
+    font-size: 40px;
+    padding: 5px;
+    height: 80px;
+}
+
+#seperator {
+    height: auto;
+    border-left: 3px solid darkgrey;
+}
+
+.flexbox {
+    flex-direction: row;
+    justify-content: space-between;
+    display: flex;
+}
+
+.div-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.div-col {
+    flex-direction: column;
+}
+
+.s {
+    padding: 5px;
+    height: 40px;
+    width: 40px;
+    color: white;
+    border-radius: 15px;
+}
+

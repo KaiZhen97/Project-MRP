@@ -21,23 +21,22 @@ namespace MRP.Database
         public string Manufacturer { get; set; }
         public string MPN { get; set; }
         public string ItemDescription { get; set; }
-        public string SupplierName { get; set; }
-        public string SupplierCode { get; set; }
-        public string Currency { get; set; }
-        public string UOM { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public Nullable<decimal> UnitPriceDiscount { get; set; }
-        public Nullable<int> MinAmountPerOrder { get; set; }
         public string Tariff { get; set; }
         public int RequiredSN { get; set; }
         public int RequiredCalibration { get; set; }
         public string MoreDetails { get; set; }
-        public string DeliveryTerm { get; set; }
-        public Nullable<System.DateTime> QuotationDate { get; set; }
-        public string QuotationValidity { get; set; }
+        public string SupplierName { get; set; }
+        public string Currency { get; set; }
+        public Nullable<decimal> UnitPrice { get; set; }
+        public Nullable<decimal> UnitPriceDiscount { get; set; }
         public Nullable<int> Std_LeadTime_Days { get; set; }
-        public int IsDefault { get; set; }
+        public Nullable<System.Guid> Purchaser1AccessID { get; set; }
+        public string Purchaser1 { get; set; }
+        public Nullable<System.Guid> Purchaser2AccessID { get; set; }
+        public string Purchaser2 { get; set; }
+        public string KeyTechSpec { get; set; }
         public int IsDraft { get; set; }
+        public int IsAddApproved { get; set; }
         public string Remark { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
@@ -48,5 +47,7 @@ namespace MRP.Database
         public string CreatedByStaffName { get; set; }
         public string LastUpdatedByStaffName { get; set; }
         public string DeletedByStaffName { get; set; }
+        public Nullable<System.Guid> Expr1 { get; set; }
+        public Nullable<System.Guid> Expr2 { get; set; }
     }
 }

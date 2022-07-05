@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d66053e333e94ec385d4658551147c8d" Name="Diagram1" ZoomLevel="100">
+      <Diagram DiagramId="d66053e333e94ec385d4658551147c8d" Name="Diagram1" ZoomLevel="44">
         <EntityTypeShape EntityType="FrameWorkModel.AuditActivityLog" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="FrameWorkModel.AuditLogTable" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="FrameWorkModel.AuditSecurityLog" Width="1.5" PointX="8.75" PointY="5.75" />

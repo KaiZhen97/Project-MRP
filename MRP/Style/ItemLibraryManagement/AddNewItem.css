@@ -1,17 +1,6 @@
-﻿body {
-    /*max-width: 1640px;*/
-}
-
-.solid-button.draft {
-    /*background-image: linear-gradient(to bottom, #FCFCFC, #C9C9C9);*/
-    /*color: black;*/
-}
-
+﻿
 div.box {
-    /*display: flex;*/
     width: 100%;
-    /*justify-content: flex-start;*/
-    /*flex-direction: row;*/
     background-color: #ECECEC;
     padding: 30px;
     border-radius: 10px;
@@ -22,41 +11,21 @@ div.box {
     color: red;
 }
 
-/*.bold {
-    font-weight: bold;
-}*/
-
 .end {
     justify-content: flex-end;
     margin-bottom: 20px;
     margin-right: 20px;
+    text-align: right;
+}
+
+textarea{
+    resize: none;
 }
 
 .modal-content {
-     /*border: 2px solid lightgrey;*/ 
      border-radius: 10px;
-     /*box-shadow: var(--inputBoxInnerShadow_Dark), var(--inputBoxInnerShadow_Light);*/
      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-
-/*.row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}*/
-
-/*.column {
-    display: flex;
-    flex-direction: column;
-}*/
-
-/*.column {
-    flex: 0 0 auto;
-}*/
-
-/*.label1 {
-    margin-left: 5px;
-}*/
 
 label {
     margin-left: -10px;
@@ -65,10 +34,6 @@ label {
 h4 {
     margin-bottom: 20px;
 }
-
-/*.length {
-    max-width: 1640px;
-}*/
 
 .AddRemoveBtn {
     background: white; 
@@ -86,58 +51,72 @@ h4 {
     justify-content: center;
 }
 
-.end {
-    /*text-align: end;*/
-    text-align: right;
-}
-
-.start {
-    /*text-align: left;*/
-    /*text-align: start;*/
-    /*align-items: flex-start;*/
-    /*align-content: flex-start;*/
-}
-
-/*button {
-    background-image: linear-gradient(to bottom, white, #0dcaf0);
-
-}*/
-
-/*.btnOrange {
-    color: white; 
-    background-image: linear-gradient(#feca4a, #ee8e17);
-}
-
-.btnRed {
-    color: white; 
-    background-image: linear-gradient(#fd7878, #e01b1b);
-}
-
-.btnBlue {
-    color: white; 
-    background-image: linear-gradient(#7ed6fc, #42bef3);
-}
-
-.btnGreen {
-    color: black; 
-    background-image: linear-gradient(#93fd65, #34df3e);
-}*/
-
-
 .spec_left {
     border-radius: 8px 0px 0px 8px;
-    width: 49%;
-    /*padding: 5px;*/
-    border: 1px solid black;
+    border-top: 1px solid #B2B2B2;
+    border-bottom: 1px solid #B2B2B2;
+    border-left: 1px solid #B2B2B2;
+    /*border-right: 1px solid white;*/
+    /*border-right: none;*/
+    background-color: #0C56AD; 
+    /*width: 20%;*/
+    padding: 10px;
+    height: 50px;
+}
+
+.spec_mid {
+    border-top: 1px solid #B2B2B2;
+    border-bottom: 1px solid #B2B2B2;
+    border-left: none;
+    border-right: none;
+    background: white; 
+    /*width: 30%;*/
+    padding: 10px;
+    height: 50px;
 }
 
 .spec_right {
     border-radius: 0px 8px 8px 0px;
-    /*padding: 5px;*/
-    border: 1px solid black;
-    /*top: 50%;*/
+    border-top: 1px solid #B2B2B2;
+    border-bottom: 1px solid #B2B2B2;
+    border-right: 1px solid #B2B2B2;
+    border-left: none;
+    background: white; 
+    /*width: 5%;*/
+    padding: 10px;
+    height: 50px;
+    /*position: relative;*/
 }
 
-.spec {
-    /*padding: 20px;*/
+.spec_right i {
+    cursor: pointer;
 }
+
+
+/*div.x i{
+    position: relative;
+    display: inline-flex;
+    z-index: 1;
+    cursor: pointer;
+}*/
+
+/*span.deleteicon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+span.deleteicon span {
+    position: absolute;
+    display: block;
+    right: 3px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #ccc;
+    font: 13px monospace;
+    text-align: center;
+    line-height: 1em;
+    cursor: pointer;
+}*/

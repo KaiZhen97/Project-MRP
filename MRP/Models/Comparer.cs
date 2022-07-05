@@ -34,7 +34,8 @@ namespace MRP.Models
 
         public int GetHashCode(V_RFQList obj)
         {
-            return obj.ID.GetHashCode() ^ obj.Watchers_AccessID.GetHashCode();
+            //return obj.ID.GetHashCode() ^ obj.Watchers_AccessID.GetHashCode();
+            return 0;
         }
     }
 }

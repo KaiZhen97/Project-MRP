@@ -16,7 +16,7 @@ namespace MRP.Database
     {
         public int ID { get; set; }
         public System.Guid Watcher_AccessID { get; set; }
-        public System.Guid AppKey { get; set; }
+        public Nullable<System.Guid> AppKey { get; set; }
         public Nullable<System.DateTime> RequestDate { get; set; }
     }
 }

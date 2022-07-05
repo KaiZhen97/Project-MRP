@@ -45,13 +45,22 @@
           <Property Name="AppKey" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RequestDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="AppRFQWatcher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Watcher_AccessID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AppKey" Type="uniqueidentifier" />
+          <Property Name="RequestDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="AppWatcher">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Watcher_AccessID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="AppKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AppKey" Type="uniqueidentifier" />
           <Property Name="RequestDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Attachments">
@@ -70,6 +79,7 @@
           <Property Name="CreatedBy" Type="uniqueidentifier" />
           <Property Name="DeletedDate" Type="datetime" />
           <Property Name="DeletedBy" Type="uniqueidentifier" />
+          <Property Name="UniqueKey" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -96,26 +106,15 @@
           <Property Name="Manufacturer" Type="varchar" MaxLength="100" />
           <Property Name="MPN" Type="varchar" MaxLength="100" />
           <Property Name="ItemDescription" Type="varchar" MaxLength="200" />
-          <Property Name="SupplierName" Type="varchar" MaxLength="100" />
-          <Property Name="SupplierCode" Type="varchar" MaxLength="100" />
-          <Property Name="Currency" Type="varchar" MaxLength="10" />
-          <Property Name="UOM" Type="varchar" MaxLength="50" />
-          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="UnitPriceDiscount" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="MinAmountPerOrder" Type="int" />
           <Property Name="RequiredSN" Type="int" Nullable="false" />
           <Property Name="Tariff" Type="varchar" MaxLength="50" />
           <Property Name="RequiredCalibration" Type="int" Nullable="false" />
           <Property Name="MoreDetails" Type="varchar" MaxLength="200" />
-          <Property Name="DeliveryTerm" Type="varchar" MaxLength="100" />
-          <Property Name="QuotationDate" Type="date" />
-          <Property Name="QuotationValidity" Type="varchar" MaxLength="100" />
-          <Property Name="Std_LeadTime_Days" Type="int" />
           <Property Name="Purchaser1" Type="uniqueidentifier" />
           <Property Name="Purchaser2" Type="uniqueidentifier" />
           <Property Name="KeyTechSpec" Type="varchar" MaxLength="1000" />
-          <Property Name="IsDefault" Type="int" Nullable="false" />
           <Property Name="IsDraft" Type="int" Nullable="false" />
+          <Property Name="IsAddApproved" Type="int" Nullable="false" />
           <Property Name="Remark" Type="varchar" MaxLength="200" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
@@ -126,6 +125,41 @@
           <Property Name="AppKey" Type="uniqueidentifier" />
           <Property Name="DeletedRemark" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ItemLibraryAttachments">
+          <Key>
+            <PropertyRef Name="AttachmentID" />
+          </Key>
+          <Property Name="AttachmentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="int" />
+          <Property Name="AttachmentName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FilePath" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsConfidential" Type="int" Nullable="false" />
+          <Property Name="IsSubmitted" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ItemLibraryPendingUpdate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PendingUpdateActionID" Type="int" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+          <Property Name="ResponderRoles" Type="varchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemLibraryPendingUpdateAction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
         <EntityType Name="ItemLibraryPWPMapping">
           <Key>
             <PropertyRef Name="ID" />
@@ -134,6 +168,115 @@
           <Property Name="Parent_ItemLibraryID" Type="int" Nullable="false" />
           <Property Name="PWP_ItemLibraryID" Type="int" Nullable="false" />
           <Property Name="PWP_UnitPriceDiscount" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="ItemLibrarySupplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="int" Nullable="false" />
+          <Property Name="IsDefault" Type="int" Nullable="false" />
+          <Property Name="SupplierCode" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeliveryTerm" Type="varchar" MaxLength="100" />
+          <Property Name="QuotationDate" Type="datetime" />
+          <Property Name="QuotationValidity" Type="varchar" MaxLength="100" />
+          <Property Name="UOM" Type="varchar" MaxLength="50" />
+          <Property Name="Currency" Type="varchar" MaxLength="10" />
+          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="UnitPriceDiscount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="MinAmountPerOrder" Type="int" />
+          <Property Name="Std_LeadTime_Days" Type="int" />
+        </EntityType>
+        <EntityType Name="ItemLibraryTemp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="IPN" Type="varchar" MaxLength="100" />
+          <Property Name="Manufacturer" Type="varchar" MaxLength="100" />
+          <Property Name="MPN" Type="varchar" MaxLength="100" />
+          <Property Name="ItemDescription" Type="varchar" MaxLength="200" />
+          <Property Name="RequiredSN" Type="int" Nullable="false" />
+          <Property Name="Tariff" Type="varchar" MaxLength="50" />
+          <Property Name="RequiredCalibration" Type="int" Nullable="false" />
+          <Property Name="MoreDetails" Type="varchar" MaxLength="200" />
+          <Property Name="Purchaser1" Type="uniqueidentifier" />
+          <Property Name="Purchaser2" Type="uniqueidentifier" />
+          <Property Name="KeyTechSpec" Type="varchar" MaxLength="1000" />
+          <Property Name="IsDraft" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="uniqueidentifier" />
+          <Property Name="AppKey" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ItemLibraryTempAttachments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="int" />
+          <Property Name="AttachmentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AttachmentName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FilePath" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsConfidential" Type="int" Nullable="false" />
+          <Property Name="IsSubmitted" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="uniqueidentifier" />
+          <Property Name="IsNewAdded" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemLibraryTempPWPMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Parent_ItemLibraryID" Type="int" Nullable="false" />
+          <Property Name="PWP_ItemLibraryID" Type="int" Nullable="false" />
+          <Property Name="PWP_UnitPriceDiscount" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="ItemLibraryTempSupplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="int" Nullable="false" />
+          <Property Name="IsDefault" Type="int" Nullable="false" />
+          <Property Name="SupplierCode" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeliveryTerm" Type="varchar" MaxLength="100" />
+          <Property Name="QuotationDate" Type="date" />
+          <Property Name="QuotationValidity" Type="varchar" MaxLength="100" />
+          <Property Name="UOM" Type="varchar" MaxLength="50" />
+          <Property Name="Currency" Type="varchar" MaxLength="10" />
+          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="UnitPriceDiscount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="MinAmountPerOrder" Type="int" />
+          <Property Name="Std_LeadTime_Days" Type="int" />
+        </EntityType>
+        <EntityType Name="ItemLibraryUpdateTrace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="int" />
+          <Property Name="UpdateTraceActionID" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ItemLibraryUpdateTraceAction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="JobNoHODMapping">
           <Key>
@@ -322,6 +465,23 @@
           <Property Name="AppKey" Type="uniqueidentifier" />
           <Property Name="AppBatchKey" Type="uniqueidentifier" />
           <Property Name="CancelRemark" Type="varchar" MaxLength="200" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PRAttachments">
+          <Key>
+            <PropertyRef Name="AttachmentID" />
+          </Key>
+          <Property Name="AttachmentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PRID" Type="int" />
+          <Property Name="PRItemID" Type="int" />
+          <Property Name="AttachmentName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FilePath" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsSubmitted" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="PRItem">
           <Key>
@@ -355,6 +515,112 @@
           <Property Name="Sequence" Type="int" Nullable="false" />
           <Property Name="Remark" Type="varchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="PRTemp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="PRBatchNo" Type="varbinary" MaxLength="50" />
+          <Property Name="PRNo" Type="varchar" MaxLength="50" />
+          <Property Name="JobNo" Type="varchar" MaxLength="100" />
+          <Property Name="PrevJobNo" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="PR_StatusID" Type="int" Nullable="false" />
+          <Property Name="PrevPR_StatusID" Type="int" />
+          <Property Name="Purchaser1" Type="uniqueidentifier" />
+          <Property Name="Purchaser2" Type="uniqueidentifier" />
+          <Property Name="HOD" Type="uniqueidentifier" />
+          <Property Name="ReqHOD_RaiseApprv" Type="int" />
+          <Property Name="HOD_RaiseApprv" Type="int" />
+          <Property Name="ReqHOD_EditApprv" Type="int" />
+          <Property Name="HOD_EditApprv" Type="int" />
+          <Property Name="Req_EditApprv" Type="int" />
+          <Property Name="EditApprv" Type="int" />
+          <Property Name="Req_CancelApprv" Type="int" />
+          <Property Name="CancelApprv" Type="int" />
+          <Property Name="Req_OnHoldApprv" Type="int" />
+          <Property Name="IsDraft" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="LastUpdatedDate" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="uniqueidentifier" />
+          <Property Name="CancelDate" Type="datetime" />
+          <Property Name="CancelBy" Type="uniqueidentifier" />
+          <Property Name="AppKey" Type="uniqueidentifier" />
+          <Property Name="AppBatchKey" Type="uniqueidentifier" />
+          <Property Name="CancekRemark" Type="varchar" MaxLength="200" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PRTempAttachment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttachmentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TempAttachmentKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AttachmentKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AttachmentName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FIlePath" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsSubmitted" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="uniqueidentifier" />
+          <Property Name="IsNewAdded" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRTempItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRID" Type="int" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="int" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="IPN" Type="varchar" MaxLength="100" />
+          <Property Name="Manufacturer" Type="varchar" MaxLength="100" />
+          <Property Name="MPN" Type="varchar" MaxLength="100" />
+          <Property Name="ItemDescription" Type="varchar" MaxLength="200" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Recv_Quantity" Type="int" />
+          <Property Name="Withdrawn_Quantity" Type="int" />
+          <Property Name="ReqETA" Type="date" />
+          <Property Name="UpdateETA" Type="date" />
+          <Property Name="AcceptUpdateETA" Type="int" />
+          <Property Name="UpdateETA_PurchaserRemark" Type="varchar" MaxLength="200" />
+          <Property Name="UpdateETA_RequesterRemark" Type="varchar" MaxLength="200" />
+          <Property Name="IsUrgent" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PRUpdateTrace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRID" Type="int" />
+          <Property Name="UpdateTraceActionID" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="PRUpdateTraceAction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MRP.dbo.PRWatcher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PRWatcher">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Watcher_AccessID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="PRID" Type="int" />
+          <Property Name="Watcher_AccessID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="RFQ">
           <Key>
             <PropertyRef Name="ID" />
@@ -377,7 +643,22 @@
           <Property Name="CancelBy" Type="uniqueidentifier" />
           <Property Name="AppKey" Type="uniqueidentifier" />
           <Property Name="CancelRemark" Type="varchar" MaxLength="200" />
-          <Property Name="tempWatcher" Type="varchar" MaxLength="500" />
+          <Property Name="AttachmentKey" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="RFQAttachments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttachmentKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AttachmentName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FilePath" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsSubmitted" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="RFQStatus">
           <Key>
@@ -387,6 +668,28 @@
           <Property Name="Status" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Sequence" Type="int" Nullable="false" />
           <Property Name="Remark" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="RFQUpdateTrace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UpdateTraceTypeID" Type="int" Nullable="false" />
+          <Property Name="UpdateTraceActionID" Type="int" />
+          <Property Name="UpdateRemark" Type="varchar" MaxLength="200" />
+          <Property Name="RFQID" Type="int" Nullable="false" />
+          <Property Name="ApprvOrReject" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="RFQWatcher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RFQID" Type="int" />
+          <Property Name="Watcher_AccessID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="RunningNo">
           <Key>
@@ -407,6 +710,19 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SupplierRelation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SSTCharge" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="UpdateTrace">
           <Key>
@@ -503,8 +819,8 @@ warning 6002: The table/view 'MRP.dbo.V_ItemLibraryList' does not have a primary
             <PropertyRef Name="ID" />
             <PropertyRef Name="RequiredSN" />
             <PropertyRef Name="RequiredCalibration" />
-            <PropertyRef Name="IsDefault" />
             <PropertyRef Name="IsDraft" />
+            <PropertyRef Name="IsAddApproved" />
             <PropertyRef Name="CreatedDate" />
             <PropertyRef Name="LastUpdatedDate" />
           </Key>
@@ -515,23 +831,22 @@ warning 6002: The table/view 'MRP.dbo.V_ItemLibraryList' does not have a primary
           <Property Name="Manufacturer" Type="varchar" MaxLength="100" />
           <Property Name="MPN" Type="varchar" MaxLength="100" />
           <Property Name="ItemDescription" Type="varchar" MaxLength="200" />
-          <Property Name="SupplierName" Type="varchar" MaxLength="100" />
-          <Property Name="SupplierCode" Type="varchar" MaxLength="100" />
-          <Property Name="Currency" Type="varchar" MaxLength="10" />
-          <Property Name="UOM" Type="varchar" MaxLength="50" />
-          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="UnitPriceDiscount" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="MinAmountPerOrder" Type="int" />
           <Property Name="Tariff" Type="varchar" MaxLength="50" />
           <Property Name="RequiredSN" Type="int" Nullable="false" />
           <Property Name="RequiredCalibration" Type="int" Nullable="false" />
           <Property Name="MoreDetails" Type="varchar" MaxLength="200" />
-          <Property Name="DeliveryTerm" Type="varchar" MaxLength="100" />
-          <Property Name="QuotationDate" Type="date" />
-          <Property Name="QuotationValidity" Type="varchar" MaxLength="100" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="100" />
+          <Property Name="Currency" Type="varchar" MaxLength="10" />
+          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="UnitPriceDiscount" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Std_LeadTime_Days" Type="int" />
-          <Property Name="IsDefault" Type="int" Nullable="false" />
+          <Property Name="Purchaser1AccessID" Type="uniqueidentifier" />
+          <Property Name="Purchaser1" Type="varchar" MaxLength="200" />
+          <Property Name="Purchaser2AccessID" Type="uniqueidentifier" />
+          <Property Name="Purchaser2" Type="varchar" MaxLength="200" />
+          <Property Name="KeyTechSpec" Type="varchar" MaxLength="1000" />
           <Property Name="IsDraft" Type="int" Nullable="false" />
+          <Property Name="IsAddApproved" Type="int" Nullable="false" />
           <Property Name="Remark" Type="varchar" MaxLength="200" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
@@ -542,6 +857,86 @@ warning 6002: The table/view 'MRP.dbo.V_ItemLibraryList' does not have a primary
           <Property Name="CreatedByStaffName" Type="varchar" MaxLength="200" />
           <Property Name="LastUpdatedByStaffName" Type="varchar" MaxLength="200" />
           <Property Name="DeletedByStaffName" Type="varchar" MaxLength="200" />
+          <Property Name="Expr1" Type="uniqueidentifier" />
+          <Property Name="Expr2" Type="uniqueidentifier" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MRP.dbo.V_ItemLibraryPendingUpdate' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_ItemLibraryPendingUpdate">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PendingUpdateActionID" />
+            <PropertyRef Name="ItemLibraryID" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="CreatedBy" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="PendingUpdateActionID" Type="int" Nullable="false" />
+          <Property Name="PendingUpdateAction" Type="varchar" MaxLength="200" />
+          <Property Name="ItemLibraryID" Type="int" Nullable="false" />
+          <Property Name="IPN" Type="varchar" MaxLength="100" />
+          <Property Name="ItemDescription" Type="varchar" MaxLength="200" />
+          <Property Name="ResponderRoles" Type="varchar" MaxLength="500" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreatedByStaffName" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MRP.dbo.V_ItemLibraryTempList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_ItemLibraryTempList">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ItemLibraryID" />
+            <PropertyRef Name="RequiredSN" />
+            <PropertyRef Name="RequiredCalibration" />
+            <PropertyRef Name="IsDraft" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="LastUpdatedDate" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="IPN" Type="varchar" MaxLength="100" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="100" />
+          <Property Name="Manufacturer" Type="varchar" MaxLength="100" />
+          <Property Name="MPN" Type="varchar" MaxLength="100" />
+          <Property Name="ItemDescription" Type="varchar" MaxLength="200" />
+          <Property Name="Tariff" Type="varchar" MaxLength="50" />
+          <Property Name="RequiredSN" Type="int" Nullable="false" />
+          <Property Name="RequiredCalibration" Type="int" Nullable="false" />
+          <Property Name="MoreDetails" Type="varchar" MaxLength="200" />
+          <Property Name="Purchaser1AccessID" Type="uniqueidentifier" />
+          <Property Name="Purchaser1" Type="varchar" MaxLength="200" />
+          <Property Name="Purchaser2AccessID" Type="uniqueidentifier" />
+          <Property Name="Purchaser2" Type="varchar" MaxLength="200" />
+          <Property Name="KeyTechSpec" Type="varchar" MaxLength="1000" />
+          <Property Name="IsDraft" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedByStaffName" Type="varchar" MaxLength="200" />
+          <Property Name="LastUpdatedByStaffName" Type="varchar" MaxLength="200" />
+          <Property Name="DeletedByStaffName" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MRP.dbo.V_ItemLibraryUpdateTrace' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_ItemLibraryUpdateTrace">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="UpdateTraceActionID" />
+            <PropertyRef Name="CreatedDate" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="int" />
+          <Property Name="UpdateTraceActionID" Type="int" Nullable="false" />
+          <Property Name="UpdateTraceAction" Type="varchar" MaxLength="100" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedByStaffName" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MRP.dbo.V_PH_PO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -739,25 +1134,24 @@ warning 6002: The table/view 'MRP.dbo.V_RFQAttachmentsList' does not have a prim
         <EntityType Name="V_RFQAttachmentsList">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="AttachmentKey" />
             <PropertyRef Name="AttachmentName" />
+            <PropertyRef Name="FileName" />
             <PropertyRef Name="FilePath" />
-            <PropertyRef Name="IsConfidential" />
+            <PropertyRef Name="IsSubmitted" />
             <PropertyRef Name="CreatedDate" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="ItemLibraryID" Type="int" />
-          <Property Name="PRID" Type="int" />
-          <Property Name="POID" Type="int" />
-          <Property Name="RFQID" Type="int" />
+          <Property Name="AttachmentKey" Type="uniqueidentifier" Nullable="false" />
           <Property Name="AttachmentName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="FilePath" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="IsConfidential" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsSubmitted" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByStaffName" Type="varchar" MaxLength="200" />
           <Property Name="DeletedDate" Type="datetime" />
           <Property Name="DeletedBy" Type="uniqueidentifier" />
-          <Property Name="CreatedByStaffName" Type="varchar" MaxLength="200" />
-          <Property Name="DeletedByStaffName" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MRP.dbo.V_RFQList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -785,9 +1179,52 @@ warning 6002: The table/view 'MRP.dbo.V_RFQList' does not have a primary key def
           <Property Name="Purchaser2" Type="uniqueidentifier" />
           <Property Name="Purchaser2StaffName" Type="varchar" MaxLength="200" />
           <Property Name="Purchaser1StaffName" Type="varchar" MaxLength="200" />
-          <Property Name="tempWatcher" Type="varchar" MaxLength="500" />
-          <Property Name="PrimaryID" Type="int" />
-          <Property Name="Watchers_AccessID" Type="uniqueidentifier" />
+          <Property Name="Watcher_AccessID" Type="uniqueidentifier" />
+          <Property Name="Status" Type="varchar" MaxLength="100" />
+          <Property Name="AttachmentKey" Type="uniqueidentifier" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MRP.dbo.V_RFQUpdateTrace' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RFQUpdateTrace">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="UpdateTraceTypeID" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="RFQID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UpdateTraceTypeID" Type="int" Nullable="false" />
+          <Property Name="UpdateTraceActionID" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="Status" Type="varchar" MaxLength="100" />
+          <Property Name="Type" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="RFQID" Type="int" Nullable="false" />
+          <Property Name="UpdateRemark" Type="varchar" MaxLength="200" />
+          <Property Name="CreatedByStaffName" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MRP.dbo.V_SupplierRelation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_SupplierRelation">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CODE" />
+            <PropertyRef Name="SupplierName" />
+            <PropertyRef Name="SSTCharge" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="CreatedBy" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SSTCharge" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreatedByStaffName" Type="varchar" MaxLength="200" />
+          <Property Name="LastUpdatedDate" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="uniqueidentifier" />
+          <Property Name="LastUpdatedByStaffName" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -862,6 +1299,150 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ItemLibraryAttachments_ItemLibrary">
+          <End Role="ItemLibrary" Type="Self.ItemLibrary" Multiplicity="0..1" />
+          <End Role="ItemLibraryAttachments" Type="Self.ItemLibraryAttachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryAttachments">
+              <PropertyRef Name="ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryPendingUpdate_ItemLibrary">
+          <End Role="ItemLibrary" Type="Self.ItemLibrary" Multiplicity="1" />
+          <End Role="ItemLibraryPendingUpdate" Type="Self.ItemLibraryPendingUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryPendingUpdate">
+              <PropertyRef Name="ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryPendingUpdate_ItemLibraryPendingUpdateAction">
+          <End Role="ItemLibraryPendingUpdateAction" Type="Self.ItemLibraryPendingUpdateAction" Multiplicity="1" />
+          <End Role="ItemLibraryPendingUpdate" Type="Self.ItemLibraryPendingUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibraryPendingUpdateAction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryPendingUpdate">
+              <PropertyRef Name="PendingUpdateActionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryPWPMapping_ParentItemLibrary">
+          <End Role="ItemLibrary" Type="Self.ItemLibrary" Multiplicity="1" />
+          <End Role="ItemLibraryPWPMapping" Type="Self.ItemLibraryPWPMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryPWPMapping">
+              <PropertyRef Name="Parent_ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryPWPMapping_PWPItemLibrary">
+          <End Role="ItemLibrary" Type="Self.ItemLibrary" Multiplicity="1" />
+          <End Role="ItemLibraryPWPMapping" Type="Self.ItemLibraryPWPMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryPWPMapping">
+              <PropertyRef Name="PWP_ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibrarySupplier_ItemLibrary">
+          <End Role="ItemLibrary" Type="Self.ItemLibrary" Multiplicity="1" />
+          <End Role="ItemLibrarySupplier" Type="Self.ItemLibrarySupplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibrarySupplier">
+              <PropertyRef Name="ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryTemp_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="ItemLibraryTemp" Type="Self.ItemLibraryTemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryTemp">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryTemp_ItemLibrary">
+          <End Role="ItemLibrary" Type="Self.ItemLibrary" Multiplicity="1" />
+          <End Role="ItemLibraryTemp" Type="Self.ItemLibraryTemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryTemp">
+              <PropertyRef Name="ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryTempPWPMapping_ParentItemLibrary">
+          <End Role="ItemLibrary" Type="Self.ItemLibrary" Multiplicity="1" />
+          <End Role="ItemLibraryTempPWPMapping" Type="Self.ItemLibraryTempPWPMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryTempPWPMapping">
+              <PropertyRef Name="Parent_ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryTempPWPMapping_PWPItemLibrary1">
+          <End Role="ItemLibrary" Type="Self.ItemLibrary" Multiplicity="1" />
+          <End Role="ItemLibraryTempPWPMapping" Type="Self.ItemLibraryTempPWPMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryTempPWPMapping">
+              <PropertyRef Name="PWP_ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryTempSupplier_ItemLibrary">
+          <End Role="ItemLibrary" Type="Self.ItemLibrary" Multiplicity="1" />
+          <End Role="ItemLibraryTempSupplier" Type="Self.ItemLibraryTempSupplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryTempSupplier">
+              <PropertyRef Name="ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryUpdateTrace_ItemLibraryUpdateTraceAction">
+          <End Role="ItemLibraryUpdateTraceAction" Type="Self.ItemLibraryUpdateTraceAction" Multiplicity="1" />
+          <End Role="ItemLibraryUpdateTrace" Type="Self.ItemLibraryUpdateTrace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibraryUpdateTraceAction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryUpdateTrace">
+              <PropertyRef Name="UpdateTraceActionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Notification_NotificationType">
           <End Role="NotificationType" Type="Self.NotificationType" Multiplicity="1" />
           <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
@@ -898,18 +1479,6 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PR_Item_ItemLibrary">
-          <End Role="ItemLibrary" Type="Self.ItemLibrary" Multiplicity="0..1" />
-          <End Role="PRItem" Type="Self.PRItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ItemLibrary">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PRItem">
-              <PropertyRef Name="ItemLibraryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PR_PRStatus">
           <End Role="PRStatus" Type="Self.PRStatus" Multiplicity="0..1" />
           <End Role="PR" Type="Self.PR" Multiplicity="*" />
@@ -922,6 +1491,30 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PRAttachments_PR">
+          <End Role="PR" Type="Self.PR" Multiplicity="0..1" />
+          <End Role="PRAttachments" Type="Self.PRAttachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRAttachments">
+              <PropertyRef Name="PRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRAttachments_PRItem">
+          <End Role="PRItem" Type="Self.PRItem" Multiplicity="0..1" />
+          <End Role="PRAttachments" Type="Self.PRAttachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRItem">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRAttachments">
+              <PropertyRef Name="PRItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RFQ_RFQStatus">
           <End Role="RFQStatus" Type="Self.RFQStatus" Multiplicity="1" />
           <End Role="RFQ" Type="Self.RFQ" Multiplicity="*" />
@@ -931,6 +1524,42 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Principal>
             <Dependent Role="RFQ">
               <PropertyRef Name="RFQ_StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RFQUpdateTrace_UpdateTraceAction">
+          <End Role="UpdateTraceAction" Type="Self.UpdateTraceAction" Multiplicity="0..1" />
+          <End Role="RFQUpdateTrace" Type="Self.RFQUpdateTrace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UpdateTraceAction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RFQUpdateTrace">
+              <PropertyRef Name="UpdateTraceActionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RFQUpdateTrace_UpdateTraceType">
+          <End Role="UpdateTraceType" Type="Self.UpdateTraceType" Multiplicity="1" />
+          <End Role="RFQUpdateTrace" Type="Self.RFQUpdateTrace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UpdateTraceType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RFQUpdateTrace">
+              <PropertyRef Name="UpdateTraceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RFQWatcher_RFQ">
+          <End Role="RFQ" Type="Self.RFQ" Multiplicity="0..1" />
+          <End Role="RFQWatcher" Type="Self.RFQWatcher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RFQ">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RFQWatcher">
+              <PropertyRef Name="RFQID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1042,11 +1671,22 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySet Name="AppItemLibrary" EntityType="Self.AppItemLibrary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppPR" EntityType="Self.AppPR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppRFQ" EntityType="Self.AppRFQ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppRFQWatcher" EntityType="Self.AppRFQWatcher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppWatcher" EntityType="Self.AppWatcher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemLibrary" EntityType="Self.ItemLibrary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemLibraryAttachments" EntityType="Self.ItemLibraryAttachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemLibraryPendingUpdate" EntityType="Self.ItemLibraryPendingUpdate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemLibraryPendingUpdateAction" EntityType="Self.ItemLibraryPendingUpdateAction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemLibraryPWPMapping" EntityType="Self.ItemLibraryPWPMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemLibrarySupplier" EntityType="Self.ItemLibrarySupplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemLibraryTemp" EntityType="Self.ItemLibraryTemp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemLibraryTempAttachments" EntityType="Self.ItemLibraryTempAttachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemLibraryTempPWPMapping" EntityType="Self.ItemLibraryTempPWPMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemLibraryTempSupplier" EntityType="Self.ItemLibraryTempSupplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemLibraryUpdateTrace" EntityType="Self.ItemLibraryUpdateTrace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemLibraryUpdateTraceAction" EntityType="Self.ItemLibraryUpdateTraceAction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobNoHODMapping" EntityType="Self.JobNoHODMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MultiTierApproval" EntityType="Self.MultiTierApproval" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
@@ -1056,16 +1696,33 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySet Name="POItem" EntityType="Self.POItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POStatus" EntityType="Self.POStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PR" EntityType="Self.PR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRAttachments" EntityType="Self.PRAttachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRItem" EntityType="Self.PRItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRStatus" EntityType="Self.PRStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRTemp" EntityType="Self.PRTemp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRTempAttachment" EntityType="Self.PRTempAttachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRTempItem" EntityType="Self.PRTempItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRUpdateTrace" EntityType="Self.PRUpdateTrace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRUpdateTraceAction" EntityType="Self.PRUpdateTraceAction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RFQ" EntityType="Self.RFQ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RFQAttachments" EntityType="Self.RFQAttachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RFQStatus" EntityType="Self.RFQStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RFQUpdateTrace" EntityType="Self.RFQUpdateTrace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RFQWatcher" EntityType="Self.RFQWatcher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RunningNo" EntityType="Self.RunningNo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RunningNoType" EntityType="Self.RunningNoType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierRelation" EntityType="Self.SupplierRelation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UpdateTrace" EntityType="Self.UpdateTrace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UpdateTraceAction" EntityType="Self.UpdateTraceAction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UpdateTraceType" EntityType="Self.UpdateTraceType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Watcher" EntityType="Self.Watcher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRWatcher" EntityType="Self.PRWatcher" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PRWatcher].[ID] AS [ID], 
+    [PRWatcher].[PRID] AS [PRID], 
+    [PRWatcher].[Watcher_AccessID] AS [Watcher_AccessID]
+    FROM [dbo].[PRWatcher] AS [PRWatcher]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_CategoryList" EntityType="Self.V_CategoryList" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_CategoryList].[ID] AS [ID], 
@@ -1108,23 +1765,22 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
     [V_ItemLibraryList].[Manufacturer] AS [Manufacturer], 
     [V_ItemLibraryList].[MPN] AS [MPN], 
     [V_ItemLibraryList].[ItemDescription] AS [ItemDescription], 
-    [V_ItemLibraryList].[SupplierName] AS [SupplierName], 
-    [V_ItemLibraryList].[SupplierCode] AS [SupplierCode], 
-    [V_ItemLibraryList].[Currency] AS [Currency], 
-    [V_ItemLibraryList].[UOM] AS [UOM], 
-    [V_ItemLibraryList].[UnitPrice] AS [UnitPrice], 
-    [V_ItemLibraryList].[UnitPriceDiscount] AS [UnitPriceDiscount], 
-    [V_ItemLibraryList].[MinAmountPerOrder] AS [MinAmountPerOrder], 
     [V_ItemLibraryList].[Tariff] AS [Tariff], 
     [V_ItemLibraryList].[RequiredSN] AS [RequiredSN], 
     [V_ItemLibraryList].[RequiredCalibration] AS [RequiredCalibration], 
     [V_ItemLibraryList].[MoreDetails] AS [MoreDetails], 
-    [V_ItemLibraryList].[DeliveryTerm] AS [DeliveryTerm], 
-    [V_ItemLibraryList].[QuotationDate] AS [QuotationDate], 
-    [V_ItemLibraryList].[QuotationValidity] AS [QuotationValidity], 
+    [V_ItemLibraryList].[SupplierName] AS [SupplierName], 
+    [V_ItemLibraryList].[Currency] AS [Currency], 
+    [V_ItemLibraryList].[UnitPrice] AS [UnitPrice], 
+    [V_ItemLibraryList].[UnitPriceDiscount] AS [UnitPriceDiscount], 
     [V_ItemLibraryList].[Std_LeadTime_Days] AS [Std_LeadTime_Days], 
-    [V_ItemLibraryList].[IsDefault] AS [IsDefault], 
+    [V_ItemLibraryList].[Purchaser1AccessID] AS [Purchaser1AccessID], 
+    [V_ItemLibraryList].[Purchaser1] AS [Purchaser1], 
+    [V_ItemLibraryList].[Purchaser2AccessID] AS [Purchaser2AccessID], 
+    [V_ItemLibraryList].[Purchaser2] AS [Purchaser2], 
+    [V_ItemLibraryList].[KeyTechSpec] AS [KeyTechSpec], 
     [V_ItemLibraryList].[IsDraft] AS [IsDraft], 
+    [V_ItemLibraryList].[IsAddApproved] AS [IsAddApproved], 
     [V_ItemLibraryList].[Remark] AS [Remark], 
     [V_ItemLibraryList].[CreatedDate] AS [CreatedDate], 
     [V_ItemLibraryList].[CreatedBy] AS [CreatedBy], 
@@ -1134,8 +1790,67 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
     [V_ItemLibraryList].[DeletedBy] AS [DeletedBy], 
     [V_ItemLibraryList].[CreatedByStaffName] AS [CreatedByStaffName], 
     [V_ItemLibraryList].[LastUpdatedByStaffName] AS [LastUpdatedByStaffName], 
-    [V_ItemLibraryList].[DeletedByStaffName] AS [DeletedByStaffName]
+    [V_ItemLibraryList].[DeletedByStaffName] AS [DeletedByStaffName], 
+    [V_ItemLibraryList].[Expr1] AS [Expr1], 
+    [V_ItemLibraryList].[Expr2] AS [Expr2]
     FROM [dbo].[V_ItemLibraryList] AS [V_ItemLibraryList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_ItemLibraryPendingUpdate" EntityType="Self.V_ItemLibraryPendingUpdate" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ItemLibraryPendingUpdate].[ID] AS [ID], 
+    [V_ItemLibraryPendingUpdate].[PendingUpdateActionID] AS [PendingUpdateActionID], 
+    [V_ItemLibraryPendingUpdate].[PendingUpdateAction] AS [PendingUpdateAction], 
+    [V_ItemLibraryPendingUpdate].[ItemLibraryID] AS [ItemLibraryID], 
+    [V_ItemLibraryPendingUpdate].[IPN] AS [IPN], 
+    [V_ItemLibraryPendingUpdate].[ItemDescription] AS [ItemDescription], 
+    [V_ItemLibraryPendingUpdate].[ResponderRoles] AS [ResponderRoles], 
+    [V_ItemLibraryPendingUpdate].[Remark] AS [Remark], 
+    [V_ItemLibraryPendingUpdate].[CreatedDate] AS [CreatedDate], 
+    [V_ItemLibraryPendingUpdate].[CreatedBy] AS [CreatedBy], 
+    [V_ItemLibraryPendingUpdate].[CreatedByStaffName] AS [CreatedByStaffName]
+    FROM [dbo].[V_ItemLibraryPendingUpdate] AS [V_ItemLibraryPendingUpdate]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_ItemLibraryTempList" EntityType="Self.V_ItemLibraryTempList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ItemLibraryTempList].[ID] AS [ID], 
+    [V_ItemLibraryTempList].[ItemLibraryID] AS [ItemLibraryID], 
+    [V_ItemLibraryTempList].[CategoryID] AS [CategoryID], 
+    [V_ItemLibraryTempList].[IPN] AS [IPN], 
+    [V_ItemLibraryTempList].[CategoryName] AS [CategoryName], 
+    [V_ItemLibraryTempList].[Manufacturer] AS [Manufacturer], 
+    [V_ItemLibraryTempList].[MPN] AS [MPN], 
+    [V_ItemLibraryTempList].[ItemDescription] AS [ItemDescription], 
+    [V_ItemLibraryTempList].[Tariff] AS [Tariff], 
+    [V_ItemLibraryTempList].[RequiredSN] AS [RequiredSN], 
+    [V_ItemLibraryTempList].[RequiredCalibration] AS [RequiredCalibration], 
+    [V_ItemLibraryTempList].[MoreDetails] AS [MoreDetails], 
+    [V_ItemLibraryTempList].[Purchaser1AccessID] AS [Purchaser1AccessID], 
+    [V_ItemLibraryTempList].[Purchaser1] AS [Purchaser1], 
+    [V_ItemLibraryTempList].[Purchaser2AccessID] AS [Purchaser2AccessID], 
+    [V_ItemLibraryTempList].[Purchaser2] AS [Purchaser2], 
+    [V_ItemLibraryTempList].[KeyTechSpec] AS [KeyTechSpec], 
+    [V_ItemLibraryTempList].[IsDraft] AS [IsDraft], 
+    [V_ItemLibraryTempList].[Remark] AS [Remark], 
+    [V_ItemLibraryTempList].[CreatedDate] AS [CreatedDate], 
+    [V_ItemLibraryTempList].[CreatedBy] AS [CreatedBy], 
+    [V_ItemLibraryTempList].[LastUpdatedDate] AS [LastUpdatedDate], 
+    [V_ItemLibraryTempList].[LastUpdatedBy] AS [LastUpdatedBy], 
+    [V_ItemLibraryTempList].[CreatedByStaffName] AS [CreatedByStaffName], 
+    [V_ItemLibraryTempList].[LastUpdatedByStaffName] AS [LastUpdatedByStaffName], 
+    [V_ItemLibraryTempList].[DeletedByStaffName] AS [DeletedByStaffName]
+    FROM [dbo].[V_ItemLibraryTempList] AS [V_ItemLibraryTempList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_ItemLibraryUpdateTrace" EntityType="Self.V_ItemLibraryUpdateTrace" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ItemLibraryUpdateTrace].[ID] AS [ID], 
+    [V_ItemLibraryUpdateTrace].[ItemLibraryID] AS [ItemLibraryID], 
+    [V_ItemLibraryUpdateTrace].[UpdateTraceActionID] AS [UpdateTraceActionID], 
+    [V_ItemLibraryUpdateTrace].[UpdateTraceAction] AS [UpdateTraceAction], 
+    [V_ItemLibraryUpdateTrace].[Remark] AS [Remark], 
+    [V_ItemLibraryUpdateTrace].[CreatedDate] AS [CreatedDate], 
+    [V_ItemLibraryUpdateTrace].[CreatedBy] AS [CreatedBy], 
+    [V_ItemLibraryUpdateTrace].[CreatedByStaffName] AS [CreatedByStaffName]
+    FROM [dbo].[V_ItemLibraryUpdateTrace] AS [V_ItemLibraryUpdateTrace]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_PH_PO" EntityType="Self.V_PH_PO" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1288,19 +2003,16 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySet Name="V_RFQAttachmentsList" EntityType="Self.V_RFQAttachmentsList" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_RFQAttachmentsList].[ID] AS [ID], 
-    [V_RFQAttachmentsList].[ItemLibraryID] AS [ItemLibraryID], 
-    [V_RFQAttachmentsList].[PRID] AS [PRID], 
-    [V_RFQAttachmentsList].[POID] AS [POID], 
-    [V_RFQAttachmentsList].[RFQID] AS [RFQID], 
+    [V_RFQAttachmentsList].[AttachmentKey] AS [AttachmentKey], 
     [V_RFQAttachmentsList].[AttachmentName] AS [AttachmentName], 
+    [V_RFQAttachmentsList].[FileName] AS [FileName], 
     [V_RFQAttachmentsList].[FilePath] AS [FilePath], 
-    [V_RFQAttachmentsList].[IsConfidential] AS [IsConfidential], 
-    [V_RFQAttachmentsList].[CreatedDate] AS [CreatedDate], 
+    [V_RFQAttachmentsList].[IsSubmitted] AS [IsSubmitted], 
     [V_RFQAttachmentsList].[CreatedBy] AS [CreatedBy], 
-    [V_RFQAttachmentsList].[DeletedDate] AS [DeletedDate], 
-    [V_RFQAttachmentsList].[DeletedBy] AS [DeletedBy], 
+    [V_RFQAttachmentsList].[CreatedDate] AS [CreatedDate], 
     [V_RFQAttachmentsList].[CreatedByStaffName] AS [CreatedByStaffName], 
-    [V_RFQAttachmentsList].[DeletedByStaffName] AS [DeletedByStaffName]
+    [V_RFQAttachmentsList].[DeletedDate] AS [DeletedDate], 
+    [V_RFQAttachmentsList].[DeletedBy] AS [DeletedBy]
     FROM [dbo].[V_RFQAttachmentsList] AS [V_RFQAttachmentsList]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RFQList" EntityType="Self.V_RFQList" store:Type="Views" store:Schema="dbo">
@@ -1321,10 +2033,39 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
     [V_RFQList].[Purchaser2] AS [Purchaser2], 
     [V_RFQList].[Purchaser2StaffName] AS [Purchaser2StaffName], 
     [V_RFQList].[Purchaser1StaffName] AS [Purchaser1StaffName], 
-    [V_RFQList].[tempWatcher] AS [tempWatcher], 
-    [V_RFQList].[PrimaryID] AS [PrimaryID], 
-    [V_RFQList].[Watchers_AccessID] AS [Watchers_AccessID]
+    [V_RFQList].[Watcher_AccessID] AS [Watcher_AccessID], 
+    [V_RFQList].[Status] AS [Status], 
+    [V_RFQList].[AttachmentKey] AS [AttachmentKey]
     FROM [dbo].[V_RFQList] AS [V_RFQList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RFQUpdateTrace" EntityType="Self.V_RFQUpdateTrace" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_RFQUpdateTrace].[ID] AS [ID], 
+    [V_RFQUpdateTrace].[UpdateTraceTypeID] AS [UpdateTraceTypeID], 
+    [V_RFQUpdateTrace].[UpdateTraceActionID] AS [UpdateTraceActionID], 
+    [V_RFQUpdateTrace].[CreatedDate] AS [CreatedDate], 
+    [V_RFQUpdateTrace].[CreatedBy] AS [CreatedBy], 
+    [V_RFQUpdateTrace].[Status] AS [Status], 
+    [V_RFQUpdateTrace].[Type] AS [Type], 
+    [V_RFQUpdateTrace].[Description] AS [Description], 
+    [V_RFQUpdateTrace].[RFQID] AS [RFQID], 
+    [V_RFQUpdateTrace].[UpdateRemark] AS [UpdateRemark], 
+    [V_RFQUpdateTrace].[CreatedByStaffName] AS [CreatedByStaffName]
+    FROM [dbo].[V_RFQUpdateTrace] AS [V_RFQUpdateTrace]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_SupplierRelation" EntityType="Self.V_SupplierRelation" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_SupplierRelation].[ID] AS [ID], 
+    [V_SupplierRelation].[CODE] AS [CODE], 
+    [V_SupplierRelation].[SupplierName] AS [SupplierName], 
+    [V_SupplierRelation].[SSTCharge] AS [SSTCharge], 
+    [V_SupplierRelation].[CreatedDate] AS [CreatedDate], 
+    [V_SupplierRelation].[CreatedBy] AS [CreatedBy], 
+    [V_SupplierRelation].[CreatedByStaffName] AS [CreatedByStaffName], 
+    [V_SupplierRelation].[LastUpdatedDate] AS [LastUpdatedDate], 
+    [V_SupplierRelation].[LastUpdatedBy] AS [LastUpdatedBy], 
+    [V_SupplierRelation].[LastUpdatedByStaffName] AS [LastUpdatedByStaffName]
+    FROM [dbo].[V_SupplierRelation] AS [V_SupplierRelation]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_UpdateHistoryTrace" EntityType="Self.V_UpdateHistoryTrace" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1362,6 +2103,54 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             <End Role="Category" EntitySet="Category" />
             <End Role="ItemLibrary" EntitySet="ItemLibrary" />
           </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryAttachments_ItemLibrary" Association="Self.FK_ItemLibraryAttachments_ItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibrary" />
+            <End Role="ItemLibraryAttachments" EntitySet="ItemLibraryAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryPendingUpdate_ItemLibrary" Association="Self.FK_ItemLibraryPendingUpdate_ItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibrary" />
+            <End Role="ItemLibraryPendingUpdate" EntitySet="ItemLibraryPendingUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryPendingUpdate_ItemLibraryPendingUpdateAction" Association="Self.FK_ItemLibraryPendingUpdate_ItemLibraryPendingUpdateAction">
+            <End Role="ItemLibraryPendingUpdateAction" EntitySet="ItemLibraryPendingUpdateAction" />
+            <End Role="ItemLibraryPendingUpdate" EntitySet="ItemLibraryPendingUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryPWPMapping_ParentItemLibrary" Association="Self.FK_ItemLibraryPWPMapping_ParentItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibrary" />
+            <End Role="ItemLibraryPWPMapping" EntitySet="ItemLibraryPWPMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryPWPMapping_PWPItemLibrary" Association="Self.FK_ItemLibraryPWPMapping_PWPItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibrary" />
+            <End Role="ItemLibraryPWPMapping" EntitySet="ItemLibraryPWPMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibrarySupplier_ItemLibrary" Association="Self.FK_ItemLibrarySupplier_ItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibrary" />
+            <End Role="ItemLibrarySupplier" EntitySet="ItemLibrarySupplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryTemp_Category" Association="Self.FK_ItemLibraryTemp_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="ItemLibraryTemp" EntitySet="ItemLibraryTemp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryTemp_ItemLibrary" Association="Self.FK_ItemLibraryTemp_ItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibrary" />
+            <End Role="ItemLibraryTemp" EntitySet="ItemLibraryTemp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryTempPWPMapping_ParentItemLibrary" Association="Self.FK_ItemLibraryTempPWPMapping_ParentItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibrary" />
+            <End Role="ItemLibraryTempPWPMapping" EntitySet="ItemLibraryTempPWPMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryTempPWPMapping_PWPItemLibrary1" Association="Self.FK_ItemLibraryTempPWPMapping_PWPItemLibrary1">
+            <End Role="ItemLibrary" EntitySet="ItemLibrary" />
+            <End Role="ItemLibraryTempPWPMapping" EntitySet="ItemLibraryTempPWPMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryTempSupplier_ItemLibrary" Association="Self.FK_ItemLibraryTempSupplier_ItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibrary" />
+            <End Role="ItemLibraryTempSupplier" EntitySet="ItemLibraryTempSupplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryUpdateTrace_ItemLibraryUpdateTraceAction" Association="Self.FK_ItemLibraryUpdateTrace_ItemLibraryUpdateTraceAction">
+            <End Role="ItemLibraryUpdateTraceAction" EntitySet="ItemLibraryUpdateTraceAction" />
+            <End Role="ItemLibraryUpdateTrace" EntitySet="ItemLibraryUpdateTrace" />
+          </AssociationSet>
           <AssociationSet Name="FK_Notification_NotificationType" Association="Self.FK_Notification_NotificationType">
             <End Role="NotificationType" EntitySet="NotificationType" />
             <End Role="Notification" EntitySet="Notification" />
@@ -1374,17 +2163,33 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             <End Role="Category" EntitySet="Category" />
             <End Role="PRItem" EntitySet="PRItem" />
           </AssociationSet>
-          <AssociationSet Name="FK_PR_Item_ItemLibrary" Association="Self.FK_PR_Item_ItemLibrary">
-            <End Role="ItemLibrary" EntitySet="ItemLibrary" />
-            <End Role="PRItem" EntitySet="PRItem" />
-          </AssociationSet>
           <AssociationSet Name="FK_PR_PRStatus" Association="Self.FK_PR_PRStatus">
             <End Role="PRStatus" EntitySet="PRStatus" />
             <End Role="PR" EntitySet="PR" />
           </AssociationSet>
+          <AssociationSet Name="FK_PRAttachments_PR" Association="Self.FK_PRAttachments_PR">
+            <End Role="PR" EntitySet="PR" />
+            <End Role="PRAttachments" EntitySet="PRAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRAttachments_PRItem" Association="Self.FK_PRAttachments_PRItem">
+            <End Role="PRItem" EntitySet="PRItem" />
+            <End Role="PRAttachments" EntitySet="PRAttachments" />
+          </AssociationSet>
           <AssociationSet Name="FK_RFQ_RFQStatus" Association="Self.FK_RFQ_RFQStatus">
             <End Role="RFQStatus" EntitySet="RFQStatus" />
             <End Role="RFQ" EntitySet="RFQ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RFQUpdateTrace_UpdateTraceAction" Association="Self.FK_RFQUpdateTrace_UpdateTraceAction">
+            <End Role="UpdateTraceAction" EntitySet="UpdateTraceAction" />
+            <End Role="RFQUpdateTrace" EntitySet="RFQUpdateTrace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RFQUpdateTrace_UpdateTraceType" Association="Self.FK_RFQUpdateTrace_UpdateTraceType">
+            <End Role="UpdateTraceType" EntitySet="UpdateTraceType" />
+            <End Role="RFQUpdateTrace" EntitySet="RFQUpdateTrace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RFQWatcher_RFQ" Association="Self.FK_RFQWatcher_RFQ">
+            <End Role="RFQ" EntitySet="RFQ" />
+            <End Role="RFQWatcher" EntitySet="RFQWatcher" />
           </AssociationSet>
           <AssociationSet Name="FK_RunningNo_RunningNoType" Association="Self.FK_RunningNo_RunningNoType">
             <End Role="RunningNoType" EntitySet="RunningNoType" />
@@ -1435,11 +2240,22 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySet Name="AppItemLibraries" EntityType="MRPModel.AppItemLibrary" />
           <EntitySet Name="AppPRs" EntityType="MRPModel.AppPR" />
           <EntitySet Name="AppRFQs" EntityType="MRPModel.AppRFQ" />
+          <EntitySet Name="AppRFQWatchers" EntityType="MRPModel.AppRFQWatcher" />
           <EntitySet Name="AppWatchers" EntityType="MRPModel.AppWatcher" />
           <EntitySet Name="Attachments" EntityType="MRPModel.Attachment" />
           <EntitySet Name="Categories" EntityType="MRPModel.Category" />
           <EntitySet Name="ItemLibraries" EntityType="MRPModel.ItemLibrary" />
+          <EntitySet Name="ItemLibraryAttachments" EntityType="MRPModel.ItemLibraryAttachment" />
+          <EntitySet Name="ItemLibraryPendingUpdates" EntityType="MRPModel.ItemLibraryPendingUpdate" />
+          <EntitySet Name="ItemLibraryPendingUpdateActions" EntityType="MRPModel.ItemLibraryPendingUpdateAction" />
           <EntitySet Name="ItemLibraryPWPMappings" EntityType="MRPModel.ItemLibraryPWPMapping" />
+          <EntitySet Name="ItemLibrarySuppliers" EntityType="MRPModel.ItemLibrarySupplier" />
+          <EntitySet Name="ItemLibraryTemps" EntityType="MRPModel.ItemLibraryTemp" />
+          <EntitySet Name="ItemLibraryTempAttachments" EntityType="MRPModel.ItemLibraryTempAttachment" />
+          <EntitySet Name="ItemLibraryTempPWPMappings" EntityType="MRPModel.ItemLibraryTempPWPMapping" />
+          <EntitySet Name="ItemLibraryTempSuppliers" EntityType="MRPModel.ItemLibraryTempSupplier" />
+          <EntitySet Name="ItemLibraryUpdateTraces" EntityType="MRPModel.ItemLibraryUpdateTrace" />
+          <EntitySet Name="ItemLibraryUpdateTraceActions" EntityType="MRPModel.ItemLibraryUpdateTraceAction" />
           <EntitySet Name="JobNoHODMappings" EntityType="MRPModel.JobNoHODMapping" />
           <EntitySet Name="MultiTierApprovals" EntityType="MRPModel.MultiTierApproval" />
           <EntitySet Name="Notifications" EntityType="MRPModel.Notification" />
@@ -1449,19 +2265,33 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySet Name="POItems" EntityType="MRPModel.POItem" />
           <EntitySet Name="POStatus" EntityType="MRPModel.POStatu" />
           <EntitySet Name="PRs" EntityType="MRPModel.PR" />
+          <EntitySet Name="PRAttachments" EntityType="MRPModel.PRAttachment" />
           <EntitySet Name="PRItems" EntityType="MRPModel.PRItem" />
           <EntitySet Name="PRStatus" EntityType="MRPModel.PRStatu" />
+          <EntitySet Name="PRTemps" EntityType="MRPModel.PRTemp" />
+          <EntitySet Name="PRTempAttachments" EntityType="MRPModel.PRTempAttachment" />
+          <EntitySet Name="PRTempItems" EntityType="MRPModel.PRTempItem" />
+          <EntitySet Name="PRUpdateTraces" EntityType="MRPModel.PRUpdateTrace" />
+          <EntitySet Name="PRUpdateTraceActions" EntityType="MRPModel.PRUpdateTraceAction" />
           <EntitySet Name="RFQs" EntityType="MRPModel.RFQ" />
+          <EntitySet Name="RFQAttachments" EntityType="MRPModel.RFQAttachment" />
           <EntitySet Name="RFQStatus" EntityType="MRPModel.RFQStatu" />
+          <EntitySet Name="RFQUpdateTraces" EntityType="MRPModel.RFQUpdateTrace" />
+          <EntitySet Name="RFQWatchers" EntityType="MRPModel.RFQWatcher" />
           <EntitySet Name="RunningNoes" EntityType="MRPModel.RunningNo" />
           <EntitySet Name="RunningNoTypes" EntityType="MRPModel.RunningNoType" />
+          <EntitySet Name="SupplierRelations" EntityType="MRPModel.SupplierRelation" />
           <EntitySet Name="UpdateTraces" EntityType="MRPModel.UpdateTrace" />
           <EntitySet Name="UpdateTraceActions" EntityType="MRPModel.UpdateTraceAction" />
           <EntitySet Name="UpdateTraceTypes" EntityType="MRPModel.UpdateTraceType" />
           <EntitySet Name="Watchers" EntityType="MRPModel.Watcher" />
+          <EntitySet Name="PRWatchers" EntityType="MRPModel.PRWatcher" />
           <EntitySet Name="V_CategoryList" EntityType="MRPModel.V_CategoryList" />
           <EntitySet Name="V_ItemLibraryAttachments" EntityType="MRPModel.V_ItemLibraryAttachments" />
           <EntitySet Name="V_ItemLibraryList" EntityType="MRPModel.V_ItemLibraryList" />
+          <EntitySet Name="V_ItemLibraryPendingUpdate" EntityType="MRPModel.V_ItemLibraryPendingUpdate" />
+          <EntitySet Name="V_ItemLibraryTempList" EntityType="MRPModel.V_ItemLibraryTempList" />
+          <EntitySet Name="V_ItemLibraryUpdateTrace" EntityType="MRPModel.V_ItemLibraryUpdateTrace" />
           <EntitySet Name="V_PH_PO" EntityType="MRPModel.V_PH_PO" />
           <EntitySet Name="V_PH_PODTL" EntityType="MRPModel.V_PH_PODTL" />
           <EntitySet Name="V_POAttachmentsList" EntityType="MRPModel.V_POAttachmentsList" />
@@ -1470,6 +2300,8 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySet Name="V_PRList_Watcher" EntityType="MRPModel.V_PRList_Watcher" />
           <EntitySet Name="V_RFQAttachmentsList" EntityType="MRPModel.V_RFQAttachmentsList" />
           <EntitySet Name="V_RFQList" EntityType="MRPModel.V_RFQList" />
+          <EntitySet Name="V_RFQUpdateTrace" EntityType="MRPModel.V_RFQUpdateTrace" />
+          <EntitySet Name="V_SupplierRelation" EntityType="MRPModel.V_SupplierRelation" />
           <EntitySet Name="V_UpdateHistoryTrace" EntityType="MRPModel.V_UpdateHistoryTrace" />
           <AssociationSet Name="FK_Attachments_PO" Association="MRPModel.FK_Attachments_PO">
             <End Role="PO" EntitySet="POes" />
@@ -1487,17 +2319,61 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             <End Role="Category" EntitySet="Categories" />
             <End Role="ItemLibrary" EntitySet="ItemLibraries" />
           </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryTemp_Category" Association="MRPModel.FK_ItemLibraryTemp_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="ItemLibraryTemp" EntitySet="ItemLibraryTemps" />
+          </AssociationSet>
           <AssociationSet Name="FK_PR_Item_Category" Association="MRPModel.FK_PR_Item_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="PRItem" EntitySet="PRItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_PR_Item_ItemLibrary" Association="MRPModel.FK_PR_Item_ItemLibrary">
+          <AssociationSet Name="FK_ItemLibraryAttachments_ItemLibrary" Association="MRPModel.FK_ItemLibraryAttachments_ItemLibrary">
             <End Role="ItemLibrary" EntitySet="ItemLibraries" />
-            <End Role="PRItem" EntitySet="PRItems" />
+            <End Role="ItemLibraryAttachment" EntitySet="ItemLibraryAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryPendingUpdate_ItemLibrary" Association="MRPModel.FK_ItemLibraryPendingUpdate_ItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibraries" />
+            <End Role="ItemLibraryPendingUpdate" EntitySet="ItemLibraryPendingUpdates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryPWPMapping_ParentItemLibrary" Association="MRPModel.FK_ItemLibraryPWPMapping_ParentItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibraries" />
+            <End Role="ItemLibraryPWPMapping" EntitySet="ItemLibraryPWPMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryPWPMapping_PWPItemLibrary" Association="MRPModel.FK_ItemLibraryPWPMapping_PWPItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibraries" />
+            <End Role="ItemLibraryPWPMapping" EntitySet="ItemLibraryPWPMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibrarySupplier_ItemLibrary" Association="MRPModel.FK_ItemLibrarySupplier_ItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibraries" />
+            <End Role="ItemLibrarySupplier" EntitySet="ItemLibrarySuppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryTemp_ItemLibrary" Association="MRPModel.FK_ItemLibraryTemp_ItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibraries" />
+            <End Role="ItemLibraryTemp" EntitySet="ItemLibraryTemps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryTempPWPMapping_ParentItemLibrary" Association="MRPModel.FK_ItemLibraryTempPWPMapping_ParentItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibraries" />
+            <End Role="ItemLibraryTempPWPMapping" EntitySet="ItemLibraryTempPWPMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryTempPWPMapping_PWPItemLibrary1" Association="MRPModel.FK_ItemLibraryTempPWPMapping_PWPItemLibrary1">
+            <End Role="ItemLibrary" EntitySet="ItemLibraries" />
+            <End Role="ItemLibraryTempPWPMapping" EntitySet="ItemLibraryTempPWPMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryTempSupplier_ItemLibrary" Association="MRPModel.FK_ItemLibraryTempSupplier_ItemLibrary">
+            <End Role="ItemLibrary" EntitySet="ItemLibraries" />
+            <End Role="ItemLibraryTempSupplier" EntitySet="ItemLibraryTempSuppliers" />
           </AssociationSet>
           <AssociationSet Name="FK_UpdateTrace_ItemLibrary" Association="MRPModel.FK_UpdateTrace_ItemLibrary">
             <End Role="ItemLibrary" EntitySet="ItemLibraries" />
             <End Role="UpdateTrace" EntitySet="UpdateTraces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryPendingUpdate_ItemLibraryPendingUpdateAction" Association="MRPModel.FK_ItemLibraryPendingUpdate_ItemLibraryPendingUpdateAction">
+            <End Role="ItemLibraryPendingUpdateAction" EntitySet="ItemLibraryPendingUpdateActions" />
+            <End Role="ItemLibraryPendingUpdate" EntitySet="ItemLibraryPendingUpdates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemLibraryUpdateTrace_ItemLibraryUpdateTraceAction" Association="MRPModel.FK_ItemLibraryUpdateTrace_ItemLibraryUpdateTraceAction">
+            <End Role="ItemLibraryUpdateTraceAction" EntitySet="ItemLibraryUpdateTraceActions" />
+            <End Role="ItemLibraryUpdateTrace" EntitySet="ItemLibraryUpdateTraces" />
           </AssociationSet>
           <AssociationSet Name="FK_Notification_NotificationType" Association="MRPModel.FK_Notification_NotificationType">
             <End Role="NotificationType" EntitySet="NotificationTypes" />
@@ -1515,13 +2391,25 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             <End Role="PRStatu" EntitySet="PRStatus" />
             <End Role="PR" EntitySet="PRs" />
           </AssociationSet>
+          <AssociationSet Name="FK_PRAttachments_PR" Association="MRPModel.FK_PRAttachments_PR">
+            <End Role="PR" EntitySet="PRs" />
+            <End Role="PRAttachment" EntitySet="PRAttachments" />
+          </AssociationSet>
           <AssociationSet Name="FK_UpdateTrace_PR" Association="MRPModel.FK_UpdateTrace_PR">
             <End Role="PR" EntitySet="PRs" />
             <End Role="UpdateTrace" EntitySet="UpdateTraces" />
           </AssociationSet>
+          <AssociationSet Name="FK_PRAttachments_PRItem" Association="MRPModel.FK_PRAttachments_PRItem">
+            <End Role="PRItem" EntitySet="PRItems" />
+            <End Role="PRAttachment" EntitySet="PRAttachments" />
+          </AssociationSet>
           <AssociationSet Name="FK_RFQ_RFQStatus" Association="MRPModel.FK_RFQ_RFQStatus">
             <End Role="RFQStatu" EntitySet="RFQStatus" />
             <End Role="RFQ" EntitySet="RFQs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RFQWatcher_RFQ" Association="MRPModel.FK_RFQWatcher_RFQ">
+            <End Role="RFQ" EntitySet="RFQs" />
+            <End Role="RFQWatcher" EntitySet="RFQWatchers" />
           </AssociationSet>
           <AssociationSet Name="FK_UpdateTrace_RFQ" Association="MRPModel.FK_UpdateTrace_RFQ">
             <End Role="RFQ" EntitySet="RFQs" />
@@ -1530,6 +2418,14 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <AssociationSet Name="FK_Watcher_RFQ" Association="MRPModel.FK_Watcher_RFQ">
             <End Role="RFQ" EntitySet="RFQs" />
             <End Role="Watcher" EntitySet="Watchers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RFQUpdateTrace_UpdateTraceAction" Association="MRPModel.FK_RFQUpdateTrace_UpdateTraceAction">
+            <End Role="UpdateTraceAction" EntitySet="UpdateTraceActions" />
+            <End Role="RFQUpdateTrace" EntitySet="RFQUpdateTraces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RFQUpdateTrace_UpdateTraceType" Association="MRPModel.FK_RFQUpdateTrace_UpdateTraceType">
+            <End Role="UpdateTraceType" EntitySet="UpdateTraceTypes" />
+            <End Role="RFQUpdateTrace" EntitySet="RFQUpdateTraces" />
           </AssociationSet>
           <AssociationSet Name="FK_RunningNo_RunningNoType" Association="MRPModel.FK_RunningNo_RunningNoType">
             <End Role="RunningNoType" EntitySet="RunningNoTypes" />
@@ -1584,13 +2480,22 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="AppKey" Type="Guid" Nullable="false" />
           <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="AppRFQWatcher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Watcher_AccessID" Type="Guid" Nullable="false" />
+          <Property Name="AppKey" Type="Guid" />
+          <Property Name="RequestDate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="AppWatcher">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Watcher_AccessID" Type="Guid" Nullable="false" />
-          <Property Name="AppKey" Type="Guid" Nullable="false" />
+          <Property Name="AppKey" Type="Guid" />
           <Property Name="RequestDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Attachment">
@@ -1609,6 +2514,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="CreatedBy" Type="Guid" />
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="DeletedBy" Type="Guid" />
+          <Property Name="UniqueKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PO" Relationship="MRPModel.FK_Attachments_PO" FromRole="Attachment" ToRole="PO" />
           <NavigationProperty Name="PRItem" Relationship="MRPModel.FK_Attachments_PRItem" FromRole="Attachment" ToRole="PRItem" />
           <NavigationProperty Name="RFQ" Relationship="MRPModel.FK_Attachments_RFQ" FromRole="Attachment" ToRole="RFQ" />
@@ -1628,6 +2534,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="DeletedBy" Type="Guid" />
           <Property Name="DeletedRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ItemLibraries" Relationship="MRPModel.FK_ItemLibrary_Category" FromRole="Category" ToRole="ItemLibrary" />
+          <NavigationProperty Name="ItemLibraryTemps" Relationship="MRPModel.FK_ItemLibraryTemp_Category" FromRole="Category" ToRole="ItemLibraryTemp" />
           <NavigationProperty Name="PRItems" Relationship="MRPModel.FK_PR_Item_Category" FromRole="Category" ToRole="PRItem" />
         </EntityType>
         <EntityType Name="ItemLibrary">
@@ -1640,26 +2547,15 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="Manufacturer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MPN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ItemDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="SupplierCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Currency" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="UnitPriceDiscount" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="MinAmountPerOrder" Type="Int32" />
           <Property Name="RequiredSN" Type="Int32" Nullable="false" />
           <Property Name="Tariff" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RequiredCalibration" Type="Int32" Nullable="false" />
           <Property Name="MoreDetails" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="DeliveryTerm" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="QuotationDate" Type="DateTime" Precision="0" />
-          <Property Name="QuotationValidity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Std_LeadTime_Days" Type="Int32" />
           <Property Name="Purchaser1" Type="Guid" />
           <Property Name="Purchaser2" Type="Guid" />
           <Property Name="KeyTechSpec" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="IsDefault" Type="Int32" Nullable="false" />
           <Property Name="IsDraft" Type="Int32" Nullable="false" />
+          <Property Name="IsAddApproved" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" />
@@ -1670,8 +2566,55 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="AppKey" Type="Guid" />
           <Property Name="DeletedRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Category" Relationship="MRPModel.FK_ItemLibrary_Category" FromRole="ItemLibrary" ToRole="Category" />
-          <NavigationProperty Name="PRItems" Relationship="MRPModel.FK_PR_Item_ItemLibrary" FromRole="ItemLibrary" ToRole="PRItem" />
+          <NavigationProperty Name="ItemLibraryAttachments" Relationship="MRPModel.FK_ItemLibraryAttachments_ItemLibrary" FromRole="ItemLibrary" ToRole="ItemLibraryAttachment" />
+          <NavigationProperty Name="ItemLibraryPendingUpdates" Relationship="MRPModel.FK_ItemLibraryPendingUpdate_ItemLibrary" FromRole="ItemLibrary" ToRole="ItemLibraryPendingUpdate" />
+          <NavigationProperty Name="ItemLibraryPWPMappings" Relationship="MRPModel.FK_ItemLibraryPWPMapping_ParentItemLibrary" FromRole="ItemLibrary" ToRole="ItemLibraryPWPMapping" />
+          <NavigationProperty Name="ItemLibraryPWPMappings1" Relationship="MRPModel.FK_ItemLibraryPWPMapping_PWPItemLibrary" FromRole="ItemLibrary" ToRole="ItemLibraryPWPMapping" />
+          <NavigationProperty Name="ItemLibrarySuppliers" Relationship="MRPModel.FK_ItemLibrarySupplier_ItemLibrary" FromRole="ItemLibrary" ToRole="ItemLibrarySupplier" />
+          <NavigationProperty Name="ItemLibraryTemps" Relationship="MRPModel.FK_ItemLibraryTemp_ItemLibrary" FromRole="ItemLibrary" ToRole="ItemLibraryTemp" />
+          <NavigationProperty Name="ItemLibraryTempPWPMappings" Relationship="MRPModel.FK_ItemLibraryTempPWPMapping_ParentItemLibrary" FromRole="ItemLibrary" ToRole="ItemLibraryTempPWPMapping" />
+          <NavigationProperty Name="ItemLibraryTempPWPMappings1" Relationship="MRPModel.FK_ItemLibraryTempPWPMapping_PWPItemLibrary1" FromRole="ItemLibrary" ToRole="ItemLibraryTempPWPMapping" />
+          <NavigationProperty Name="ItemLibraryTempSuppliers" Relationship="MRPModel.FK_ItemLibraryTempSupplier_ItemLibrary" FromRole="ItemLibrary" ToRole="ItemLibraryTempSupplier" />
           <NavigationProperty Name="UpdateTraces" Relationship="MRPModel.FK_UpdateTrace_ItemLibrary" FromRole="ItemLibrary" ToRole="UpdateTrace" />
+        </EntityType>
+        <EntityType Name="ItemLibraryAttachment">
+          <Key>
+            <PropertyRef Name="AttachmentID" />
+          </Key>
+          <Property Name="AttachmentID" Type="Guid" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="Int32" />
+          <Property Name="AttachmentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsConfidential" Type="Int32" Nullable="false" />
+          <Property Name="IsSubmitted" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Guid" />
+          <NavigationProperty Name="ItemLibrary" Relationship="MRPModel.FK_ItemLibraryAttachments_ItemLibrary" FromRole="ItemLibraryAttachment" ToRole="ItemLibrary" />
+        </EntityType>
+        <EntityType Name="ItemLibraryPendingUpdate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PendingUpdateActionID" Type="Int32" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ResponderRoles" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="ItemLibrary" Relationship="MRPModel.FK_ItemLibraryPendingUpdate_ItemLibrary" FromRole="ItemLibraryPendingUpdate" ToRole="ItemLibrary" />
+          <NavigationProperty Name="ItemLibraryPendingUpdateAction" Relationship="MRPModel.FK_ItemLibraryPendingUpdate_ItemLibraryPendingUpdateAction" FromRole="ItemLibraryPendingUpdate" ToRole="ItemLibraryPendingUpdateAction" />
+        </EntityType>
+        <EntityType Name="ItemLibraryPendingUpdateAction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ItemLibraryPendingUpdates" Relationship="MRPModel.FK_ItemLibraryPendingUpdate_ItemLibraryPendingUpdateAction" FromRole="ItemLibraryPendingUpdateAction" ToRole="ItemLibraryPendingUpdate" />
         </EntityType>
         <EntityType Name="ItemLibraryPWPMapping">
           <Key>
@@ -1681,6 +2624,125 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="Parent_ItemLibraryID" Type="Int32" Nullable="false" />
           <Property Name="PWP_ItemLibraryID" Type="Int32" Nullable="false" />
           <Property Name="PWP_UnitPriceDiscount" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="ItemLibrary" Relationship="MRPModel.FK_ItemLibraryPWPMapping_ParentItemLibrary" FromRole="ItemLibraryPWPMapping" ToRole="ItemLibrary" />
+          <NavigationProperty Name="ItemLibrary1" Relationship="MRPModel.FK_ItemLibraryPWPMapping_PWPItemLibrary" FromRole="ItemLibraryPWPMapping" ToRole="ItemLibrary" />
+        </EntityType>
+        <EntityType Name="ItemLibrarySupplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemLibraryID" Type="Int32" Nullable="false" />
+          <Property Name="IsDefault" Type="Int32" Nullable="false" />
+          <Property Name="SupplierCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryTerm" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="QuotationDate" Type="DateTime" Precision="3" />
+          <Property Name="QuotationValidity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Currency" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="UnitPriceDiscount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="MinAmountPerOrder" Type="Int32" />
+          <Property Name="Std_LeadTime_Days" Type="Int32" />
+          <NavigationProperty Name="ItemLibrary" Relationship="MRPModel.FK_ItemLibrarySupplier_ItemLibrary" FromRole="ItemLibrarySupplier" ToRole="ItemLibrary" />
+        </EntityType>
+        <EntityType Name="ItemLibraryTemp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemLibraryID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="IPN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Manufacturer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MPN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ItemDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RequiredSN" Type="Int32" Nullable="false" />
+          <Property Name="Tariff" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequiredCalibration" Type="Int32" Nullable="false" />
+          <Property Name="MoreDetails" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Purchaser1" Type="Guid" />
+          <Property Name="Purchaser2" Type="Guid" />
+          <Property Name="KeyTechSpec" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IsDraft" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Guid" />
+          <Property Name="AppKey" Type="Guid" />
+          <NavigationProperty Name="Category" Relationship="MRPModel.FK_ItemLibraryTemp_Category" FromRole="ItemLibraryTemp" ToRole="Category" />
+          <NavigationProperty Name="ItemLibrary" Relationship="MRPModel.FK_ItemLibraryTemp_ItemLibrary" FromRole="ItemLibraryTemp" ToRole="ItemLibrary" />
+        </EntityType>
+        <EntityType Name="ItemLibraryTempAttachment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemLibraryID" Type="Int32" />
+          <Property Name="AttachmentID" Type="Guid" Nullable="false" />
+          <Property Name="AttachmentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsConfidential" Type="Int32" Nullable="false" />
+          <Property Name="IsSubmitted" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Guid" />
+          <Property Name="IsNewAdded" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemLibraryTempPWPMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Parent_ItemLibraryID" Type="Int32" Nullable="false" />
+          <Property Name="PWP_ItemLibraryID" Type="Int32" Nullable="false" />
+          <Property Name="PWP_UnitPriceDiscount" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="ItemLibrary" Relationship="MRPModel.FK_ItemLibraryTempPWPMapping_ParentItemLibrary" FromRole="ItemLibraryTempPWPMapping" ToRole="ItemLibrary" />
+          <NavigationProperty Name="ItemLibrary1" Relationship="MRPModel.FK_ItemLibraryTempPWPMapping_PWPItemLibrary1" FromRole="ItemLibraryTempPWPMapping" ToRole="ItemLibrary" />
+        </EntityType>
+        <EntityType Name="ItemLibraryTempSupplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemLibraryID" Type="Int32" Nullable="false" />
+          <Property Name="IsDefault" Type="Int32" Nullable="false" />
+          <Property Name="SupplierCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryTerm" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="QuotationDate" Type="DateTime" Precision="0" />
+          <Property Name="QuotationValidity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Currency" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="UnitPriceDiscount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="MinAmountPerOrder" Type="Int32" />
+          <Property Name="Std_LeadTime_Days" Type="Int32" />
+          <NavigationProperty Name="ItemLibrary" Relationship="MRPModel.FK_ItemLibraryTempSupplier_ItemLibrary" FromRole="ItemLibraryTempSupplier" ToRole="ItemLibrary" />
+        </EntityType>
+        <EntityType Name="ItemLibraryUpdateTrace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemLibraryID" Type="Int32" />
+          <Property Name="UpdateTraceActionID" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <NavigationProperty Name="ItemLibraryUpdateTraceAction" Relationship="MRPModel.FK_ItemLibraryUpdateTrace_ItemLibraryUpdateTraceAction" FromRole="ItemLibraryUpdateTrace" ToRole="ItemLibraryUpdateTraceAction" />
+        </EntityType>
+        <EntityType Name="ItemLibraryUpdateTraceAction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ItemLibraryUpdateTraces" Relationship="MRPModel.FK_ItemLibraryUpdateTrace_ItemLibraryUpdateTraceAction" FromRole="ItemLibraryUpdateTraceAction" ToRole="ItemLibraryUpdateTrace" />
         </EntityType>
         <EntityType Name="JobNoHODMapping">
           <Key>
@@ -1875,8 +2937,28 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="AppKey" Type="Guid" />
           <Property Name="AppBatchKey" Type="Guid" />
           <Property Name="CancelRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PRStatu" Relationship="MRPModel.FK_PR_PRStatus" FromRole="PR" ToRole="PRStatu" />
+          <NavigationProperty Name="PRAttachments" Relationship="MRPModel.FK_PRAttachments_PR" FromRole="PR" ToRole="PRAttachment" />
           <NavigationProperty Name="UpdateTraces" Relationship="MRPModel.FK_UpdateTrace_PR" FromRole="PR" ToRole="UpdateTrace" />
+        </EntityType>
+        <EntityType Name="PRAttachment">
+          <Key>
+            <PropertyRef Name="AttachmentID" />
+          </Key>
+          <Property Name="AttachmentID" Type="Guid" Nullable="false" />
+          <Property Name="PRID" Type="Int32" />
+          <Property Name="PRItemID" Type="Int32" />
+          <Property Name="AttachmentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsSubmitted" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Guid" />
+          <NavigationProperty Name="PR" Relationship="MRPModel.FK_PRAttachments_PR" FromRole="PRAttachment" ToRole="PR" />
+          <NavigationProperty Name="PRItem" Relationship="MRPModel.FK_PRAttachments_PRItem" FromRole="PRAttachment" ToRole="PRItem" />
         </EntityType>
         <EntityType Name="PRItem">
           <Key>
@@ -1902,7 +2984,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Attachments" Relationship="MRPModel.FK_Attachments_PRItem" FromRole="PRItem" ToRole="Attachment" />
           <NavigationProperty Name="Category" Relationship="MRPModel.FK_PR_Item_Category" FromRole="PRItem" ToRole="Category" />
-          <NavigationProperty Name="ItemLibrary" Relationship="MRPModel.FK_PR_Item_ItemLibrary" FromRole="PRItem" ToRole="ItemLibrary" />
+          <NavigationProperty Name="PRAttachments" Relationship="MRPModel.FK_PRAttachments_PRItem" FromRole="PRItem" ToRole="PRAttachment" />
         </EntityType>
         <EntityType Name="PRStatu">
           <Key>
@@ -1913,6 +2995,101 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="Sequence" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PRs" Relationship="MRPModel.FK_PR_PRStatus" FromRole="PRStatu" ToRole="PR" />
+        </EntityType>
+        <EntityType Name="PRTemp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PRBatchNo" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="PRNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JobNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PrevJobNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PR_StatusID" Type="Int32" Nullable="false" />
+          <Property Name="PrevPR_StatusID" Type="Int32" />
+          <Property Name="Purchaser1" Type="Guid" />
+          <Property Name="Purchaser2" Type="Guid" />
+          <Property Name="HOD" Type="Guid" />
+          <Property Name="ReqHOD_RaiseApprv" Type="Int32" />
+          <Property Name="HOD_RaiseApprv" Type="Int32" />
+          <Property Name="ReqHOD_EditApprv" Type="Int32" />
+          <Property Name="HOD_EditApprv" Type="Int32" />
+          <Property Name="Req_EditApprv" Type="Int32" />
+          <Property Name="EditApprv" Type="Int32" />
+          <Property Name="Req_CancelApprv" Type="Int32" />
+          <Property Name="CancelApprv" Type="Int32" />
+          <Property Name="Req_OnHoldApprv" Type="Int32" />
+          <Property Name="IsDraft" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Guid" />
+          <Property Name="CancelDate" Type="DateTime" Precision="3" />
+          <Property Name="CancelBy" Type="Guid" />
+          <Property Name="AppKey" Type="Guid" />
+          <Property Name="AppBatchKey" Type="Guid" />
+          <Property Name="CancekRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PRTempAttachment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttachmentID" Type="Guid" Nullable="false" />
+          <Property Name="TempAttachmentKey" Type="Guid" Nullable="false" />
+          <Property Name="AttachmentKey" Type="Guid" Nullable="false" />
+          <Property Name="AttachmentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FIlePath" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsSubmitted" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Guid" />
+          <Property Name="IsNewAdded" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRTempItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRID" Type="Int32" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="IPN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Manufacturer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MPN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ItemDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Recv_Quantity" Type="Int32" />
+          <Property Name="Withdrawn_Quantity" Type="Int32" />
+          <Property Name="ReqETA" Type="DateTime" Precision="0" />
+          <Property Name="UpdateETA" Type="DateTime" Precision="0" />
+          <Property Name="AcceptUpdateETA" Type="Int32" />
+          <Property Name="UpdateETA_PurchaserRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateETA_RequesterRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsUrgent" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PRUpdateTrace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRID" Type="Int32" />
+          <Property Name="UpdateTraceActionID" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+        </EntityType>
+        <EntityType Name="PRUpdateTraceAction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="RFQ">
           <Key>
@@ -1936,11 +3113,27 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="CancelBy" Type="Guid" />
           <Property Name="AppKey" Type="Guid" />
           <Property Name="CancelRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="tempWatcher" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AttachmentKey" Type="Guid" />
           <NavigationProperty Name="Attachments" Relationship="MRPModel.FK_Attachments_RFQ" FromRole="RFQ" ToRole="Attachment" />
           <NavigationProperty Name="RFQStatu" Relationship="MRPModel.FK_RFQ_RFQStatus" FromRole="RFQ" ToRole="RFQStatu" />
+          <NavigationProperty Name="RFQWatchers" Relationship="MRPModel.FK_RFQWatcher_RFQ" FromRole="RFQ" ToRole="RFQWatcher" />
           <NavigationProperty Name="UpdateTraces" Relationship="MRPModel.FK_UpdateTrace_RFQ" FromRole="RFQ" ToRole="UpdateTrace" />
           <NavigationProperty Name="Watchers" Relationship="MRPModel.FK_Watcher_RFQ" FromRole="RFQ" ToRole="Watcher" />
+        </EntityType>
+        <EntityType Name="RFQAttachment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttachmentKey" Type="Guid" Nullable="false" />
+          <Property Name="AttachmentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsSubmitted" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Guid" />
         </EntityType>
         <EntityType Name="RFQStatu">
           <Key>
@@ -1951,6 +3144,31 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="Sequence" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="RFQs" Relationship="MRPModel.FK_RFQ_RFQStatus" FromRole="RFQStatu" ToRole="RFQ" />
+        </EntityType>
+        <EntityType Name="RFQUpdateTrace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UpdateTraceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTraceActionID" Type="Int32" />
+          <Property Name="UpdateRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RFQID" Type="Int32" Nullable="false" />
+          <Property Name="ApprvOrReject" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <NavigationProperty Name="UpdateTraceAction" Relationship="MRPModel.FK_RFQUpdateTrace_UpdateTraceAction" FromRole="RFQUpdateTrace" ToRole="UpdateTraceAction" />
+          <NavigationProperty Name="UpdateTraceType" Relationship="MRPModel.FK_RFQUpdateTrace_UpdateTraceType" FromRole="RFQUpdateTrace" ToRole="UpdateTraceType" />
+        </EntityType>
+        <EntityType Name="RFQWatcher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RFQID" Type="Int32" />
+          <Property Name="Watcher_AccessID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="RFQ" Relationship="MRPModel.FK_RFQWatcher_RFQ" FromRole="RFQWatcher" ToRole="RFQ" />
         </EntityType>
         <EntityType Name="RunningNo">
           <Key>
@@ -1973,6 +3191,19 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="RunningNoes" Relationship="MRPModel.FK_RunningNo_RunningNoType" FromRole="RunningNoType" ToRole="RunningNo" />
+        </EntityType>
+        <EntityType Name="SupplierRelation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SSTCharge" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Guid" />
         </EntityType>
         <EntityType Name="UpdateTrace">
           <Key>
@@ -2003,6 +3234,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RFQUpdateTraces" Relationship="MRPModel.FK_RFQUpdateTrace_UpdateTraceAction" FromRole="UpdateTraceAction" ToRole="RFQUpdateTrace" />
           <NavigationProperty Name="UpdateTraces" Relationship="MRPModel.FK_UpdateTrace_UpdateTraceAction" FromRole="UpdateTraceAction" ToRole="UpdateTrace" />
         </EntityType>
         <EntityType Name="UpdateTraceType">
@@ -2011,6 +3243,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RFQUpdateTraces" Relationship="MRPModel.FK_RFQUpdateTrace_UpdateTraceType" FromRole="UpdateTraceType" ToRole="RFQUpdateTrace" />
           <NavigationProperty Name="UpdateTraces" Relationship="MRPModel.FK_UpdateTrace_UpdateTraceType" FromRole="UpdateTraceType" ToRole="UpdateTrace" />
         </EntityType>
         <EntityType Name="Watcher">
@@ -2023,6 +3256,15 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="RFQID" Type="Int32" />
           <Property Name="Watchers_AccessID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="RFQ" Relationship="MRPModel.FK_Watcher_RFQ" FromRole="Watcher" ToRole="RFQ" />
+        </EntityType>
+        <EntityType Name="PRWatcher">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Watcher_AccessID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PRID" Type="Int32" />
+          <Property Name="Watcher_AccessID" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="V_CategoryList">
           <Key>
@@ -2072,8 +3314,8 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             <PropertyRef Name="ID" />
             <PropertyRef Name="RequiredSN" />
             <PropertyRef Name="RequiredCalibration" />
-            <PropertyRef Name="IsDefault" />
             <PropertyRef Name="IsDraft" />
+            <PropertyRef Name="IsAddApproved" />
             <PropertyRef Name="CreatedDate" />
             <PropertyRef Name="LastUpdatedDate" />
           </Key>
@@ -2084,23 +3326,22 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="Manufacturer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MPN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ItemDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="SupplierCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Currency" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="UnitPriceDiscount" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="MinAmountPerOrder" Type="Int32" />
           <Property Name="Tariff" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RequiredSN" Type="Int32" Nullable="false" />
           <Property Name="RequiredCalibration" Type="Int32" Nullable="false" />
           <Property Name="MoreDetails" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="DeliveryTerm" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="QuotationDate" Type="DateTime" Precision="0" />
-          <Property Name="QuotationValidity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Currency" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="UnitPriceDiscount" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Std_LeadTime_Days" Type="Int32" />
-          <Property Name="IsDefault" Type="Int32" Nullable="false" />
+          <Property Name="Purchaser1AccessID" Type="Guid" />
+          <Property Name="Purchaser1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Purchaser2AccessID" Type="Guid" />
+          <Property Name="Purchaser2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="KeyTechSpec" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="IsDraft" Type="Int32" Nullable="false" />
+          <Property Name="IsAddApproved" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" />
@@ -2111,6 +3352,80 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="CreatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="LastUpdatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DeletedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Expr1" Type="Guid" />
+          <Property Name="Expr2" Type="Guid" />
+        </EntityType>
+        <EntityType Name="V_ItemLibraryPendingUpdate">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PendingUpdateActionID" />
+            <PropertyRef Name="ItemLibraryID" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="CreatedBy" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PendingUpdateActionID" Type="Int32" Nullable="false" />
+          <Property Name="PendingUpdateAction" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ItemLibraryID" Type="Int32" Nullable="false" />
+          <Property Name="IPN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ItemDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ResponderRoles" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="CreatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="V_ItemLibraryTempList">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ItemLibraryID" />
+            <PropertyRef Name="RequiredSN" />
+            <PropertyRef Name="RequiredCalibration" />
+            <PropertyRef Name="IsDraft" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="LastUpdatedDate" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="IPN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Manufacturer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MPN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ItemDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Tariff" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequiredSN" Type="Int32" Nullable="false" />
+          <Property Name="RequiredCalibration" Type="Int32" Nullable="false" />
+          <Property Name="MoreDetails" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Purchaser1AccessID" Type="Guid" />
+          <Property Name="Purchaser1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Purchaser2AccessID" Type="Guid" />
+          <Property Name="Purchaser2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="KeyTechSpec" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IsDraft" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Guid" />
+          <Property Name="CreatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="V_ItemLibraryUpdateTrace">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="UpdateTraceActionID" />
+            <PropertyRef Name="CreatedDate" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ItemLibraryID" Type="Int32" />
+          <Property Name="UpdateTraceActionID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTraceAction" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="V_PH_PO">
           <Key>
@@ -2294,25 +3609,24 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
         <EntityType Name="V_RFQAttachmentsList">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="AttachmentKey" />
             <PropertyRef Name="AttachmentName" />
+            <PropertyRef Name="FileName" />
             <PropertyRef Name="FilePath" />
-            <PropertyRef Name="IsConfidential" />
+            <PropertyRef Name="IsSubmitted" />
             <PropertyRef Name="CreatedDate" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="ItemLibraryID" Type="Int32" />
-          <Property Name="PRID" Type="Int32" />
-          <Property Name="POID" Type="Int32" />
-          <Property Name="RFQID" Type="Int32" />
+          <Property Name="AttachmentKey" Type="Guid" Nullable="false" />
           <Property Name="AttachmentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="FilePath" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IsConfidential" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsSubmitted" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="DeletedBy" Type="Guid" />
-          <Property Name="CreatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="DeletedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="V_RFQList">
           <Key>
@@ -2338,9 +3652,48 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <Property Name="Purchaser2" Type="Guid" />
           <Property Name="Purchaser2StaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Purchaser1StaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="tempWatcher" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="PrimaryID" Type="Int32" />
-          <Property Name="Watchers_AccessID" Type="Guid" />
+          <Property Name="Watcher_AccessID" Type="Guid" />
+          <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AttachmentKey" Type="Guid" />
+        </EntityType>
+        <EntityType Name="V_RFQUpdateTrace">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="UpdateTraceTypeID" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="RFQID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTraceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTraceActionID" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RFQID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="V_SupplierRelation">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CODE" />
+            <PropertyRef Name="SupplierName" />
+            <PropertyRef Name="SSTCharge" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="CreatedBy" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SSTCharge" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="CreatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Guid" />
+          <Property Name="LastUpdatedByStaffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="V_UpdateHistoryTrace">
           <Key>
@@ -2413,6 +3766,18 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ItemLibraryTemp_Category">
+          <End Type="MRPModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="MRPModel.ItemLibraryTemp" Role="ItemLibraryTemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryTemp">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PR_Item_Category">
           <End Type="MRPModel.Category" Role="Category" Multiplicity="0..1" />
           <End Type="MRPModel.PRItem" Role="PRItem" Multiplicity="*" />
@@ -2425,14 +3790,110 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PR_Item_ItemLibrary">
+        <Association Name="FK_ItemLibraryAttachments_ItemLibrary">
           <End Type="MRPModel.ItemLibrary" Role="ItemLibrary" Multiplicity="0..1" />
-          <End Type="MRPModel.PRItem" Role="PRItem" Multiplicity="*" />
+          <End Type="MRPModel.ItemLibraryAttachment" Role="ItemLibraryAttachment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ItemLibrary">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="PRItem">
+            <Dependent Role="ItemLibraryAttachment">
+              <PropertyRef Name="ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryPendingUpdate_ItemLibrary">
+          <End Type="MRPModel.ItemLibrary" Role="ItemLibrary" Multiplicity="1" />
+          <End Type="MRPModel.ItemLibraryPendingUpdate" Role="ItemLibraryPendingUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryPendingUpdate">
+              <PropertyRef Name="ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryPWPMapping_ParentItemLibrary">
+          <End Type="MRPModel.ItemLibrary" Role="ItemLibrary" Multiplicity="1" />
+          <End Type="MRPModel.ItemLibraryPWPMapping" Role="ItemLibraryPWPMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryPWPMapping">
+              <PropertyRef Name="Parent_ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryPWPMapping_PWPItemLibrary">
+          <End Type="MRPModel.ItemLibrary" Role="ItemLibrary" Multiplicity="1" />
+          <End Type="MRPModel.ItemLibraryPWPMapping" Role="ItemLibraryPWPMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryPWPMapping">
+              <PropertyRef Name="PWP_ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibrarySupplier_ItemLibrary">
+          <End Type="MRPModel.ItemLibrary" Role="ItemLibrary" Multiplicity="1" />
+          <End Type="MRPModel.ItemLibrarySupplier" Role="ItemLibrarySupplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibrarySupplier">
+              <PropertyRef Name="ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryTemp_ItemLibrary">
+          <End Type="MRPModel.ItemLibrary" Role="ItemLibrary" Multiplicity="1" />
+          <End Type="MRPModel.ItemLibraryTemp" Role="ItemLibraryTemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryTemp">
+              <PropertyRef Name="ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryTempPWPMapping_ParentItemLibrary">
+          <End Type="MRPModel.ItemLibrary" Role="ItemLibrary" Multiplicity="1" />
+          <End Type="MRPModel.ItemLibraryTempPWPMapping" Role="ItemLibraryTempPWPMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryTempPWPMapping">
+              <PropertyRef Name="Parent_ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryTempPWPMapping_PWPItemLibrary1">
+          <End Type="MRPModel.ItemLibrary" Role="ItemLibrary" Multiplicity="1" />
+          <End Type="MRPModel.ItemLibraryTempPWPMapping" Role="ItemLibraryTempPWPMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryTempPWPMapping">
+              <PropertyRef Name="PWP_ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryTempSupplier_ItemLibrary">
+          <End Type="MRPModel.ItemLibrary" Role="ItemLibrary" Multiplicity="1" />
+          <End Type="MRPModel.ItemLibraryTempSupplier" Role="ItemLibraryTempSupplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibrary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryTempSupplier">
               <PropertyRef Name="ItemLibraryID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2446,6 +3907,30 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Principal>
             <Dependent Role="UpdateTrace">
               <PropertyRef Name="ItemLibraryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryPendingUpdate_ItemLibraryPendingUpdateAction">
+          <End Type="MRPModel.ItemLibraryPendingUpdateAction" Role="ItemLibraryPendingUpdateAction" Multiplicity="1" />
+          <End Type="MRPModel.ItemLibraryPendingUpdate" Role="ItemLibraryPendingUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibraryPendingUpdateAction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryPendingUpdate">
+              <PropertyRef Name="PendingUpdateActionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemLibraryUpdateTrace_ItemLibraryUpdateTraceAction">
+          <End Type="MRPModel.ItemLibraryUpdateTraceAction" Role="ItemLibraryUpdateTraceAction" Multiplicity="1" />
+          <End Type="MRPModel.ItemLibraryUpdateTrace" Role="ItemLibraryUpdateTrace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemLibraryUpdateTraceAction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemLibraryUpdateTrace">
+              <PropertyRef Name="UpdateTraceActionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2497,6 +3982,18 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PRAttachments_PR">
+          <End Type="MRPModel.PR" Role="PR" Multiplicity="0..1" />
+          <End Type="MRPModel.PRAttachment" Role="PRAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRAttachment">
+              <PropertyRef Name="PRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UpdateTrace_PR">
           <End Type="MRPModel.PR" Role="PR" Multiplicity="0..1" />
           <End Type="MRPModel.UpdateTrace" Role="UpdateTrace" Multiplicity="*" />
@@ -2509,6 +4006,18 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PRAttachments_PRItem">
+          <End Type="MRPModel.PRItem" Role="PRItem" Multiplicity="0..1" />
+          <End Type="MRPModel.PRAttachment" Role="PRAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRItem">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRAttachment">
+              <PropertyRef Name="PRItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RFQ_RFQStatus">
           <End Type="MRPModel.RFQStatu" Role="RFQStatu" Multiplicity="1" />
           <End Type="MRPModel.RFQ" Role="RFQ" Multiplicity="*" />
@@ -2518,6 +4027,18 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Principal>
             <Dependent Role="RFQ">
               <PropertyRef Name="RFQ_StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RFQWatcher_RFQ">
+          <End Type="MRPModel.RFQ" Role="RFQ" Multiplicity="0..1" />
+          <End Type="MRPModel.RFQWatcher" Role="RFQWatcher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RFQ">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RFQWatcher">
+              <PropertyRef Name="RFQID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2542,6 +4063,30 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             </Principal>
             <Dependent Role="Watcher">
               <PropertyRef Name="RFQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RFQUpdateTrace_UpdateTraceAction">
+          <End Type="MRPModel.UpdateTraceAction" Role="UpdateTraceAction" Multiplicity="0..1" />
+          <End Type="MRPModel.RFQUpdateTrace" Role="RFQUpdateTrace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UpdateTraceAction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RFQUpdateTrace">
+              <PropertyRef Name="UpdateTraceActionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RFQUpdateTrace_UpdateTraceType">
+          <End Type="MRPModel.UpdateTraceType" Role="UpdateTraceType" Multiplicity="1" />
+          <End Type="MRPModel.RFQUpdateTrace" Role="RFQUpdateTrace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UpdateTraceType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RFQUpdateTrace">
+              <PropertyRef Name="UpdateTraceTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2638,6 +4183,16 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AppRFQWatchers">
+            <EntityTypeMapping TypeName="MRPModel.AppRFQWatcher">
+              <MappingFragment StoreEntitySet="AppRFQWatcher">
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="AppKey" ColumnName="AppKey" />
+                <ScalarProperty Name="Watcher_AccessID" ColumnName="Watcher_AccessID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AppWatchers">
             <EntityTypeMapping TypeName="MRPModel.AppWatcher">
               <MappingFragment StoreEntitySet="AppWatcher">
@@ -2651,6 +4206,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySetMapping Name="Attachments">
             <EntityTypeMapping TypeName="MRPModel.Attachment">
               <MappingFragment StoreEntitySet="Attachments">
+                <ScalarProperty Name="UniqueKey" ColumnName="UniqueKey" />
                 <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
                 <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -2694,31 +4250,58 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsAddApproved" ColumnName="IsAddApproved" />
                 <ScalarProperty Name="IsDraft" ColumnName="IsDraft" />
-                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="KeyTechSpec" ColumnName="KeyTechSpec" />
                 <ScalarProperty Name="Purchaser2" ColumnName="Purchaser2" />
                 <ScalarProperty Name="Purchaser1" ColumnName="Purchaser1" />
-                <ScalarProperty Name="Std_LeadTime_Days" ColumnName="Std_LeadTime_Days" />
-                <ScalarProperty Name="QuotationValidity" ColumnName="QuotationValidity" />
-                <ScalarProperty Name="QuotationDate" ColumnName="QuotationDate" />
-                <ScalarProperty Name="DeliveryTerm" ColumnName="DeliveryTerm" />
                 <ScalarProperty Name="MoreDetails" ColumnName="MoreDetails" />
                 <ScalarProperty Name="RequiredCalibration" ColumnName="RequiredCalibration" />
                 <ScalarProperty Name="Tariff" ColumnName="Tariff" />
                 <ScalarProperty Name="RequiredSN" ColumnName="RequiredSN" />
-                <ScalarProperty Name="MinAmountPerOrder" ColumnName="MinAmountPerOrder" />
-                <ScalarProperty Name="UnitPriceDiscount" ColumnName="UnitPriceDiscount" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="UOM" ColumnName="UOM" />
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
-                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
                 <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
                 <ScalarProperty Name="MPN" ColumnName="MPN" />
                 <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
                 <ScalarProperty Name="IPN" ColumnName="IPN" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemLibraryAttachments">
+            <EntityTypeMapping TypeName="MRPModel.ItemLibraryAttachment">
+              <MappingFragment StoreEntitySet="ItemLibraryAttachments">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
+                <ScalarProperty Name="IsConfidential" ColumnName="IsConfidential" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="AttachmentName" ColumnName="AttachmentName" />
+                <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
+                <ScalarProperty Name="AttachmentID" ColumnName="AttachmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemLibraryPendingUpdates">
+            <EntityTypeMapping TypeName="MRPModel.ItemLibraryPendingUpdate">
+              <MappingFragment StoreEntitySet="ItemLibraryPendingUpdate">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ResponderRoles" ColumnName="ResponderRoles" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
+                <ScalarProperty Name="PendingUpdateActionID" ColumnName="PendingUpdateActionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemLibraryPendingUpdateActions">
+            <EntityTypeMapping TypeName="MRPModel.ItemLibraryPendingUpdateAction">
+              <MappingFragment StoreEntitySet="ItemLibraryPendingUpdateAction">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2729,6 +4312,122 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
                 <ScalarProperty Name="PWP_UnitPriceDiscount" ColumnName="PWP_UnitPriceDiscount" />
                 <ScalarProperty Name="PWP_ItemLibraryID" ColumnName="PWP_ItemLibraryID" />
                 <ScalarProperty Name="Parent_ItemLibraryID" ColumnName="Parent_ItemLibraryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemLibrarySuppliers">
+            <EntityTypeMapping TypeName="MRPModel.ItemLibrarySupplier">
+              <MappingFragment StoreEntitySet="ItemLibrarySupplier">
+                <ScalarProperty Name="Std_LeadTime_Days" ColumnName="Std_LeadTime_Days" />
+                <ScalarProperty Name="MinAmountPerOrder" ColumnName="MinAmountPerOrder" />
+                <ScalarProperty Name="UnitPriceDiscount" ColumnName="UnitPriceDiscount" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="QuotationValidity" ColumnName="QuotationValidity" />
+                <ScalarProperty Name="QuotationDate" ColumnName="QuotationDate" />
+                <ScalarProperty Name="DeliveryTerm" ColumnName="DeliveryTerm" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemLibraryTemps">
+            <EntityTypeMapping TypeName="MRPModel.ItemLibraryTemp">
+              <MappingFragment StoreEntitySet="ItemLibraryTemp">
+                <ScalarProperty Name="AppKey" ColumnName="AppKey" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsDraft" ColumnName="IsDraft" />
+                <ScalarProperty Name="KeyTechSpec" ColumnName="KeyTechSpec" />
+                <ScalarProperty Name="Purchaser2" ColumnName="Purchaser2" />
+                <ScalarProperty Name="Purchaser1" ColumnName="Purchaser1" />
+                <ScalarProperty Name="MoreDetails" ColumnName="MoreDetails" />
+                <ScalarProperty Name="RequiredCalibration" ColumnName="RequiredCalibration" />
+                <ScalarProperty Name="Tariff" ColumnName="Tariff" />
+                <ScalarProperty Name="RequiredSN" ColumnName="RequiredSN" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="MPN" ColumnName="MPN" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="IPN" ColumnName="IPN" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemLibraryTempAttachments">
+            <EntityTypeMapping TypeName="MRPModel.ItemLibraryTempAttachment">
+              <MappingFragment StoreEntitySet="ItemLibraryTempAttachments">
+                <ScalarProperty Name="IsNewAdded" ColumnName="IsNewAdded" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
+                <ScalarProperty Name="IsConfidential" ColumnName="IsConfidential" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="AttachmentName" ColumnName="AttachmentName" />
+                <ScalarProperty Name="AttachmentID" ColumnName="AttachmentID" />
+                <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemLibraryTempPWPMappings">
+            <EntityTypeMapping TypeName="MRPModel.ItemLibraryTempPWPMapping">
+              <MappingFragment StoreEntitySet="ItemLibraryTempPWPMapping">
+                <ScalarProperty Name="PWP_UnitPriceDiscount" ColumnName="PWP_UnitPriceDiscount" />
+                <ScalarProperty Name="PWP_ItemLibraryID" ColumnName="PWP_ItemLibraryID" />
+                <ScalarProperty Name="Parent_ItemLibraryID" ColumnName="Parent_ItemLibraryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemLibraryTempSuppliers">
+            <EntityTypeMapping TypeName="MRPModel.ItemLibraryTempSupplier">
+              <MappingFragment StoreEntitySet="ItemLibraryTempSupplier">
+                <ScalarProperty Name="Std_LeadTime_Days" ColumnName="Std_LeadTime_Days" />
+                <ScalarProperty Name="MinAmountPerOrder" ColumnName="MinAmountPerOrder" />
+                <ScalarProperty Name="UnitPriceDiscount" ColumnName="UnitPriceDiscount" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="QuotationValidity" ColumnName="QuotationValidity" />
+                <ScalarProperty Name="QuotationDate" ColumnName="QuotationDate" />
+                <ScalarProperty Name="DeliveryTerm" ColumnName="DeliveryTerm" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemLibraryUpdateTraces">
+            <EntityTypeMapping TypeName="MRPModel.ItemLibraryUpdateTrace">
+              <MappingFragment StoreEntitySet="ItemLibraryUpdateTrace">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UpdateTraceActionID" ColumnName="UpdateTraceActionID" />
+                <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemLibraryUpdateTraceActions">
+            <EntityTypeMapping TypeName="MRPModel.ItemLibraryUpdateTraceAction">
+              <MappingFragment StoreEntitySet="ItemLibraryUpdateTraceAction">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2896,6 +4595,7 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySetMapping Name="PRs">
             <EntityTypeMapping TypeName="MRPModel.PR">
               <MappingFragment StoreEntitySet="PR">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="CancelRemark" ColumnName="CancelRemark" />
                 <ScalarProperty Name="AppBatchKey" ColumnName="AppBatchKey" />
                 <ScalarProperty Name="AppKey" ColumnName="AppKey" />
@@ -2927,6 +4627,23 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
                 <ScalarProperty Name="PRNo" ColumnName="PRNo" />
                 <ScalarProperty Name="PRBatchNo" ColumnName="PRBatchNo" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRAttachments">
+            <EntityTypeMapping TypeName="MRPModel.PRAttachment">
+              <MappingFragment StoreEntitySet="PRAttachments">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="AttachmentName" ColumnName="AttachmentName" />
+                <ScalarProperty Name="PRItemID" ColumnName="PRItemID" />
+                <ScalarProperty Name="PRID" ColumnName="PRID" />
+                <ScalarProperty Name="AttachmentID" ColumnName="AttachmentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2964,10 +4681,110 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PRTemps">
+            <EntityTypeMapping TypeName="MRPModel.PRTemp">
+              <MappingFragment StoreEntitySet="PRTemp">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CancekRemark" ColumnName="CancekRemark" />
+                <ScalarProperty Name="AppBatchKey" ColumnName="AppBatchKey" />
+                <ScalarProperty Name="AppKey" ColumnName="AppKey" />
+                <ScalarProperty Name="CancelBy" ColumnName="CancelBy" />
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDraft" ColumnName="IsDraft" />
+                <ScalarProperty Name="Req_OnHoldApprv" ColumnName="Req_OnHoldApprv" />
+                <ScalarProperty Name="CancelApprv" ColumnName="CancelApprv" />
+                <ScalarProperty Name="Req_CancelApprv" ColumnName="Req_CancelApprv" />
+                <ScalarProperty Name="EditApprv" ColumnName="EditApprv" />
+                <ScalarProperty Name="Req_EditApprv" ColumnName="Req_EditApprv" />
+                <ScalarProperty Name="HOD_EditApprv" ColumnName="HOD_EditApprv" />
+                <ScalarProperty Name="ReqHOD_EditApprv" ColumnName="ReqHOD_EditApprv" />
+                <ScalarProperty Name="HOD_RaiseApprv" ColumnName="HOD_RaiseApprv" />
+                <ScalarProperty Name="ReqHOD_RaiseApprv" ColumnName="ReqHOD_RaiseApprv" />
+                <ScalarProperty Name="HOD" ColumnName="HOD" />
+                <ScalarProperty Name="Purchaser2" ColumnName="Purchaser2" />
+                <ScalarProperty Name="Purchaser1" ColumnName="Purchaser1" />
+                <ScalarProperty Name="PrevPR_StatusID" ColumnName="PrevPR_StatusID" />
+                <ScalarProperty Name="PR_StatusID" ColumnName="PR_StatusID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PrevJobNo" ColumnName="PrevJobNo" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="PRNo" ColumnName="PRNo" />
+                <ScalarProperty Name="PRBatchNo" ColumnName="PRBatchNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRTempAttachments">
+            <EntityTypeMapping TypeName="MRPModel.PRTempAttachment">
+              <MappingFragment StoreEntitySet="PRTempAttachment">
+                <ScalarProperty Name="IsNewAdded" ColumnName="IsNewAdded" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
+                <ScalarProperty Name="FIlePath" ColumnName="FIlePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="AttachmentName" ColumnName="AttachmentName" />
+                <ScalarProperty Name="AttachmentKey" ColumnName="AttachmentKey" />
+                <ScalarProperty Name="TempAttachmentKey" ColumnName="TempAttachmentKey" />
+                <ScalarProperty Name="AttachmentID" ColumnName="AttachmentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRTempItems">
+            <EntityTypeMapping TypeName="MRPModel.PRTempItem">
+              <MappingFragment StoreEntitySet="PRTempItem">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsUrgent" ColumnName="IsUrgent" />
+                <ScalarProperty Name="UpdateETA_RequesterRemark" ColumnName="UpdateETA_RequesterRemark" />
+                <ScalarProperty Name="UpdateETA_PurchaserRemark" ColumnName="UpdateETA_PurchaserRemark" />
+                <ScalarProperty Name="AcceptUpdateETA" ColumnName="AcceptUpdateETA" />
+                <ScalarProperty Name="UpdateETA" ColumnName="UpdateETA" />
+                <ScalarProperty Name="ReqETA" ColumnName="ReqETA" />
+                <ScalarProperty Name="Withdrawn_Quantity" ColumnName="Withdrawn_Quantity" />
+                <ScalarProperty Name="Recv_Quantity" ColumnName="Recv_Quantity" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="MPN" ColumnName="MPN" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="IPN" ColumnName="IPN" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
+                <ScalarProperty Name="PRID" ColumnName="PRID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRUpdateTraces">
+            <EntityTypeMapping TypeName="MRPModel.PRUpdateTrace">
+              <MappingFragment StoreEntitySet="PRUpdateTrace">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UpdateTraceActionID" ColumnName="UpdateTraceActionID" />
+                <ScalarProperty Name="PRID" ColumnName="PRID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRUpdateTraceActions">
+            <EntityTypeMapping TypeName="MRPModel.PRUpdateTraceAction">
+              <MappingFragment StoreEntitySet="PRUpdateTraceAction">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="RFQs">
             <EntityTypeMapping TypeName="MRPModel.RFQ">
               <MappingFragment StoreEntitySet="RFQ">
-                <ScalarProperty Name="tempWatcher" ColumnName="tempWatcher" />
+                <ScalarProperty Name="AttachmentKey" ColumnName="AttachmentKey" />
                 <ScalarProperty Name="CancelRemark" ColumnName="CancelRemark" />
                 <ScalarProperty Name="AppKey" ColumnName="AppKey" />
                 <ScalarProperty Name="CancelBy" ColumnName="CancelBy" />
@@ -2989,12 +4806,52 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="RFQAttachments">
+            <EntityTypeMapping TypeName="MRPModel.RFQAttachment">
+              <MappingFragment StoreEntitySet="RFQAttachments">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="AttachmentName" ColumnName="AttachmentName" />
+                <ScalarProperty Name="AttachmentKey" ColumnName="AttachmentKey" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="RFQStatus">
             <EntityTypeMapping TypeName="MRPModel.RFQStatu">
               <MappingFragment StoreEntitySet="RFQStatus">
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RFQUpdateTraces">
+            <EntityTypeMapping TypeName="MRPModel.RFQUpdateTrace">
+              <MappingFragment StoreEntitySet="RFQUpdateTrace">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApprvOrReject" ColumnName="ApprvOrReject" />
+                <ScalarProperty Name="RFQID" ColumnName="RFQID" />
+                <ScalarProperty Name="UpdateRemark" ColumnName="UpdateRemark" />
+                <ScalarProperty Name="UpdateTraceActionID" ColumnName="UpdateTraceActionID" />
+                <ScalarProperty Name="UpdateTraceTypeID" ColumnName="UpdateTraceTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RFQWatchers">
+            <EntityTypeMapping TypeName="MRPModel.RFQWatcher">
+              <MappingFragment StoreEntitySet="RFQWatcher">
+                <ScalarProperty Name="Watcher_AccessID" ColumnName="Watcher_AccessID" />
+                <ScalarProperty Name="RFQID" ColumnName="RFQID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3017,6 +4874,20 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
             <EntityTypeMapping TypeName="MRPModel.RunningNoType">
               <MappingFragment StoreEntitySet="RunningNoType">
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierRelations">
+            <EntityTypeMapping TypeName="MRPModel.SupplierRelation">
+              <MappingFragment StoreEntitySet="SupplierRelation">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="SSTCharge" ColumnName="SSTCharge" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3066,6 +4937,15 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PRWatchers">
+            <EntityTypeMapping TypeName="MRPModel.PRWatcher">
+              <MappingFragment StoreEntitySet="PRWatcher">
+                <ScalarProperty Name="Watcher_AccessID" ColumnName="Watcher_AccessID" />
+                <ScalarProperty Name="PRID" ColumnName="PRID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="V_CategoryList">
             <EntityTypeMapping TypeName="MRPModel.V_CategoryList">
               <MappingFragment StoreEntitySet="V_CategoryList">
@@ -3106,6 +4986,8 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySetMapping Name="V_ItemLibraryList">
             <EntityTypeMapping TypeName="MRPModel.V_ItemLibraryList">
               <MappingFragment StoreEntitySet="V_ItemLibraryList">
+                <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
                 <ScalarProperty Name="DeletedByStaffName" ColumnName="DeletedByStaffName" />
                 <ScalarProperty Name="LastUpdatedByStaffName" ColumnName="LastUpdatedByStaffName" />
                 <ScalarProperty Name="CreatedByStaffName" ColumnName="CreatedByStaffName" />
@@ -3116,29 +4998,91 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsAddApproved" ColumnName="IsAddApproved" />
                 <ScalarProperty Name="IsDraft" ColumnName="IsDraft" />
-                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="KeyTechSpec" ColumnName="KeyTechSpec" />
+                <ScalarProperty Name="Purchaser2" ColumnName="Purchaser2" />
+                <ScalarProperty Name="Purchaser2AccessID" ColumnName="Purchaser2AccessID" />
+                <ScalarProperty Name="Purchaser1" ColumnName="Purchaser1" />
+                <ScalarProperty Name="Purchaser1AccessID" ColumnName="Purchaser1AccessID" />
                 <ScalarProperty Name="Std_LeadTime_Days" ColumnName="Std_LeadTime_Days" />
-                <ScalarProperty Name="QuotationValidity" ColumnName="QuotationValidity" />
-                <ScalarProperty Name="QuotationDate" ColumnName="QuotationDate" />
-                <ScalarProperty Name="DeliveryTerm" ColumnName="DeliveryTerm" />
+                <ScalarProperty Name="UnitPriceDiscount" ColumnName="UnitPriceDiscount" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
                 <ScalarProperty Name="MoreDetails" ColumnName="MoreDetails" />
                 <ScalarProperty Name="RequiredCalibration" ColumnName="RequiredCalibration" />
                 <ScalarProperty Name="RequiredSN" ColumnName="RequiredSN" />
                 <ScalarProperty Name="Tariff" ColumnName="Tariff" />
-                <ScalarProperty Name="MinAmountPerOrder" ColumnName="MinAmountPerOrder" />
-                <ScalarProperty Name="UnitPriceDiscount" ColumnName="UnitPriceDiscount" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="UOM" ColumnName="UOM" />
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
-                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
                 <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
                 <ScalarProperty Name="MPN" ColumnName="MPN" />
                 <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="IPN" ColumnName="IPN" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ItemLibraryPendingUpdate">
+            <EntityTypeMapping TypeName="MRPModel.V_ItemLibraryPendingUpdate">
+              <MappingFragment StoreEntitySet="V_ItemLibraryPendingUpdate">
+                <ScalarProperty Name="CreatedByStaffName" ColumnName="CreatedByStaffName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ResponderRoles" ColumnName="ResponderRoles" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="IPN" ColumnName="IPN" />
+                <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
+                <ScalarProperty Name="PendingUpdateAction" ColumnName="PendingUpdateAction" />
+                <ScalarProperty Name="PendingUpdateActionID" ColumnName="PendingUpdateActionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ItemLibraryTempList">
+            <EntityTypeMapping TypeName="MRPModel.V_ItemLibraryTempList">
+              <MappingFragment StoreEntitySet="V_ItemLibraryTempList">
+                <ScalarProperty Name="DeletedByStaffName" ColumnName="DeletedByStaffName" />
+                <ScalarProperty Name="LastUpdatedByStaffName" ColumnName="LastUpdatedByStaffName" />
+                <ScalarProperty Name="CreatedByStaffName" ColumnName="CreatedByStaffName" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsDraft" ColumnName="IsDraft" />
+                <ScalarProperty Name="KeyTechSpec" ColumnName="KeyTechSpec" />
+                <ScalarProperty Name="Purchaser2" ColumnName="Purchaser2" />
+                <ScalarProperty Name="Purchaser2AccessID" ColumnName="Purchaser2AccessID" />
+                <ScalarProperty Name="Purchaser1" ColumnName="Purchaser1" />
+                <ScalarProperty Name="Purchaser1AccessID" ColumnName="Purchaser1AccessID" />
+                <ScalarProperty Name="MoreDetails" ColumnName="MoreDetails" />
+                <ScalarProperty Name="RequiredCalibration" ColumnName="RequiredCalibration" />
+                <ScalarProperty Name="RequiredSN" ColumnName="RequiredSN" />
+                <ScalarProperty Name="Tariff" ColumnName="Tariff" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="MPN" ColumnName="MPN" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="IPN" ColumnName="IPN" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ItemLibraryUpdateTrace">
+            <EntityTypeMapping TypeName="MRPModel.V_ItemLibraryUpdateTrace">
+              <MappingFragment StoreEntitySet="V_ItemLibraryUpdateTrace">
+                <ScalarProperty Name="CreatedByStaffName" ColumnName="CreatedByStaffName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UpdateTraceAction" ColumnName="UpdateTraceAction" />
+                <ScalarProperty Name="UpdateTraceActionID" ColumnName="UpdateTraceActionID" />
+                <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3306,19 +5250,16 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySetMapping Name="V_RFQAttachmentsList">
             <EntityTypeMapping TypeName="MRPModel.V_RFQAttachmentsList">
               <MappingFragment StoreEntitySet="V_RFQAttachmentsList">
-                <ScalarProperty Name="DeletedByStaffName" ColumnName="DeletedByStaffName" />
-                <ScalarProperty Name="CreatedByStaffName" ColumnName="CreatedByStaffName" />
                 <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
                 <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedByStaffName" ColumnName="CreatedByStaffName" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="IsConfidential" ColumnName="IsConfidential" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsSubmitted" ColumnName="IsSubmitted" />
                 <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="AttachmentName" ColumnName="AttachmentName" />
-                <ScalarProperty Name="RFQID" ColumnName="RFQID" />
-                <ScalarProperty Name="POID" ColumnName="POID" />
-                <ScalarProperty Name="PRID" ColumnName="PRID" />
-                <ScalarProperty Name="ItemLibraryID" ColumnName="ItemLibraryID" />
+                <ScalarProperty Name="AttachmentKey" ColumnName="AttachmentKey" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3326,9 +5267,9 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
           <EntitySetMapping Name="V_RFQList">
             <EntityTypeMapping TypeName="MRPModel.V_RFQList">
               <MappingFragment StoreEntitySet="V_RFQList">
-                <ScalarProperty Name="Watchers_AccessID" ColumnName="Watchers_AccessID" />
-                <ScalarProperty Name="PrimaryID" ColumnName="PrimaryID" />
-                <ScalarProperty Name="tempWatcher" ColumnName="tempWatcher" />
+                <ScalarProperty Name="AttachmentKey" ColumnName="AttachmentKey" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Watcher_AccessID" ColumnName="Watcher_AccessID" />
                 <ScalarProperty Name="Purchaser1StaffName" ColumnName="Purchaser1StaffName" />
                 <ScalarProperty Name="Purchaser2StaffName" ColumnName="Purchaser2StaffName" />
                 <ScalarProperty Name="Purchaser2" ColumnName="Purchaser2" />
@@ -3345,6 +5286,39 @@ warning 6002: The table/view 'MRP.dbo.V_UpdateHistoryTrace' does not have a prim
                 <ScalarProperty Name="RFQ_StatusID" ColumnName="RFQ_StatusID" />
                 <ScalarProperty Name="RFQNo" ColumnName="RFQNo" />
                 <ScalarProperty Name="CreatedByStaffName" ColumnName="CreatedByStaffName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RFQUpdateTrace">
+            <EntityTypeMapping TypeName="MRPModel.V_RFQUpdateTrace">
+              <MappingFragment StoreEntitySet="V_RFQUpdateTrace">
+                <ScalarProperty Name="CreatedByStaffName" ColumnName="CreatedByStaffName" />
+                <ScalarProperty Name="UpdateRemark" ColumnName="UpdateRemark" />
+                <ScalarProperty Name="RFQID" ColumnName="RFQID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdateTraceActionID" ColumnName="UpdateTraceActionID" />
+                <ScalarProperty Name="UpdateTraceTypeID" ColumnName="UpdateTraceTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_SupplierRelation">
+            <EntityTypeMapping TypeName="MRPModel.V_SupplierRelation">
+              <MappingFragment StoreEntitySet="V_SupplierRelation">
+                <ScalarProperty Name="LastUpdatedByStaffName" ColumnName="LastUpdatedByStaffName" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="CreatedByStaffName" ColumnName="CreatedByStaffName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="SSTCharge" ColumnName="SSTCharge" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -17,12 +17,15 @@ namespace MRP.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UpdateTraceAction()
         {
+            this.RFQUpdateTraces = new HashSet<RFQUpdateTrace>();
             this.UpdateTraces = new HashSet<UpdateTrace>();
         }
     
         public int ID { get; set; }
         public string Description { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RFQUpdateTrace> RFQUpdateTraces { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UpdateTrace> UpdateTraces { get; set; }
     }

@@ -18,6 +18,7 @@ namespace MRP.Database
         public PRItem()
         {
             this.Attachments = new HashSet<Attachment>();
+            this.PRAttachments = new HashSet<PRAttachment>();
         }
     
         public int ID { get; set; }
@@ -42,6 +43,7 @@ namespace MRP.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attachment> Attachments { get; set; }
         public virtual Category Category { get; set; }
-        public virtual ItemLibrary ItemLibrary { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PRAttachment> PRAttachments { get; set; }
     }
 }

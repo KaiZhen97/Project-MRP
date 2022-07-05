@@ -33,31 +33,12 @@ namespace WebFrameWork.Controllers
             return response;
         }
 
-
-        //[HttpGet]
-        ////[Authorize]
-        //public HttpResponseMessage getPurchasingList()
-        //{
-        //    DataTablesUserDetail data = new DataTablesUserDetail();
-        //    List<V_UserDetail> dataList = userDal.getPurchasingList();
-
-        //    data.data = dataList;
-        //    data.draw = 1;
-        //    data.recordsFiltered = dataList.Count;
-        //    data.recordsTotal = dataList.Count;
-
-        //    HttpResponseMessage response = new HttpResponseMessage();
-        //    response = Request.CreateResponse(HttpStatusCode.OK, data);
-        //    return response;
-        //}
-
-
         [HttpGet]
         [Authorize]
-        public HttpResponseMessage getPurchasingList(HttpRequestMessage Request)
+        public HttpResponseMessage getPurchaserList(HttpRequestMessage Request)
         {
             DataTablesUserDetail data = new DataTablesUserDetail();
-            List<V_UserDetail> dataList = userDal.getPurchasingList(Request);
+            List<V_UserDetail> dataList = userDal.getPurchaserList(Request);
 
             data.data = dataList;
             data.draw = 1;
@@ -65,37 +46,9 @@ namespace WebFrameWork.Controllers
             data.recordsTotal = dataList.Count;
 
             HttpResponseMessage response = new HttpResponseMessage();
-            response = userBL.getPurchasingList(Request);
+            response = userBL.getPurchaserList(Request);
             return response;
         }
-
-
-        //[HttpGet]
-        //[Authorize]
-        //public HttpResponseMessage getPurchasingList(HttpRequestMessage Request)
-        //{
-        //    DataTablesUserDetail data = new DataTablesUserDetail();
-        //    List<V_UserDetail> dataList = userDal.getPurchasingList(Request);
-
-        //    data.data = dataList;
-        //    data.draw = 1;
-        //    //if (dataList == null)
-        //    //{
-        //    //    data.recordsFiltered = 0;
-        //    //    data.recordsTotal = 0;
-        //    //}
-        //    //else
-        //    //{
-        //    data.recordsFiltered = dataList.Count;
-        //    data.recordsTotal = dataList.Count;
-        //    //}
-        //    //}
-        //    HttpResponseMessage response = new HttpResponseMessage();
-        //    //response = userBL.getPurchasingList(Request);
-        //    response = Request.CreateResponse(HttpStatusCode.OK, data);
-        //    return response;
-        //}
-
 
         [HttpGet]
         [Authorize]

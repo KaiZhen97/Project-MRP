@@ -32,6 +32,104 @@ namespace MRP.Dal
             }
         }
 
+        //public List<V_ItemLibraryList> getSupplierList()
+        //{
+        //    try
+        //    {
+        //        var data = dbContext.V_ItemLibraryList.Where(c => c.DeletedDate == null).ToList();
+        //        //var data = dbContext.V_ItemLibraryList.Where(c => c.Purchaser1 != null || c.Purchaser2 != null).ToList();
+        //        return data;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+        //            System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+        //        return null;
+        //    }
+        //}
+
+
+        public List<V_ItemLibraryList> getSupplierNameList()
+        {
+            try
+            {
+                //var data = dbContext.V_ItemLibraryList.Where(c => c.DeletedByStaffName == null).ToList();
+                var data = dbContext.V_ItemLibraryList.Where(c => c.SupplierName != null).ToList();
+                return data;
+            }
+            catch (Exception ex)
+            {
+                logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+                    System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+                return null;
+            }
+        }
+
+        public List<V_ItemLibraryList> getPurchaserNameList()
+        {
+            try
+            {
+                //var data = dbContext.V_ItemLibraryList.Where(c => c.DeletedByStaffName == null).ToList();
+                var data = dbContext.V_ItemLibraryList.Where(c => c.Purchaser1 != null || c.Purchaser2 != null).ToList();
+                return data;
+            }
+            catch (Exception ex)
+            {
+                logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+                    System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+                return null;
+            }
+        }
+
+        public List<ItemLibrarySupplier> getSupplierList()
+        {
+            try
+            {
+                //var data = dbContext.V_ItemLibraryList.Where(c => c.DeletedByStaffName == null).ToList();
+                //var data = dbContext.V_ItemLibraryList.Where(c => c.Purchaser1 != null || c.Purchaser2 != null).ToList();
+
+                var data = dbContext.ItemLibrarySuppliers.ToList();
+                return data;
+            }
+            catch (Exception ex)
+            {
+                logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+                    System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+                return null;
+            }
+        }
+
+        //public List<V_ItemLibraryList> getNameList()
+        //{
+        //    try
+        //    {
+        //        var data = dbContext.V_ItemLibraryList.Where(c => c.DeletedByStaffName == null).ToList();
+        //        return data;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+        //            System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+        //        return null;
+        //    }
+        //}
+
+
+        //public List<V_CategoryList> getSelectList()
+        //{
+        //    try
+        //    {
+        //        var data = dbContext.V_CategoryList.ToList();
+        //        return data;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+        //            System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+        //        return null;
+        //    }
+        //}
+
         public List<V_ItemLibraryList> getDraftItemLibraryList()
         {
             try
@@ -45,11 +143,6 @@ namespace MRP.Dal
                     System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
                 return null;
             }
-            //{
-            //    logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
-            //        System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
-            //    return null;
-            //}
         }
 
         public V_ItemLibraryList postItemLibraryByID(RequestParameter.inputID input)
@@ -73,7 +166,6 @@ namespace MRP.Dal
             {
                 Guid userGuid = common.extractUserID(request);
 
-                // Create app key for IPN Counter purpose
                 Guid appKey = Guid.NewGuid();
 
                 AppItemLibrary newAppItemLibrary = new AppItemLibrary();
@@ -81,62 +173,60 @@ namespace MRP.Dal
                 newAppItemLibrary.AppKey = appKey;
                 newAppItemLibrary.RequestDate = DateTime.Now;
 
-                ItemLibrary newItemLibrary = new ItemLibrary();
+                ItemLibrary itemLibrary = new ItemLibrary();
 
-                newItemLibrary.CategoryID = input.CategoryID;
-                newItemLibrary.IPN = input.IPN;
-                newItemLibrary.Manufacturer = input.Manufacturer;
-                newItemLibrary.MPN = input.MPN;
-                newItemLibrary.ItemDescription = input.ItemDescription;
-                newItemLibrary.SupplierName = input.SupplierName;
-                newItemLibrary.SupplierCode = input.SupplierCode;
-                newItemLibrary.Currency = input.Currency;
-                newItemLibrary.UOM = input.UOM;
-                newItemLibrary.UnitPrice = input.UnitPrice;
-                newItemLibrary.UnitPriceDiscount = input.UnitPriceDiscount;
-                newItemLibrary.MinAmountPerOrder = input.MinAmountPerOrder;
-                newItemLibrary.RequiredSN = input.RequiredSN;
-                newItemLibrary.Tariff = input.Tariff;
-                newItemLibrary.RequiredCalibration = input.RequiredCalibration;
-                newItemLibrary.MoreDetails = input.MoreDetails;
-                newItemLibrary.DeliveryTerm = input.DeliveryTerm;
-                newItemLibrary.QuotationDate = input.QuotationDate;
-                newItemLibrary.QuotationValidity = input.QuotationValidity;
-                newItemLibrary.Std_LeadTime_Days = input.Std_LeadTime_Days;
-                newItemLibrary.Purchaser1 = string.IsNullOrEmpty(input.Purchaser1) ? Guid.Empty : new Guid(input.Purchaser1);
-                newItemLibrary.Purchaser2 = string.IsNullOrEmpty(input.Purchaser2) ? Guid.Empty : new Guid(input.Purchaser2);
-                //newItemLibrary.Purchaser1 = input.Purchaser1;
-                //newItemLibrary.Purchaser2 = input.Purchaser2;
-                newItemLibrary.KeyTechSpec = input.KeyTechSpec;
-                newItemLibrary.IsDefault = input.IsDefault;
-                newItemLibrary.IsDraft = input.IsDraft;
-                newItemLibrary.Remark = input.Remark;
+                itemLibrary.CategoryID = input.CategoryID;
+                itemLibrary.IPN = input.IPN;
+                itemLibrary.Manufacturer = input.Manufacturer;
+                itemLibrary.MPN = input.MPN;
+                itemLibrary.ItemDescription = input.ItemDescription;
+                //itemLibrary.SupplierName = input.SupplierName;
+                //itemLibrary.SupplierCode = input.SupplierCode;
+                //itemLibrary.Currency = input.Currency;
+                //itemLibrary.UOM = input.UOM;
+                //itemLibrary.UnitPrice = input.UnitPrice;
+                //itemLibrary.UnitPriceDiscount = input.UnitPriceDiscount;
+                //itemLibrary.MinAmountPerOrder = input.MinAmountPerOrder;
+                itemLibrary.RequiredSN = input.RequiredSN;
+                itemLibrary.Tariff = input.Tariff;
+                itemLibrary.RequiredCalibration = input.RequiredCalibration;
+                itemLibrary.MoreDetails = input.MoreDetails;
+                //itemLibrary.DeliveryTerm = input.DeliveryTerm;
+                //itemLibrary.QuotationDate = input.QuotationDate;
+                //itemLibrary.QuotationValidity = input.QuotationValidity;
+                //itemLibrary.Std_LeadTime_Days = input.Std_LeadTime_Days;
+                itemLibrary.Purchaser1 = string.IsNullOrEmpty(input.Purchaser1) ? Guid.Empty : new Guid(input.Purchaser1);
+                itemLibrary.Purchaser2 = string.IsNullOrEmpty(input.Purchaser2) ? Guid.Empty : new Guid(input.Purchaser2);
+                itemLibrary.KeyTechSpec = input.KeyTechSpec;
+                //itemLibrary.IsDefault = input.IsDefault;
+                itemLibrary.IsDraft = 0;
+                itemLibrary.Remark = input.Remark;
 
-                newItemLibrary.CreatedBy = userGuid;
-                newItemLibrary.CreatedDate = DateTime.Now;
-                newItemLibrary.LastUpdatedBy = userGuid;
-                newItemLibrary.LastUpdatedDate = DateTime.Now;
+                itemLibrary.CreatedBy = userGuid;
+                itemLibrary.CreatedDate = DateTime.Now;
+                itemLibrary.LastUpdatedBy = userGuid;
+                itemLibrary.LastUpdatedDate = DateTime.Now;
+                //itemLibrary.DeletedByStaffName = null;
 
                 dbContext.AppItemLibraries.Add(newAppItemLibrary);
-                dbContext.ItemLibraries.Add(newItemLibrary);
+                dbContext.ItemLibraries.Add(itemLibrary);
                 dbContext.SaveChanges();
 
-                ////Add PWP Mapping
-                //if (input.PWPItemList != null && input.PWPItemList.Count() > 0)
-                //{
-                //    foreach (RequestParameter.inputAddItemLibraryPWP item in input.PWPItemList)
-                //    {
-                //        ItemLibraryPWPMapping itemLibraryPWP = new ItemLibraryPWPMapping();
+                if (input.PWPItemList != null && input.PWPItemList.Count() > 0)
+                {
+                    foreach (RequestParameter.inputAddItemLibraryPWP item in input.PWPItemList)
+                    {
+                        ItemLibraryPWPMapping itemLibraryPWP = new ItemLibraryPWPMapping();
 
-                //        itemLibraryPWP.Parent_ItemLibraryID = newItemLibrary.ID;
-                //        itemLibraryPWP.PWP_ItemLibraryID = item.PWPItemLibraryID;
-                //        itemLibraryPWP.PWP_UnitPriceDiscount = item.PWPUnitPriceDiscount;
+                        itemLibraryPWP.Parent_ItemLibraryID = itemLibrary.ID;
+                        itemLibraryPWP.PWP_ItemLibraryID = item.PWPItemLibraryID;
+                        itemLibraryPWP.PWP_UnitPriceDiscount = item.PWPUnitPriceDiscount;
 
-                //        dbContext.ItemLibraryPWPMappings.Add(itemLibraryPWP);
-                //    }
+                        dbContext.ItemLibraryPWPMappings.Add(itemLibraryPWP);
+                    }
 
-                //    dbContext.SaveChanges();
-                //}
+                    dbContext.SaveChanges();
+                }
 
                 return true;
             }
@@ -156,45 +246,42 @@ namespace MRP.Dal
 
                 ItemLibrary itemLibrary = dbContext.ItemLibraries.Where(c => c.ID == input.ID).FirstOrDefault();
 
-                if (itemLibrary == null)
-                    return false;
-
-                // Clear PWP Mapping
                 var targetPWP = dbContext.ItemLibraryPWPMappings.Where(c => c.Parent_ItemLibraryID == input.ID);
                 dbContext.ItemLibraryPWPMappings.RemoveRange(targetPWP);
+                
+                itemLibrary.CategoryID = input.CategoryID;
+                itemLibrary.Manufacturer = input.Manufacturer;
+                itemLibrary.MPN = input.MPN;
+                itemLibrary.ItemDescription = input.ItemDescription;
+                //itemLibrary.SupplierName = input.SupplierName;
+                //itemLibrary.SupplierCode = input.SupplierCode;
+                //itemLibrary.Currency = input.Currency;
+                //itemLibrary.UOM = input.UOM;
+                //itemLibrary.UnitPrice = input.UnitPrice;
+                //itemLibrary.UnitPriceDiscount = input.UnitPriceDiscount;
+                //itemLibrary.MinAmountPerOrder = input.MinAmountPerOrder;
+                itemLibrary.RequiredSN = input.RequiredSN;
+                itemLibrary.Tariff = input.Tariff;
+                itemLibrary.RequiredCalibration = input.RequiredCalibration;
+                itemLibrary.MoreDetails = input.MoreDetails;
+                //itemLibrary.DeliveryTerm = input.DeliveryTerm;
+                //itemLibrary.QuotationDate = input.QuotationDate;
+                //itemLibrary.QuotationValidity = input.QuotationValidity;
+                //itemLibrary.Std_LeadTime_Days = input.Std_LeadTime_Days;
+                itemLibrary.Purchaser1 = string.IsNullOrEmpty(input.Purchaser1) ? Guid.Empty : new Guid(input.Purchaser1);
+                itemLibrary.Purchaser2 = string.IsNullOrEmpty(input.Purchaser2) ? Guid.Empty : new Guid(input.Purchaser2);
+                itemLibrary.KeyTechSpec = input.KeyTechSpec;
+                //itemLibrary.IsDefault = input.IsDefault;
+                itemLibrary.IsDraft = 0;
+                itemLibrary.IsDraft = input.IsDraft;
+                itemLibrary.Remark = input.Remark;
 
-                // Edit Item Library
-                var targetItemLib = dbContext.ItemLibraries.Where(c => c.ID == input.ID).FirstOrDefault();
+                //itemLibrary.CreatedBy = userGuid;
+                //itemLibrary.CreatedDate = DateTime.Now;
+                itemLibrary.LastUpdatedBy = userGuid;
+                itemLibrary.LastUpdatedDate = DateTime.Now;
+                //itemLibrary.DeletedByStaffName = null;
 
-                targetItemLib.CategoryID = input.CategoryID;
-                targetItemLib.Manufacturer = input.Manufacturer;
-                targetItemLib.MPN = input.MPN;
-                targetItemLib.ItemDescription = input.ItemDescription;
-                targetItemLib.SupplierName = input.SupplierName;
-                targetItemLib.SupplierCode = input.SupplierCode;
-                targetItemLib.Currency = input.Currency;
-                targetItemLib.UOM = input.UOM;
-                targetItemLib.UnitPrice = input.UnitPrice;
-                targetItemLib.UnitPriceDiscount = input.UnitPriceDiscount;
-                targetItemLib.MinAmountPerOrder = input.MinAmountPerOrder;
-                targetItemLib.RequiredSN = input.RequiredSN;
-                targetItemLib.Tariff = input.Tariff;
-                targetItemLib.RequiredCalibration = input.RequiredCalibration;
-                targetItemLib.MoreDetails = input.MoreDetails;
-                targetItemLib.DeliveryTerm = input.DeliveryTerm;
-                targetItemLib.QuotationDate = input.QuotationDate;
-                targetItemLib.QuotationValidity = input.QuotationValidity;
-                targetItemLib.Std_LeadTime_Days = input.Std_LeadTime_Days;
-                targetItemLib.Purchaser1 = string.IsNullOrEmpty(input.Purchaser1) ? Guid.Empty : new Guid(input.Purchaser1);
-                targetItemLib.Purchaser2 = string.IsNullOrEmpty(input.Purchaser2) ? Guid.Empty : new Guid(input.Purchaser2);
-                targetItemLib.KeyTechSpec = input.KeyTechSpec;
-                targetItemLib.IsDefault = input.IsDefault;
-                targetItemLib.IsDraft = input.IsDraft;
-                targetItemLib.Remark = input.Remark;
-                targetItemLib.LastUpdatedBy = userGuid;
-                targetItemLib.LastUpdatedDate = DateTime.Now;
-
-                //Add PWP Mapping
                 if (input.PWPItemList != null && input.PWPItemList.Count() > 0)
                 {
                     foreach (RequestParameter.inputAddItemLibraryPWP item in input.PWPItemList)
@@ -221,80 +308,6 @@ namespace MRP.Dal
             }
         }
 
-        //public bool postDraftItemLibrary(RequestParameter.inputDraftItemLibrary input, HttpRequestMessage request)
-        //{
-        //    try
-        //    {
-        //        Guid userGuid = common.extractUserID(request);
-
-        //        ItemLibrary itemLibrary = dbContext.ItemLibraries.Where(c => c.ID == input.ID).FirstOrDefault();
-
-        //        if (itemLibrary == null)
-        //            return false;
-
-        //        // Clear PWP Mapping
-        //        //var targetPWP = dbContext.ItemLibraryPWPMappings.Where(c => c.Parent_ItemLibraryID == input.ID);
-        //        //dbContext.ItemLibraryPWPMappings.RemoveRange(targetPWP);
-
-        //        // Edit Item Library
-        //        var targetItemLib = dbContext.ItemLibraries.Where(c => c.ID == input.ID).FirstOrDefault();
-
-        //        targetItemLib.CategoryID = input.CategoryID;
-        //        targetItemLib.Manufacturer = input.Manufacturer;
-        //        targetItemLib.MPN = input.MPN;
-        //        targetItemLib.ItemDescription = input.ItemDescription;
-        //        targetItemLib.SupplierName = input.SupplierName;
-        //        targetItemLib.SupplierCode = input.SupplierCode;
-        //        targetItemLib.Currency = input.Currency;
-        //        targetItemLib.UOM = input.UOM;
-        //        targetItemLib.UnitPrice = input.UnitPrice;
-        //        targetItemLib.UnitPriceDiscount = input.UnitPriceDiscount;
-        //        targetItemLib.MinAmountPerOrder = input.MinAmountPerOrder;
-        //        targetItemLib.RequiredSN = input.RequiredSN;
-        //        targetItemLib.Tariff = input.Tariff;
-        //        targetItemLib.RequiredCalibration = input.RequiredCalibration;
-        //        targetItemLib.MoreDetails = input.MoreDetails;
-        //        targetItemLib.DeliveryTerm = input.DeliveryTerm;
-        //        targetItemLib.QuotationDate = input.QuotationDate;
-        //        targetItemLib.QuotationValidity = input.QuotationValidity;
-        //        targetItemLib.Std_LeadTime_Days = input.Std_LeadTime_Days;
-        //        targetItemLib.Purchaser1 = string.IsNullOrEmpty(input.Purchaser1) ? Guid.Empty : new Guid(input.Purchaser1);
-        //        targetItemLib.Purchaser2 = string.IsNullOrEmpty(input.Purchaser2) ? Guid.Empty : new Guid(input.Purchaser2);
-        //        targetItemLib.KeyTechSpec = input.KeyTechSpec;
-        //        targetItemLib.IsDefault = input.IsDefault;
-        //        targetItemLib.IsDraft = input.IsDraft;
-        //        targetItemLib.Remark = input.Remark;
-        //        targetItemLib.LastUpdatedBy = userGuid;
-        //        targetItemLib.LastUpdatedDate = DateTime.Now;
-
-
-        //        // Add PWP Mapping
-        //        //if (input.PWPItemList != null && input.PWPItemList.Count() > 0)
-        //        //{
-        //        //    foreach (RequestParameter.inputAddItemLibraryPWP item in input.PWPItemList)
-        //        //    {
-        //        //        ItemLibraryPWPMapping itemLibraryPWP = new ItemLibraryPWPMapping();
-
-        //        //        itemLibraryPWP.Parent_ItemLibraryID = input.ID;
-        //        //        itemLibraryPWP.PWP_ItemLibraryID = item.PWPItemLibraryID;
-        //        //        itemLibraryPWP.PWP_UnitPriceDiscount = item.PWPUnitPriceDiscount;
-
-        //        //        dbContext.ItemLibraryPWPMappings.Add(itemLibraryPWP);
-        //        //    }
-        //        //}
-
-        //        dbContext.SaveChanges();
-
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
-        //            System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
-        //        return false;
-        //    }
-        //}
-
         public bool postDeleteItemLibrary(RequestParameter.inputDeleteItemLibrary input, HttpRequestMessage request)
         {
             try
@@ -306,17 +319,157 @@ namespace MRP.Dal
                 if (itemLibrary == null)
                     return false;
 
-                // Clear PWP Mapping
                 var targetPWP = dbContext.ItemLibraryPWPMappings.Where(c => c.Parent_ItemLibraryID == input.ID);
                 dbContext.ItemLibraryPWPMappings.RemoveRange(targetPWP);
 
-                // Change target Item Library status to deleted
                 itemLibrary.LastUpdatedDate = DateTime.Now;
                 itemLibrary.LastUpdatedBy = userGuid;
                 itemLibrary.DeletedDate = DateTime.Now;
                 itemLibrary.DeletedBy = userGuid;
                 itemLibrary.DeletedRemark = input.DeletedRemark;
 
+                dbContext.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+                    System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+                return false;
+            }
+        }
+
+        public bool postAddDraftItem(RequestParameter.inputAddDraftItem input, HttpRequestMessage request)
+        {
+            try
+            {
+                Guid userGuid = common.extractUserID(request);
+
+                Guid appKey = Guid.NewGuid();
+
+                AppItemLibrary newAppItemLibrary = new AppItemLibrary();
+
+                newAppItemLibrary.AppKey = appKey;
+                newAppItemLibrary.RequestDate = DateTime.Now;
+
+                ItemLibrary itemLibrary = new ItemLibrary();
+
+                itemLibrary.CategoryID = input.CategoryID;
+                itemLibrary.IPN = input.IPN;
+                itemLibrary.Manufacturer = input.Manufacturer;
+                itemLibrary.MPN = input.MPN;
+                itemLibrary.ItemDescription = input.ItemDescription;
+                //itemLibrary.SupplierName = input.SupplierName;
+                //itemLibrary.SupplierCode = input.SupplierCode;
+                //itemLibrary.Currency = input.Currency;
+                //itemLibrary.UOM = input.UOM;
+                //itemLibrary.UnitPrice = input.UnitPrice;
+                //itemLibrary.UnitPriceDiscount = input.UnitPriceDiscount;
+                //itemLibrary.MinAmountPerOrder = input.MinAmountPerOrder;
+                itemLibrary.RequiredSN = input.RequiredSN;
+                itemLibrary.Tariff = input.Tariff;
+                itemLibrary.RequiredCalibration = input.RequiredCalibration;
+                itemLibrary.MoreDetails = input.MoreDetails;
+                //itemLibrary.DeliveryTerm = input.DeliveryTerm;
+                //itemLibrary.QuotationDate = input.QuotationDate;
+                //itemLibrary.QuotationValidity = input.QuotationValidity;
+                //itemLibrary.Std_LeadTime_Days = input.Std_LeadTime_Days;
+                itemLibrary.Purchaser1 = string.IsNullOrEmpty(input.Purchaser1) ? Guid.Empty : new Guid(input.Purchaser1);
+                itemLibrary.Purchaser2 = string.IsNullOrEmpty(input.Purchaser2) ? Guid.Empty : new Guid(input.Purchaser2);
+                itemLibrary.KeyTechSpec = input.KeyTechSpec;
+                //itemLibrary.IsDefault = input.IsDefault;
+                itemLibrary.IsDraft = 1;
+                itemLibrary.Remark = input.Remark;
+
+                itemLibrary.CreatedBy = userGuid;
+                itemLibrary.CreatedDate = DateTime.Now;
+                itemLibrary.LastUpdatedBy = userGuid;
+                itemLibrary.LastUpdatedDate = DateTime.Now;
+                //itemLibrary.DeletedByStaffName = null;
+
+                dbContext.AppItemLibraries.Add(newAppItemLibrary);
+                dbContext.ItemLibraries.Add(itemLibrary);
+                dbContext.SaveChanges();
+
+                if (input.PWPItemList != null && input.PWPItemList.Count() > 0)
+                {
+                    foreach (RequestParameter.inputAddItemLibraryPWP item in input.PWPItemList)
+                    {
+                        ItemLibraryPWPMapping itemLibraryPWP = new ItemLibraryPWPMapping();
+
+                        itemLibraryPWP.Parent_ItemLibraryID = itemLibrary.ID;
+                        itemLibraryPWP.PWP_ItemLibraryID = item.PWPItemLibraryID;
+                        itemLibraryPWP.PWP_UnitPriceDiscount = item.PWPUnitPriceDiscount;
+
+                        dbContext.ItemLibraryPWPMappings.Add(itemLibraryPWP);
+                    }
+
+                    dbContext.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logError.LogErrorDb("Error", System.Reflection.MethodBase.GetCurrentMethod().Name.ToString(),
+                    System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(), ex.ToString());
+                return false;
+            }
+        }
+
+        public bool postSaveDraftItem(RequestParameter.inputSaveDraftItem input, HttpRequestMessage request)
+        {
+            try
+            {
+                Guid userGuid = common.extractUserID(request);
+                ItemLibrary itemLibrary = dbContext.ItemLibraries.Where(c => c.ID == input.ID).FirstOrDefault();
+
+                var targetPWP = dbContext.ItemLibraryPWPMappings.Where(c => c.Parent_ItemLibraryID == input.ID);
+                dbContext.ItemLibraryPWPMappings.RemoveRange(targetPWP);
+
+                itemLibrary.CategoryID = input.CategoryID;
+                itemLibrary.Manufacturer = input.Manufacturer;
+                itemLibrary.MPN = input.MPN;
+                itemLibrary.ItemDescription = input.ItemDescription;
+                //itemLibrary.SupplierName = input.SupplierName;
+                //itemLibrary.SupplierCode = input.SupplierCode;
+                //itemLibrary.Currency = input.Currency;
+                //itemLibrary.UOM = input.UOM;
+                //itemLibrary.UnitPrice = input.UnitPrice;
+                //itemLibrary.UnitPriceDiscount = input.UnitPriceDiscount;
+                //itemLibrary.MinAmountPerOrder = input.MinAmountPerOrder;
+                itemLibrary.RequiredSN = input.RequiredSN;
+                itemLibrary.Tariff = input.Tariff;
+                itemLibrary.RequiredCalibration = input.RequiredCalibration;
+                itemLibrary.MoreDetails = input.MoreDetails;
+                //itemLibrary.DeliveryTerm = input.DeliveryTerm;
+                //itemLibrary.QuotationDate = input.QuotationDate;
+                //itemLibrary.QuotationValidity = input.QuotationValidity;
+                //itemLibrary.Std_LeadTime_Days = input.Std_LeadTime_Days;
+                itemLibrary.Purchaser1 = string.IsNullOrEmpty(input.Purchaser1) ? Guid.Empty : new Guid(input.Purchaser1);
+                itemLibrary.Purchaser2 = string.IsNullOrEmpty(input.Purchaser2) ? Guid.Empty : new Guid(input.Purchaser2);
+                itemLibrary.KeyTechSpec = input.KeyTechSpec;
+                //itemLibrary.IsDefault = input.IsDefault;
+                itemLibrary.IsDraft = 1;
+                itemLibrary.Remark = input.Remark;
+
+                itemLibrary.LastUpdatedBy = userGuid;
+                itemLibrary.LastUpdatedDate = DateTime.Now;
+
+                if (input.PWPItemList != null && input.PWPItemList.Count() > 0)
+                {
+                    foreach (RequestParameter.inputAddItemLibraryPWP item in input.PWPItemList)
+                    {
+                        ItemLibraryPWPMapping itemLibraryPWP = new ItemLibraryPWPMapping();
+
+                        itemLibraryPWP.Parent_ItemLibraryID = input.ID;
+                        itemLibraryPWP.PWP_ItemLibraryID = item.PWPItemLibraryID;
+                        itemLibraryPWP.PWP_UnitPriceDiscount = item.PWPUnitPriceDiscount;
+
+                        dbContext.ItemLibraryPWPMappings.Add(itemLibraryPWP);
+                    }
+                }
                 dbContext.SaveChanges();
 
                 return true;
@@ -337,19 +490,13 @@ namespace MRP.Dal
 
                 ItemLibrary itemLibrary = dbContext.ItemLibraries.Where(c => c.ID == input.ID).FirstOrDefault();
 
-                if (itemLibrary == null)
-                    return false;
-
-                // Clear PWP Mapping
                 var targetPWP = dbContext.ItemLibraryPWPMappings.Where(c => c.Parent_ItemLibraryID == input.ID);
                 dbContext.ItemLibraryPWPMappings.RemoveRange(targetPWP);
 
-                // Change target Item Library status to deleted
                 itemLibrary.LastUpdatedDate = DateTime.Now;
                 itemLibrary.LastUpdatedBy = userGuid;
                 itemLibrary.DeletedDate = DateTime.Now;
                 itemLibrary.DeletedBy = userGuid;
-                itemLibrary.DeletedRemark = "Deleted";
 
                 dbContext.SaveChanges();
 
@@ -432,15 +579,15 @@ namespace MRP.Dal
             {
                 Guid userGuid = common.extractUserID(request);
 
-                Category targetCategory = dbContext.Categories.Where(c => c.ID == input.ID).FirstOrDefault();
+                Category category = dbContext.Categories.Where(c => c.ID == input.ID).FirstOrDefault();
 
-                if (targetCategory == null)
+                if (category == null)
                     return false;
 
-                targetCategory.CategoryName = input.CategoryName;
-                targetCategory.Description = input.Description;
-                targetCategory.LastUpdatedDate = DateTime.Now;
-                targetCategory.LastUpdatedBy = userGuid;
+                category.CategoryName = input.CategoryName;
+                category.Description = input.Description;
+                category.LastUpdatedDate = DateTime.Now;
+                category.LastUpdatedBy = userGuid;
 
                 dbContext.SaveChanges();
 
@@ -460,16 +607,16 @@ namespace MRP.Dal
             {
                 Guid userGuid = common.extractUserID(request);
 
-                Category itemLibrary = dbContext.Categories.Where(c => c.ID == input.ID).FirstOrDefault();
+                Category category = dbContext.Categories.Where(c => c.ID == input.ID).FirstOrDefault();
 
-                if (itemLibrary == null)
+                if (category == null)
                     return false;
 
-                itemLibrary.LastUpdatedDate = DateTime.Now;
-                itemLibrary.LastUpdatedBy = userGuid;
-                itemLibrary.DeletedDate = DateTime.Now;
-                itemLibrary.DeletedBy = userGuid;
-                itemLibrary.DeletedRemark = input.DeletedRemark;
+                category.LastUpdatedDate = DateTime.Now;
+                category.LastUpdatedBy = userGuid;
+                category.DeletedDate = DateTime.Now;
+                category.DeletedBy = userGuid;
+                category.DeletedRemark = input.DeletedRemark;
 
                 dbContext.SaveChanges();
 

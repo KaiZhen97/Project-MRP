@@ -17,7 +17,15 @@ namespace MRP.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ItemLibrary()
         {
-            this.PRItems = new HashSet<PRItem>();
+            this.ItemLibraryAttachments = new HashSet<ItemLibraryAttachment>();
+            this.ItemLibraryPendingUpdates = new HashSet<ItemLibraryPendingUpdate>();
+            this.ItemLibraryPWPMappings = new HashSet<ItemLibraryPWPMapping>();
+            this.ItemLibraryPWPMappings1 = new HashSet<ItemLibraryPWPMapping>();
+            this.ItemLibrarySuppliers = new HashSet<ItemLibrarySupplier>();
+            this.ItemLibraryTemps = new HashSet<ItemLibraryTemp>();
+            this.ItemLibraryTempPWPMappings = new HashSet<ItemLibraryTempPWPMapping>();
+            this.ItemLibraryTempPWPMappings1 = new HashSet<ItemLibraryTempPWPMapping>();
+            this.ItemLibraryTempSuppliers = new HashSet<ItemLibraryTempSupplier>();
             this.UpdateTraces = new HashSet<UpdateTrace>();
         }
     
@@ -27,26 +35,15 @@ namespace MRP.Database
         public string Manufacturer { get; set; }
         public string MPN { get; set; }
         public string ItemDescription { get; set; }
-        public string SupplierName { get; set; }
-        public string SupplierCode { get; set; }
-        public string Currency { get; set; }
-        public string UOM { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public Nullable<decimal> UnitPriceDiscount { get; set; }
-        public Nullable<int> MinAmountPerOrder { get; set; }
         public int RequiredSN { get; set; }
         public string Tariff { get; set; }
         public int RequiredCalibration { get; set; }
         public string MoreDetails { get; set; }
-        public string DeliveryTerm { get; set; }
-        public Nullable<System.DateTime> QuotationDate { get; set; }
-        public string QuotationValidity { get; set; }
-        public Nullable<int> Std_LeadTime_Days { get; set; }
         public Nullable<System.Guid> Purchaser1 { get; set; }
         public Nullable<System.Guid> Purchaser2 { get; set; }
         public string KeyTechSpec { get; set; }
-        public int IsDefault { get; set; }
         public int IsDraft { get; set; }
+        public int IsAddApproved { get; set; }
         public string Remark { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
@@ -59,7 +56,23 @@ namespace MRP.Database
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PRItem> PRItems { get; set; }
+        public virtual ICollection<ItemLibraryAttachment> ItemLibraryAttachments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemLibraryPendingUpdate> ItemLibraryPendingUpdates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemLibraryPWPMapping> ItemLibraryPWPMappings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemLibraryPWPMapping> ItemLibraryPWPMappings1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemLibrarySupplier> ItemLibrarySuppliers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemLibraryTemp> ItemLibraryTemps { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemLibraryTempPWPMapping> ItemLibraryTempPWPMappings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemLibraryTempPWPMapping> ItemLibraryTempPWPMappings1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemLibraryTempSupplier> ItemLibraryTempSuppliers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UpdateTrace> UpdateTraces { get; set; }
     }

@@ -140,15 +140,73 @@ namespace MRP.BusinessLogic
             }
         }
 
+        public HttpResponseMessage postAddDraftItem(RequestParameter.inputAddDraftItem input, ModelStateDictionary modelState, HttpRequestMessage request)
+        {
+            try
+            {
+                if (modelState.IsValid)
+                {
+                    var addData = itemLibraryDal.postAddDraftItem(input, request);
+
+                    if (!addData)
+                        return webReqApi.returnBad(Resources.ADD_FAILED, request);
+
+                    return webReqApi.returnOk(Resources.ADD_SUCCESS, request);
+                }
+                else
+                {
+                    systemMessage.Message = extractModelStateMsg.GetErrorMessageForKey(modelState);
+                    HttpResponseMessage response = request.CreateResponse(HttpStatusCode.BadRequest, systemMessage);
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message != null)
+                    return webReqApi.returnUnexpected(request, ex.Message.ToString());
+                else
+                    return webReqApi.returnUnexpected(request, "Unexpected Error");
+            }
+        }
+
+        public HttpResponseMessage postSaveDraftItem(RequestParameter.inputSaveDraftItem input, ModelStateDictionary modelState, HttpRequestMessage request)
+        {
+            try
+            {
+                if (modelState.IsValid)
+                {
+                    var editData = itemLibraryDal.postSaveDraftItem(input, request);
+
+                    if (!editData)
+                        return webReqApi.returnBad(Resources.UPDATE_FAILED, request);
+
+                    return webReqApi.returnOk(Resources.UPDATE_SUCCESS, request);
+                }
+                else
+                {
+                    systemMessage.Message = extractModelStateMsg.GetErrorMessageForKey(modelState);
+                    HttpResponseMessage response = request.CreateResponse(HttpStatusCode.BadRequest, systemMessage);
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message != null)
+                    return webReqApi.returnUnexpected(request, ex.Message.ToString());
+                else
+                    return webReqApi.returnUnexpected(request, "Unexpected Error");
+            }
+        }
+
         public HttpResponseMessage postDeleteDraftItem(RequestParameter.inputDeleteDraftItem input, ModelStateDictionary modelState, HttpRequestMessage request)
         {
             try
             {
                 if (modelState.IsValid)
                 {
-                    var deleteData = itemLibraryDal.postDeleteDraftItem(input, request);
+                    var deleteDraft = itemLibraryDal.postDeleteDraftItem(input, request);
 
-                    if (!deleteData)
+                    if (!deleteDraft)
                         return webReqApi.returnBad(Resources.UPDATE_FAILED, request);
 
                     return webReqApi.returnOk(Resources.UPDATE_SUCCESS, request);

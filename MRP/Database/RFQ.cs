@@ -18,6 +18,7 @@ namespace MRP.Database
         public RFQ()
         {
             this.Attachments = new HashSet<Attachment>();
+            this.RFQWatchers = new HashSet<RFQWatcher>();
             this.UpdateTraces = new HashSet<UpdateTrace>();
             this.Watchers = new HashSet<Watcher>();
         }
@@ -40,11 +41,13 @@ namespace MRP.Database
         public Nullable<System.Guid> CancelBy { get; set; }
         public Nullable<System.Guid> AppKey { get; set; }
         public string CancelRemark { get; set; }
-        public string tempWatcher { get; set; }
+        public Nullable<System.Guid> AttachmentKey { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attachment> Attachments { get; set; }
         public virtual RFQStatu RFQStatu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RFQWatcher> RFQWatchers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UpdateTrace> UpdateTraces { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -269,7 +269,8 @@ namespace MRP.BusinessLogic
                     string fileName = postedFile.FileName;
                     string originalFileName = postedFile.FileName;
 
-                    V_RFQAttachmentsList attachment = dbContext.V_RFQAttachmentsList.Where(c => c.RFQID == input.ID && c.AttachmentName == fileName).FirstOrDefault();
+                    //V_RFQAttachmentsList attachment = dbContext.V_RFQAttachmentsList.Where(c => c.RFQID == input.ID && c.AttachmentName == fileName).FirstOrDefault();
+                    V_RFQAttachmentsList attachment = dbContext.V_RFQAttachmentsList.Where(c => c.ID == input.ID && c.AttachmentName == fileName).FirstOrDefault();
 
                     //check for duplicated file
                     if (attachment == null)
@@ -356,7 +357,8 @@ namespace MRP.BusinessLogic
                     string fileName = postedFile.FileName;
                     string originalFileName = postedFile.FileName;
 
-                    V_RFQAttachmentsList attachment = dbContext.V_RFQAttachmentsList.Where(c => c.RFQID == input.ID && c.AttachmentName == fileName).FirstOrDefault();
+                    //V_RFQAttachmentsList attachment = dbContext.V_RFQAttachmentsList.Where(c => c.RFQID == input.ID && c.AttachmentName == fileName).FirstOrDefault();
+                    V_RFQAttachmentsList attachment = dbContext.V_RFQAttachmentsList.Where(c => c.ID == input.ID && c.AttachmentName == fileName).FirstOrDefault();
 
                     //check for duplicated file
                     if (attachment == null)
@@ -598,7 +600,8 @@ namespace MRP.BusinessLogic
                     string fileName = postedFile.FileName;
                     string originalFileName = postedFile.FileName;
 
-                    V_RFQAttachmentsList attachment = dbContext.V_RFQAttachmentsList.Where(c => c.RFQID == input.ID && c.AttachmentName == fileName).FirstOrDefault();
+                    //V_RFQAttachmentsList attachment = dbContext.V_RFQAttachmentsList.Where(c => c.RFQID == input.ID && c.AttachmentName == fileName).FirstOrDefault();
+                    V_RFQAttachmentsList attachment = dbContext.V_RFQAttachmentsList.Where(c => c.ID == input.ID && c.AttachmentName == fileName).FirstOrDefault();
 
                     //check for duplicated file
                     if (attachment == null)
@@ -763,34 +766,34 @@ namespace MRP.BusinessLogic
             }
         }
 
-        public HttpResponseMessage postAttachmentByID(RequestParameter.inputID input, ModelStateDictionary modelState, HttpRequestMessage request)
-        {
-            try
-            {
-                if (modelState.IsValid)
-                {
-                    var data = RFQDal.postAttachmentByID(input);
+        //public HttpResponseMessage postAttachmentByID(RequestParameter.inputID input, ModelStateDictionary modelState, HttpRequestMessage request)
+        //{
+        //    try
+        //    {
+        //        if (modelState.IsValid)
+        //        {
+        //            var data = RFQDal.postAttachmentByID(input);
 
-                    if (data == null)
-                        return webReqApi.returnBad(Resources.NO_DATA, request);
+        //            if (data == null)
+        //                return webReqApi.returnBad(Resources.NO_DATA, request);
 
-                    return webReqApi.returnOk(request, data);
-                }
-                else
-                {
-                    systemMessage.Message = extractModelStateMsg.GetErrorMessageForKey(modelState);
-                    HttpResponseMessage response = request.CreateResponse(HttpStatusCode.BadRequest, systemMessage);
-                    return response;
-                }
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message != null)
-                    return webReqApi.returnUnexpected(request, ex.Message.ToString());
-                else
-                    return webReqApi.returnUnexpected(request, "Unexpected Error");
-            }
-        }
+        //            return webReqApi.returnOk(request, data);
+        //        }
+        //        else
+        //        {
+        //            systemMessage.Message = extractModelStateMsg.GetErrorMessageForKey(modelState);
+        //            HttpResponseMessage response = request.CreateResponse(HttpStatusCode.BadRequest, systemMessage);
+        //            return response;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (ex.Message != null)
+        //            return webReqApi.returnUnexpected(request, ex.Message.ToString());
+        //        else
+        //            return webReqApi.returnUnexpected(request, "Unexpected Error");
+        //    }
+        //}
 
         public HttpResponseMessage postAddWatcher (RequestParameter.inputAddWatcher input, ModelStateDictionary modelState, HttpRequestMessage request)
         {

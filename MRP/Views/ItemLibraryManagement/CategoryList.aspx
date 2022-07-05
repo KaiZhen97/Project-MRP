@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Category Setup" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CategorySetup.aspx.cs" Inherits="MRP.Views.ItemLibraryManagement.CategorySetup" %>
+﻿<%@ Page Title="Category Setup" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CategoryList.aspx.cs" Inherits="MRP.Views.ItemLibraryManagement.CategorySetup" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="CssContent" runat="server">
     <%: Styles.Render("~/styleBundle/ILM/CategorySetup") %>
@@ -12,7 +12,7 @@
     </form>
 
     <div class="_button-container mb-4">
-        <button class="solid-button normal" id="btnSAddCategory" data-bs-toggle="modal" data-bs-target="#addCategory">
+        <button class="solid-button normal" id="btnAddCategory">
             <i class="fa-solid fa-plus"></i>
             New Category
         </button>
@@ -33,7 +33,7 @@
         </thead>
     </table>
 
-    <div class="modal" id="addCategory" tabindex="-1" data-bs-backdrop="true">
+    <div class="modal fade" id="addCategory" tabindex="-1" data-bs-backdrop="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    <div class="modal" id="editCategory" tabindex="-1" data-bs-backdrop="true">
+    <div class="modal fade" id="editCategory" tabindex="-1" data-bs-backdrop="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -98,7 +98,7 @@
         </div>
     </div>
 
-    <div class="modal" id="deleteCategory" tabindex="-1" data-bs-backdrop="true" >
+    <div class="modal fade" id="deleteCategory" tabindex="-1" data-bs-backdrop="true" >
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">

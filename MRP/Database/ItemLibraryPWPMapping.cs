@@ -18,5 +18,8 @@ namespace MRP.Database
         public int Parent_ItemLibraryID { get; set; }
         public int PWP_ItemLibraryID { get; set; }
         public Nullable<decimal> PWP_UnitPriceDiscount { get; set; }
+    
+        public virtual ItemLibrary ItemLibrary { get; set; }
+        public virtual ItemLibrary ItemLibrary1 { get; set; }
     }
 }

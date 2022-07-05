@@ -26,6 +26,7 @@ namespace MRP.Database
         public Nullable<System.Guid> CreatedBy { get; set; }
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public Nullable<System.Guid> DeletedBy { get; set; }
+        public string UniqueKey { get; set; }
     
         public virtual PO PO { get; set; }
         public virtual PRItem PRItem { get; set; }

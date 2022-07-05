@@ -1,4 +1,4 @@
-﻿var CategoryList;
+﻿//var CategoryList;
 
 function loadTable_CategoryList(reqCategoryListUrl, authToken) {
     CategoryList = $("#Table_CategoryList").DataTable(
@@ -19,10 +19,6 @@ function loadTable_CategoryList(reqCategoryListUrl, authToken) {
                 }
             },
             "columns": [
-                //{
-                //    "data": "ID",
-                //    "visible": true,
-                //},
                 {
                     "data": "CategoryName"
                 },
@@ -79,9 +75,6 @@ $(document).ready(function () {
                         $("#editCategory").modal("hide");
                         ShowError("Load Category Failed", "Fail");
                     })
-                    //.finally(() => {
-                    //    $(`#${hiddenCategoryID}`).val(category.ID);
-                    //})
                 }
             },
             "delete": {
@@ -104,25 +97,16 @@ $(document).ready(function () {
                         $("#deleteCategory").modal("hide");
                         ShowError("Load Role Details Failed", "Fail");
                     })
-                    //.finally(() => {
-                    //    $(`#${hiddenCategoryID}`).val(category.ID);
-                    //})
                 }
             }
         }
-    })
-
-    $("#btnAddCategory").click(function () {
-        $("#addCategory").modal("show");
-        $("#inputAddCategoryName").val("");
-        $("#inputAddCategoryDescription").val("");
-    })
+    });
 
     $("#btnConfirmAddCategory").click(function () {
         $("#addCategory").submit();
 
         var dataStr = {
-            categoryName: $("#inputAddCategoryName").val(),
+            CategoryName: $("#inputAddCategoryName").val(),
             Description: $("#inputAddCategoryDescription").val()
         }
 
@@ -139,7 +123,7 @@ $(document).ready(function () {
         $("#addCategory").modal("hide");
 
         $("input").val("");
-    })
+    });
 
     $("#btnConfirmEditCategory").click(function () {
         $("#editCategory").submit();
@@ -162,12 +146,11 @@ $(document).ready(function () {
             ShowError("Fail To Edit Category", error.responseText || error);
         })
         $("#editCategory").modal("hide");
-    })
-
+    });
 
     $("#btnYesDeleteCategory").click(function () {
         $("#deleteCategory").submit();
-        
+
         var dataStr = {
             ID: $(`#${hiddenCategoryID}`).val(),
             DeletedRemark: $("#DeleteCategoryRemark").val()
@@ -186,27 +169,20 @@ $(document).ready(function () {
             ShowError("Fail To Delete Category", error.responseText || error);
         })
         $("input").val("");
-    })
-
-
-    $(".btn-close").click(function () {
-        $("#addCategory").modal("hide");
-        $("#editCategory").modal("hide");
-        $("#deleteCategory").modal("hide");
-        $("input").val("");
-    })
-
-
-    $("#btnCancelAddCategory").click(function () {
-        $("#addCategory").modal("hide");
-        $("input").val("");
     });
 
-    $("#btnCancelEditCategory").click(function () {
-        $("#editCategory").modal("hide");
+    
+    $("#btnAddCategory").click(function () {
+        $("#addCategory").modal("show");
     });
 
-    $("#btnNoDeleteCategory").click(function (e) {
+    $(".btn-close")
+    .add("#btnCancelAddCategory")
+    .add("#btnNoDeleteCategory")
+    .add("#btnCancelEditCategory")
+    .click(function () {
+        $("#addCategory").modal("hide");
+        $("#editCategory").modal("hide");
         $("#deleteCategory").modal("hide");
         $("input").val("");
     });
@@ -234,7 +210,7 @@ function loadCategoryID(reqCategoryByIDUrl, authToken, dataStr) {
             }
         })
     })
-}
+};
 
 function addCategory(reqAddCategoryUrl, authToken, dataStr) {
     return new Promise((resolve, error) => {
@@ -255,7 +231,7 @@ function addCategory(reqAddCategoryUrl, authToken, dataStr) {
             }
         })
     })
-}
+};
 
 function editCategory(reqEditCategoryUrl, authToken, dataStr) {
     return new Promise((resolve, error) => {
@@ -276,7 +252,7 @@ function editCategory(reqEditCategoryUrl, authToken, dataStr) {
             }
         })
     })
-}
+};
 
 function deleteCategory(reqDeleteCategoryUrl, authToken, dataStr) {
     return new Promise((resolve, error) => {
@@ -297,4 +273,4 @@ function deleteCategory(reqDeleteCategoryUrl, authToken, dataStr) {
             }
         })
     })
-}
+};

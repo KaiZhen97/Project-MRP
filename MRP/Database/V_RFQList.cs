@@ -30,8 +30,8 @@ namespace MRP.Database
         public Nullable<System.Guid> Purchaser2 { get; set; }
         public string Purchaser2StaffName { get; set; }
         public string Purchaser1StaffName { get; set; }
-        public string tempWatcher { get; set; }
-        public Nullable<int> PrimaryID { get; set; }
-        public Nullable<System.Guid> Watchers_AccessID { get; set; }
+        public Nullable<System.Guid> Watcher_AccessID { get; set; }
+        public string Status { get; set; }
+        public Nullable<System.Guid> AttachmentKey { get; set; }
     }
 }
