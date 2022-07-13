@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Category Setup" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CategoryList.aspx.cs" Inherits="MRP.Views.ItemLibraryManagement.CategorySetup" %>
+﻿<%@ Page Title="Category Setup" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CategorySetup.aspx.cs" Inherits="MRP.Views.ItemLibraryManagement.CategorySetup" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="CssContent" runat="server">
     <%: Styles.Render("~/styleBundle/ILM/CategorySetup") %>
@@ -25,10 +25,10 @@
             <tr>
                 <th>Category</th>
                 <th>Description</th>
-                <th>CreateDate</th>
-                <th>CreateBy</th>
-                <th>LastUpdateDate</th>
-                <th>LastUpdateBy</th>
+                <th>Created Date</th>
+                <th>Created By</th>
+                <th>Last Updated Date</th>
+                <th>Lastd Updated By</th>
             </tr>
         </thead>
     </table>

@@ -69,7 +69,9 @@ namespace MRP
 
             routes.MapPageRoute("ILM_ItemDetails", "Views/ItemLibraryManagement/ItemDetails/{ID}", "~/Views/ItemLibraryManagement/ItemDetails.aspx");
 
-            routes.MapPageRoute("ILM_CategorySetup", "Views/ItemLibraryManagement/CategorySetup", "~/Views/ItemLibraryManagement/CategoryList.aspx");
+            routes.MapPageRoute("ILM_CategorySetup", "Views/ItemLibraryManagement/CategorySetup", "~/Views/ItemLibraryManagement/CategorySetup.aspx");
+
+            routes.MapPageRoute("ILM_SupplierSetup", "Views/ItemLibraryManagement/SupplierSetup", "~/Views/ItemLibraryManagement/SupplierSetup.aspx");
             #endregion
 
         }

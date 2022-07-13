@@ -15,6 +15,9 @@ namespace MRP.Database
     public partial class ItemLibraryPWPMapping
     {
         public int ID { get; set; }
+        public string SupplierCode { get; set; }
+        public string SupplierName { get; set; }
+        public string Currency { get; set; }
         public int Parent_ItemLibraryID { get; set; }
         public int PWP_ItemLibraryID { get; set; }
         public Nullable<decimal> PWP_UnitPriceDiscount { get; set; }

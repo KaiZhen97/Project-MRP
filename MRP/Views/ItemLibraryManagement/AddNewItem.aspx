@@ -33,7 +33,6 @@
                 <div class="row">
                     <label class="label">Category <span style="color: red;">*</span></label>
                     <select id="inputCategory" style="width: 95%;" required>
-                        <%--<option selected hidden>select</option>--%>
                     </select>
                 </div>
             </div>
@@ -68,7 +67,6 @@
                 <div class="row">
                     <label class="label">Required Serial Number</label>
                     <select id="inputRequiredSN" style="width: 95%;">
-                        <%--<option selected hidden disabled>select</option>--%>
                         <option value="1">Yes</option>
                         <option value="0" selected>No</option>
                     </select>
@@ -78,7 +76,6 @@
                 <div class="row">
                     <label class="label">Required Calibration</label>
                     <select id="inputRequiredCalibration" style="width: 95%;">
-                        <%--<option selected hidden disabled>select</option>--%>
                         <option value="1">Yes</option>
                         <option value="0" selected>No</option>
                     </select>
@@ -88,7 +85,6 @@
                 <div class="row">
                     <label class="label">Is Default</label>
                     <select id="inputIsDefault" style="width: 95%;" required>
-                        <%--<option selected hidden disabled>select</option>--%>
                         <option value="1">Yes</option>
                         <option value="0" selected>No</option>
                     </select>
@@ -107,53 +103,139 @@
 
     <hr />
 
-    <h5>2 | Pricing & Shipping</h5>
+    <div class="flex flex-row">
+        <div class="flex flex-col me-5">
+            <h5>2 | Supplier & Pricing</h5> 
+        </div>
+        <div class="flex flex-col">
+            <button class="solid-button normal p-0 ps-3 pe-3" style="color: black; font-size: 15px; padding: 5px" id="btnAddDefault">
+                <span class="ms-1 me-2" style="font-size: 20px; font-weight: 600"> + </span>
+                <span class="me-1" style="font-weight: 500">
+                    ADD
+                </span>
+            </button>
+        </div>
+    </div>
     <br />
-    <div class="input-container">
-        <div class="row ms-0 mb-2">
-            <div class="col">
+
+    <div class="input-container tab">
+        <span class="center p-3" style="background-color: #E5C860;  border-radius: 5px 5px 0px 0px; font-weight: 500">D E F A U L T</span>
+        <br />
+        <div class="row ms-3 mb-3" style="width: 99%">
+            <div class="col me-1">
                 <div class="row">
-                    <label>Supplier <span style="color: red;">*</span></label>
-                    <select id="inputSupplierName" style="width: 95%;" required>
-                        <%--<option selected hidden>select</option>--%>
-                        <%--<option>Supplier</option>--%>
+                    <label class="label">Supplier <span style="color: red;">*</span></label>
+                    <select id="inputSupplierNameD" style="width: 95%;" required>
                     </select>
                 </div>
             </div>
+            <div class="col me-1">
+                <div class="row">
+                    <label class="label">Delivery Term</label>
+                    <input id="inputDeliveryTermD" style="width: 95%"/>
+                </div>
+            </div>
+            <div class="col me-1">
+                <div class="row">
+                    <label class="label">Quotation Date</label>
+                    <input type="date" id="inputQuotationDateD" style="width: 95%;"/>
+                </div>
+            </div>
             <div class="col">
+                <div class="row">
+                    <label class="label">Quotation Validity</label>
+                    <input id="inputQuotationValidityD" style="width: 95%"/>
+                </div>
+            </div>
+        </div>
+        <div class="row ms-3 mb-3" style="width: 99%">
+            <div class="col me-1">
+                <div class="row">
+                    <label class="label">UOM <span style="color: red;">*</span></label>
+                    <input id="inputUOMD" style="width: 95%" required/>
+                </div>
+            </div>
+            <div class="col me-1">
+                <div class="row">
+                    <label class="label">Unit Price <span style="color: red;">*</span></label>
+                    <input type="number" min="0" step="0.01" id="inputUnitPriceD" style="width: 95%" placeholder="RM" required/>
+                </div>
+            </div>
+            <div class="col me-1">
+                <div class="row">
+                    <label class="label">Unit Price Discount</label>
+                    <input type="number" min="0" step="0.01" id="inputUnitPriceDiscountD" style="width: 95%" placeholder="RM"/>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <label class="label">Final Unit Price</label>
+                    <input type="number" min="0" step="0.01" id="inputFinalUnitPriceD" style="width: 95%" placeholder="RM"/>
+                </div>
+            </div>
+        </div>
+        <div class="row ms-3 mb-3" style="width: 49%;">
+            <div class="col me-1">
+                <div class="row">
+                    <label class="label">Minimum Amount Per Order <span style="color: red;">*</span></label>
+                    <input type="number" min="0" step="any" id="inputMinAmountPerOrderD" style="width: 95%;" required/>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <label class="label">Standard LeadTime</label>
+                    <input type="number" min="0" id="inputStdLeadTimeD" style="width: 96%;" placeholder:"W.Weeks"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="input-container tab" style="">
+        <span class="center p-3" style="background-color: #E6E6E6;  border-radius: 5px 5px 0px 0px; font-weight: 500"> A L T E R N A T I V E </span>
+        <br />
+        <div class="row ms-3 mb-3" style="width: 99%">
+            <div class="col me-1">
+                <div class="row">
+                    <label class="label">Supplier <span style="color: red;">*</span></label>
+                    <select id="inputSupplierName" style="width: 95%;" required>
+                    </select>
+                </div>
+            </div>
+            <div class="col me-1">
                 <div class="row">
                     <label class="label">Delivery Term</label>
                     <input id="inputDeliveryTerm" style="width: 95%"/>
                 </div>
             </div>
-            <div class="col">
+            <div class="col me-1">
                 <div class="row">
                     <label class="label">Quotation Date</label>
                     <input type="date" id="inputQuotationDate" style="width: 95%;"/>
                 </div>
             </div>
-            <div class="col">
+            <div class="col me-1">
                 <div class="row">
-                    <label>Quotation Validity</label>
+                    <label class="label">Quotation Validity</label>
                     <input id="inputQuotationValidity" style="width: 95%"/>
                 </div>
             </div>
         </div>
-
-        <div class="row ms-0 mb-2">
-            <div class="col">
+        <div class="row ms-3 mb-3" style="width: 99%">
+            <div class="col me-1">
                 <div class="row">
                     <label class="label">UOM <span style="color: red;">*</span></label>
                     <input id="inputUOM" style="width: 95%" required/>
                 </div>
             </div>
-            <div class="col">
+            <div class="col me-1">
                 <div class="row">
                     <label class="label">Unit Price <span style="color: red;">*</span></label>
                     <input type="number" min="0" step="0.01" id="inputUnitPrice" style="width: 95%" placeholder="RM" required/>
                 </div>
             </div>
-            <div class="col">
+            <div class="col me-1">
                 <div class="row">
                     <label class="label">Unit Price Discount</label>
                     <input type="number" min="0" step="0.01" id="inputUnitPriceDiscount" style="width: 95%" placeholder="RM"/>
@@ -166,15 +248,14 @@
                 </div>
             </div>
         </div>
-
-        <div class="row ms-0 mb-2" style="width: 50%;">
-            <div class="col">
+        <div class="row ms-3 mb-3" style="width: 49.5%;">
+            <div class="col me-1">
                 <div class="row">
                     <label class="label">Minimum Amount Per Order <span style="color: red;">*</span></label>
                     <input type="number" min="0" step="any" id="inputMinAmountPerOrder" style="width: 95%;" required/>
                 </div>
             </div>
-            <div class="col">
+            <div class="col me-1">
                 <div class="row">
                     <label class="label">Standard LeadTime</label>
                     <input type="number" min="0" id="inputStdLeadTime" style="width: 96%;" placeholder:"W.Weeks"/>
@@ -182,6 +263,8 @@
             </div>
         </div>
     </div>
+
+    <br />
 
     <hr />
 
@@ -195,7 +278,6 @@
                         <div class="row" style="width: 100%;">
                             <label class="input-container label">Default Purchaser / Agent 1 </label>
                             <select id="inputPurchaser1" required>
-                                <%--<option selected hidden>select</option>--%>
                             </select>
                         </div>
                     </div>
@@ -203,26 +285,24 @@
                         <div class="row" style="width: 100%;">
                             <label class="label">Default Purchaser / Agent 2 </label>
                             <select id="inputPurchaser2" required>
-                                <%--<option selected hidden>select</option>--%>
                             </select>
                         </div>
                     </div>
                 </div>
 
                 <div class="row ms-0">
-                    <label>Remark</label>
+                    <label class="label">Remark</label>
                     <textarea id="inputRemark" style="width: 98%; height: 120px"></textarea> 
                 </div>
             </div>
 
             <div class="col">
                 <div class="row ms-0 mb-2" style="width: 100%">
-                    <label>Attachments</label>
+                    <label class="label">Attachments</label>
                     <input type="file" id="inputAttachments" style="width: 99%; height: 90px;"/>
-                    <%--<i class="fa-solid fa-file"></i>--%>
                 </div>
                 <div class="row ms-0 mb-2" style="width: 100%">
-                    <label>Confidential Attachments</label>
+                    <label class="label">Confidential Attachments</label>
                     <input type="file" id="inputConfidential" style="width: 99%; height: 90px" />
                 </div>
             </div>
@@ -248,8 +328,8 @@
 
     <h5>5 | PWP Bundle</h5>
     
-    <button class="AddRemoveBtn" id="btnAddPWPItem"><i class="fa-solid fa-plus me-2"></i> Add New</button>
-    <button class="AddRemoveBtn" id="btnEditPWPItem"><i class="fa-solid fa-minus me-2"></i> Remove</button>
+    <button class="" id="btnAddPWPItem"><i class="fa-solid fa-plus me-2"></i> Add New</button>
+    <button class="" id="btnRemovePWPItem"><i class="fa-solid fa-minus me-2"></i> Remove</button>
 
     <br />
     
@@ -279,13 +359,11 @@
             <i class="fa-solid fa-inbox"></i>
             Save Draft
         </button>
-        <%--<button class="solid-button submit me-3" id="btnConfirm" data-bs-toggle="modal" data-bs-target="#confirm">--%>
         <button class="solid-button submit me-3" id="btnConfirm">
             <i class="fa-solid fa-check"></i>
             Confirm
         </button>
     </div>
-
 
     <div class="modal fade" id="ExistAdd" tabindex="-1" data-bs-backdrop="true" >
         <div class="modal-dialog modal-dialog-centered">
@@ -394,27 +472,26 @@
     </div>
 
     <div class="drawer-container" title="Add PWP Item From Library" id="AddPWPItem">
-            <div class="center">
-                1 Filter Items  >  2 Select Items
-            </div>
-            <br /><br />
-            <div class="input-container center">
-                <label style="margin-right: 30%;">Category</label>
-                <select id="inputCategoryPWP" style="width: 40%">
-                    <option>1</option>
-                    <option>2</option>
-                </select>
-            </div>
-            <div class="input-container center">
-                <label style="margin-right: 25%">Internal Part Number</label>
-                <input id="inputIPNPWP" style="width: 40%"/>
-            </div>
-            <div class="input-container center">
-                <label style="margin-right: 22%">Manufacturer Part Number</label>
-                <input id="inputMPNPWP" style="width: 40%"/>
-            </div>
-            <br />
-        <%--</form>--%>
+        <div class="center">
+            1 Filter Items  >  2 Select Items
+        </div>
+        <br /><br />
+        <div class="input-container center">
+            <label style="margin-right: 30%;">Category</label>
+            <select id="inputCategoryPWP" style="width: 40%">
+                <option>1</option>
+                <option>2</option>
+            </select>
+        </div>
+        <div class="input-container center">
+            <label style="margin-right: 25%">Internal Part Number</label>
+            <input id="inputIPNPWP" style="width: 40%"/>
+        </div>
+        <div class="input-container center">
+            <label style="margin-right: 22%">Manufacturer Part Number</label>
+            <input id="inputMPNPWP" style="width: 40%"/>
+        </div>
+        <br />
         <div class="flex flex-row center">
             <button class="solid-button submit center">
                 <i class="fa-solid fa-check-double"></i>

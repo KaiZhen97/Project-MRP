@@ -12,17 +12,17 @@ namespace MRP.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class ItemLibraryTempPWPMapping
+    public partial class V_ItemLibraryPWPMapping
     {
-        public int ID { get; set; }
+        public int Parent_ItemLibraryID { get; set; }
+        public int PWP_ItemLibraryID { get; set; }
+        public string IPN { get; set; }
+        public string ItemDescription { get; set; }
         public string SupplierCode { get; set; }
         public string SupplierName { get; set; }
         public string Currency { get; set; }
-        public int Parent_ItemLibraryID { get; set; }
-        public int PWP_ItemLibraryID { get; set; }
+        public Nullable<decimal> UnitPrice { get; set; }
+        public Nullable<decimal> UnitPriceDiscount { get; set; }
         public Nullable<decimal> PWP_UnitPriceDiscount { get; set; }
-    
-        public virtual ItemLibrary ItemLibrary { get; set; }
-        public virtual ItemLibrary ItemLibrary1 { get; set; }
     }
 }

@@ -47,7 +47,5 @@ namespace MRP.Database
         public string CreatedByStaffName { get; set; }
         public string LastUpdatedByStaffName { get; set; }
         public string DeletedByStaffName { get; set; }
-        public Nullable<System.Guid> Expr1 { get; set; }
-        public Nullable<System.Guid> Expr2 { get; set; }
     }
 }

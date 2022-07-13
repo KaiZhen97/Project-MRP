@@ -1,4 +1,14 @@
-﻿
+﻿div .flex {
+    display: flex;
+    align-items: baseline;
+}
+
+div .tab {
+    /*box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;*/
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    border-radius: 8px;
+}
+
 div.box {
     width: 100%;
     background-color: #ECECEC;
@@ -27,7 +37,7 @@ textarea{
      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-label {
+label.label {
     margin-left: -10px;
 }
 
@@ -35,7 +45,7 @@ h4 {
     margin-bottom: 20px;
 }
 
-.AddRemoveBtn {
+#btnAddPWPItem, #btnRemovePWPItem {
     background: white; 
     border-radius: 10px; 
     border: 1px solid gray; 
@@ -56,10 +66,7 @@ h4 {
     border-top: 1px solid #B2B2B2;
     border-bottom: 1px solid #B2B2B2;
     border-left: 1px solid #B2B2B2;
-    /*border-right: 1px solid white;*/
-    /*border-right: none;*/
     background-color: #0C56AD; 
-    /*width: 20%;*/
     padding: 10px;
     height: 50px;
 }
@@ -70,7 +77,6 @@ h4 {
     border-left: none;
     border-right: none;
     background: white; 
-    /*width: 30%;*/
     padding: 10px;
     height: 50px;
 }
@@ -82,41 +88,10 @@ h4 {
     border-right: 1px solid #B2B2B2;
     border-left: none;
     background: white; 
-    /*width: 5%;*/
     padding: 10px;
     height: 50px;
-    /*position: relative;*/
 }
 
 .spec_right i {
     cursor: pointer;
 }
-
-
-/*div.x i{
-    position: relative;
-    display: inline-flex;
-    z-index: 1;
-    cursor: pointer;
-}*/
-
-/*span.deleteicon {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-}
-
-span.deleteicon span {
-    position: absolute;
-    display: block;
-    right: 3px;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    color: #fff;
-    background-color: #ccc;
-    font: 13px monospace;
-    text-align: center;
-    line-height: 1em;
-    cursor: pointer;
-}*/

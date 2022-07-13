@@ -65,6 +65,7 @@ namespace MRP.Database
         public virtual DbSet<PRTempItem> PRTempItems { get; set; }
         public virtual DbSet<PRUpdateTrace> PRUpdateTraces { get; set; }
         public virtual DbSet<PRUpdateTraceAction> PRUpdateTraceActions { get; set; }
+        public virtual DbSet<PRWatcher> PRWatchers { get; set; }
         public virtual DbSet<RFQ> RFQs { get; set; }
         public virtual DbSet<RFQAttachment> RFQAttachments { get; set; }
         public virtual DbSet<RFQStatu> RFQStatus { get; set; }
@@ -77,12 +78,14 @@ namespace MRP.Database
         public virtual DbSet<UpdateTraceAction> UpdateTraceActions { get; set; }
         public virtual DbSet<UpdateTraceType> UpdateTraceTypes { get; set; }
         public virtual DbSet<Watcher> Watchers { get; set; }
-        public virtual DbSet<PRWatcher> PRWatchers { get; set; }
         public virtual DbSet<V_CategoryList> V_CategoryList { get; set; }
+        public virtual DbSet<V_ItemLibrary_ItemLibrarySupplier> V_ItemLibrary_ItemLibrarySupplier { get; set; }
         public virtual DbSet<V_ItemLibraryAttachments> V_ItemLibraryAttachments { get; set; }
         public virtual DbSet<V_ItemLibraryList> V_ItemLibraryList { get; set; }
         public virtual DbSet<V_ItemLibraryPendingUpdate> V_ItemLibraryPendingUpdate { get; set; }
+        public virtual DbSet<V_ItemLibraryPWPMapping> V_ItemLibraryPWPMapping { get; set; }
         public virtual DbSet<V_ItemLibraryTempList> V_ItemLibraryTempList { get; set; }
+        public virtual DbSet<V_ItemLibraryTempPWPMapping> V_ItemLibraryTempPWPMapping { get; set; }
         public virtual DbSet<V_ItemLibraryUpdateTrace> V_ItemLibraryUpdateTrace { get; set; }
         public virtual DbSet<V_PH_PO> V_PH_PO { get; set; }
         public virtual DbSet<V_PH_PODTL> V_PH_PODTL { get; set; }

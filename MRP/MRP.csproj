@@ -287,6 +287,7 @@
     <Content Include="Js\ItemLibraryManagement\ItemLibraryList-1.0.0.min.js">
       <DependentUpon>ItemLibraryList-1.0.0.js</DependentUpon>
     </Content>
+    <Content Include="Js\ItemLibraryManagement\SupplierSetup.js" />
     <Content Include="Js\PurchasingRFQManagement\AssignPurchaser-1.0.0.js" />
     <Content Include="Js\PurchasingRFQManagement\AssignPurchaser-1.0.0.min.js" />
     <Content Include="Js\Component\CheckBox.js" />
@@ -748,6 +749,7 @@
     <Content Include="Style\ItemLibraryManagement\CategorySetup.css" />
     <Content Include="Style\ItemLibraryManagement\ItemDetails.css" />
     <Content Include="Style\ItemLibraryManagement\ItemLibraryList.css" />
+    <Content Include="Style\ItemLibraryManagement\SupplierSetup.css" />
     <Content Include="Style\Plugins\ContextMenu.css" />
     <Content Include="Style\Plugins\DataTables.css" />
     <Content Include="Style\Plugins\iziToastCust.css" />
@@ -986,9 +988,10 @@
     <Content Include="Views\Administrator\TeamSetup.aspx" />
     <Content Include="Views\Administrator\UserSetup.aspx" />
     <Content Include="Views\ItemLibraryManagement\AddNewItem.aspx" />
-    <Content Include="Views\ItemLibraryManagement\CategoryList.aspx" />
+    <Content Include="Views\ItemLibraryManagement\CategorySetup.aspx" />
     <Content Include="Views\ItemLibraryManagement\ItemDetails.aspx" />
     <Content Include="Views\ItemLibraryManagement\ItemLibraryList.aspx" />
+    <Content Include="Views\ItemLibraryManagement\SupplierSetup.aspx" />
     <Content Include="Views\PurchasingRFQManagement\AssignPurchaser.aspx" />
     <Content Include="Views\PurchasingRFQManagement\RaiseRFQ.aspx" />
     <Content Include="Views\PurchasingRFQManagement\RFQDetails.aspx" />
@@ -1219,10 +1222,19 @@
     <Compile Include="Database\V_ItemLibraryPendingUpdate.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\V_ItemLibraryPWPMapping.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\V_ItemLibraryTempList.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\V_ItemLibraryTempPWPMapping.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\V_ItemLibraryUpdateTrace.cs">
+      <DependentUpon>MRPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\V_ItemLibrary_ItemLibrarySupplier.cs">
       <DependentUpon>MRPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\V_PH_PO.cs">
@@ -1395,12 +1407,12 @@
     <Compile Include="Views\ItemLibraryManagement\AddNewItem.aspx.designer.cs">
       <DependentUpon>AddNewItem.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\ItemLibraryManagement\CategoryList.aspx.cs">
-      <DependentUpon>CategoryList.aspx</DependentUpon>
+    <Compile Include="Views\ItemLibraryManagement\CategorySetup.aspx.cs">
+      <DependentUpon>CategorySetup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\ItemLibraryManagement\CategoryList.aspx.designer.cs">
-      <DependentUpon>CategoryList.aspx</DependentUpon>
+    <Compile Include="Views\ItemLibraryManagement\CategorySetup.aspx.designer.cs">
+      <DependentUpon>CategorySetup.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\ItemLibraryManagement\ItemDetails.aspx.cs">
       <DependentUpon>ItemDetails.aspx</DependentUpon>
@@ -1415,6 +1427,13 @@
     </Compile>
     <Compile Include="Views\ItemLibraryManagement\ItemLibraryList.aspx.designer.cs">
       <DependentUpon>ItemLibraryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ItemLibraryManagement\SupplierSetup.aspx.cs">
+      <DependentUpon>SupplierSetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ItemLibraryManagement\SupplierSetup.aspx.designer.cs">
+      <DependentUpon>SupplierSetup.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\PurchasingRFQManagement\AssignPurchaser.aspx.cs">
       <DependentUpon>AssignPurchaser.aspx</DependentUpon>

@@ -192,6 +192,12 @@ namespace MRP
                 .Include(contextMenuScript)
                 //.Include("~/Js/ItemLibraryManagement/CategorySetup-1.0.0.min.js"));
                 .Include("~/Js/ItemLibraryManagement/CategorySetup-1.0.0.js"));
+
+            bundles.Add(new ScriptBundle("~/scriptBundle/ILM/SupplierSetup")
+                .Include(dataTablesScript)
+                .Include(contextMenuScript)
+                //.Include("~/Js/ItemLibraryManagement/CategorySetup-1.0.0.min.js"));
+                .Include("~/Js/ItemLibraryManagement/SupplierSetup.js"));
             #endregion
             #endregion
 
@@ -314,6 +320,10 @@ namespace MRP
                 .Include(dataTablesStyle)
                 .Include("~/Style/ItemLibraryManagement/CategorySetup.css"));
 
+            bundles.Add(new StyleBundle("~/styleBundle/ILM/SupplierSetup")
+                .Include(contextMenuStyle)
+                .Include(dataTablesStyle)
+                .Include("~/Style/ItemLibraryManagement/SupplierSetup.css"));
 
             #endregion
             #endregion

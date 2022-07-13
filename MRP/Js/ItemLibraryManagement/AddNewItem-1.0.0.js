@@ -315,6 +315,87 @@ $(document).ready(function () {
     });
 });
 
+function getCategoryList() {
+    return new Promise((resolve, error) => {
+        $.ajax({
+            url: reqCategoryListUrl,
+            type: 'Get',
+            async: false,
+            dataType: 'json',
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "Authorization": "Bearer " + authToken,
+            },
+            success: function (data) {
+                $.each(data.data, function (i, val) {
+                    $("#inputCategory").append("<option value=" + data.data[i].ID + ">" + data.data[i].CategoryName + "</option>");
+                })
+                console.log("success category", data.data);
+            },
+            error: function (xhr) {
+                console.log("error category", data.data);
+            }
+        })
+    })
+}
+
+function getSupplierList() {
+    return new Promise((resolve, error) => {
+
+        $.ajax({
+            url: reqSupplierListUrl,
+            type: 'GET',
+            async: false,
+            dataType: 'json',
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "Authorization": "Bearer " + authToken,
+            },
+            success: function (data) {
+                $.each(data.data, function (i, val) {
+                    //$("#inputCategory").append("<option value=" + data.data[i].CategoryID + ">" + data.data[i].CategoryName + "</option>");
+                    $("#inputSupplierName").append("<option value=" + data.data[i].SupplierName + ">" + data.data[i].SupplierName + "</option>");
+                    //$("#inputPurchaser2").append("<option value=" + data.data[i].Purchaser1AccessID + ">" + data.data[i].Purchaser1 + "</option>");
+                    //$("#inputPurchaser1").append("<option value=" + data.data[i].Purchaser2AccessID + ">" + data.data[i].Purchaser2 + "</option>");
+                })
+                console.log("sucess supplier", data.data);
+            },
+            error: function (xhr) {
+                console.log("error supplier", data.data);
+            }
+        })
+    })
+}
+
+function getPurchaserList() {
+    return new Promise((resolve, error) => {
+
+        $.ajax({
+            url: reqPurchaserListUrl,
+            type: 'GET',
+            async: false,
+            dataType: 'json',
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "Authorization": "Bearer " + authToken,
+            },
+            success: function (data) {
+                $.each(data, function (i, val) {
+                //$.each(data.data, function (i, val) {
+                    $("#inputPurchaser1").append("<option value=" + data[i].AccessID + ">" + data[i].StaffName + "</option>");
+                    $("#inputPurchaser2").append("<option value=" + data[i].AccessID + ">" + data[i].StaffName + "</option>");
+                    //$("#inputPurchaser1").append("<option value=" + data.data[i].ID + ">" + data.data[i].Purchaser1 + "</option>");
+                })
+                //console.log("success purchaser1.", data.data);
+                console.log("success purchaser2", data);
+            },
+            error: function (xhr) {
+                console.log("error purchasing", data.data);
+            }
+        })
+    })
+}
+
 function retrieveData() {
     return new Promise((resolve, error) => {
         var dataStr = {
@@ -324,6 +405,7 @@ function retrieveData() {
             url: reqItemLibraryIdUrl,
             type: "Post",
             data: JSON.stringify(dataStr),
+            //await: true,
             dataType: "Json",
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
@@ -410,87 +492,6 @@ function duplicateData() {
         })
     })
 };
-
-function getCategoryList() {
-    return new Promise((resolve, error) => {
-        $.ajax({
-            url: reqCategoryListUrl,
-            type: 'Get',
-            async: false,
-            dataType: 'json',
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "Authorization": "Bearer " + authToken,
-            },
-            success: function (data) {
-                $.each(data.data, function (i, val) {
-                    $("#inputCategory").append("<option value=" + data.data[i].ID + ">" + data.data[i].CategoryName + "</option>");
-                })
-                console.log("success category", data.data);
-            },
-            error: function (xhr) {
-                console.log("error category", data.data);
-            }
-        })
-    })
-}
-
-function getSupplierList() {
-    return new Promise((resolve, error) => {
-
-        $.ajax({
-            url: reqSupplierListUrl,
-            type: 'GET',
-            async: false,
-            dataType: 'json',
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "Authorization": "Bearer " + authToken,
-            },
-            success: function (data) {
-                $.each(data.data, function (i, val) {
-                    //$("#inputCategory").append("<option value=" + data.data[i].CategoryID + ">" + data.data[i].CategoryName + "</option>");
-                    $("#inputSupplierName").append("<option value=" + data.data[i].SupplierName + ">" + data.data[i].SupplierName + "</option>");
-                    //$("#inputPurchaser2").append("<option value=" + data.data[i].Purchaser1AccessID + ">" + data.data[i].Purchaser1 + "</option>");
-                    //$("#inputPurchaser1").append("<option value=" + data.data[i].Purchaser2AccessID + ">" + data.data[i].Purchaser2 + "</option>");
-                })
-                console.log("sucess supplier", data.data);
-            },
-            error: function (xhr) {
-                console.log("error supplier", data.data);
-            }
-        })
-    })
-}
-
-function getPurchaserList() {
-    return new Promise((resolve, error) => {
-
-        $.ajax({
-            url: reqPurchaserListUrl,
-            type: 'GET',
-            async: false,
-            dataType: 'json',
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "Authorization": "Bearer " + authToken,
-            },
-            success: function (data) {
-                $.each(data, function (i, val) {
-                //$.each(data.data, function (i, val) {
-                    $("#inputPurchaser1").append("<option value=" + data[i].AccessID + ">" + data[i].StaffName + "</option>");
-                    $("#inputPurchaser2").append("<option value=" + data[i].AccessID + ">" + data[i].StaffName + "</option>");
-                    //$("#inputPurchaser1").append("<option value=" + data.data[i].ID + ">" + data.data[i].Purchaser1 + "</option>");
-                })
-                //console.log("success purchaser1.", data.data);
-                console.log("success purchaser2", data);
-            },
-            error: function (xhr) {
-                console.log("error purchasing", data.data);
-            }
-        })
-    })
-}
 
 function addItemLibrary() {
     var dataStr = {
